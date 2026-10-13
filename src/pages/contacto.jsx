@@ -6,10 +6,8 @@ import Footer from '../components/footer';
 import '../contacto.css';
 
 function Contacto() {
-  // Usuario actualmente logueado
   const usuario = localStorage.getItem('userName');
 
-  // Consultas iniciales
   const publicacionesIniciales = [
     {
         id: 1,
