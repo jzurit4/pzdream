@@ -3,11 +3,14 @@ import { useState } from 'react';
 function ProductCarousel({ id, productos, oferta = false }) {
   const [pagina, setPagina] = useState(0);
 
-  const totalPaginas = Math.ceil(productos.length / 4);
+  const productosPorPagina = 4;
+  const totalPaginas = Math.ceil(
+    productos.length / productosPorPagina
+  );
 
   const productosVisibles = productos.slice(
-    pagina * 4,
-    pagina * 4 + 4
+    pagina * productosPorPagina,
+    (pagina + 1) * productosPorPagina
   );
 
   const cambiarPagina = (direccion) => {
@@ -18,6 +21,20 @@ function ProductCarousel({ id, productos, oferta = false }) {
 
   return (
     <div id={id} className="product-carousel">
+
+      {/* Botón anterior */}
+      {totalPaginas > 1 && (
+        <button
+          type="button"
+          className="product-carousel-btn prev"
+          onClick={() => cambiarPagina(-1)}
+          aria-label="Productos anteriores"
+        >
+          &#10094;
+        </button>
+      )}
+
+      {/* Productos */}
       <div className="row g-3">
         {productosVisibles.map((producto) => (
           <div className="col-6 col-md-3" key={producto.id}>
@@ -38,7 +55,9 @@ function ProductCarousel({ id, productos, oferta = false }) {
                 loading="lazy"
               />
 
-              <h6 className="mt-2">{producto.nombre}</h6>
+              <h6 className="mt-2">
+                {producto.nombre}
+              </h6>
 
               <p className="price">
                 {oferta && (
@@ -53,33 +72,25 @@ function ProductCarousel({ id, productos, oferta = false }) {
         ))}
       </div>
 
+      {/* Botón siguiente */}
       {totalPaginas > 1 && (
-        <>
-          <button
-            type="button"
-            className="carousel-control-prev custom-carousel-control"
-            onClick={() => cambiarPagina(-1)}
-            aria-label="Productos anteriores"
-          >
-            <span className="carousel-control-prev-icon" />
-          </button>
-
-          <button
-            type="button"
-            className="carousel-control-next custom-carousel-control"
-            onClick={() => cambiarPagina(1)}
-            aria-label="Productos siguientes"
-          >
-            <span className="carousel-control-next-icon" />
-          </button>
-        </>
+        <button
+          type="button"
+          className="product-carousel-btn next"
+          onClick={() => cambiarPagina(1)}
+          aria-label="Productos siguientes"
+        >
+          &#10095;
+        </button>
       )}
 
+      {/* Indicador de página */}
       {totalPaginas > 1 && (
         <div className="text-center mt-3 small text-muted">
           {pagina + 1} de {totalPaginas}
         </div>
       )}
+
     </div>
   );
 }

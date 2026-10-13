@@ -697,3 +697,72 @@ footer {
     font-size: 1rem;
   }
 }
+/* ===== BOTONES DEL CARRUSEL DE PRODUCTOS ===== */
+
+.product-carousel {
+  position: relative;
+  padding: 0 35px;
+}
+
+.product-carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 5;
+
+  width: 42px;
+  height: 42px;
+  border: none;
+  border-radius: 50%;
+
+  background-color: #ffffff;
+  color: #007bff;
+  font-size: 20px;
+  font-weight: bold;
+
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.18);
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.product-carousel-btn:hover {
+  background-color: #007bff;
+  color: #ffffff;
+  transform: translateY(-50%) scale(1.08);
+}
+
+.product-carousel-btn.prev {
+  left: -5px;
+}
+
+.product-carousel-btn.next {
+  right: -5px;
+}
+
+.product-carousel-btn:focus-visible {
+  outline: 3px solid #80bdff;
+  outline-offset: 3px;
+}
+
+/* Ajustes para móviles */
+@media (max-width: 576px) {
+  .product-carousel {
+    padding: 0 10px;
+  }
+
+  .product-carousel-btn {
+    width: 32px;
+    height: 32px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: #ffffff;
+  }
+
+  .product-carousel-btn.prev {
+    left: -8px;
+  }
+
+  .product-carousel-btn.next {
+    right: -8px;
+  }
+}
