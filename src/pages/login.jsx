@@ -1,13 +1,15 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
-import Navbar from '../components/navbar';
-import Footer from '../components/footer';
+import Navbar from '../components/layout/navbar';
+import Footer from '../components/layout/footer';
+import { useCart } from '../context/CartContext';
 
-import '../login.css';
+import '../assets/css/login.css';
 
 function Login() {
   const navigate = useNavigate();
+  const { clear } = useCart(); // Obtener la función para reiniciar el carrito
 
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
@@ -20,14 +22,18 @@ function Login() {
       return;
     }
 
-    // Guardar sesión
-    localStorage.setItem('userLogged', 'true');
+    // 1. Limpiar la clave del localStorage directamente
+    localStorage.removeItem('pz_carrito');
 
-    // Guardar información del usuario
+    // 2. Limpiar el estado de React
+    clear();
+
+    // 3. Guardar sesión
+    localStorage.setItem('userLogged', 'true');
     localStorage.setItem('userName', username.trim());
     localStorage.setItem('userEmail', email.trim());
 
-    // Ir al inicio
+    // 4. Redirigir al inicio
     navigate('/');
   };
 
@@ -149,17 +155,17 @@ function Login() {
           {/* Registro */}
           <div className="register-link">
             ¿No tienes cuenta?{' '}
-            <a href="/registro">
+            <Link to="/registro">
               Regístrate aquí
-            </a>
+            </Link>
           </div>
 
           {/* Volver */}
           <div className="back-home">
-            <a href="/">
+            <Link to="/">
               <i className="fas fa-arrow-left me-1"></i>
               Volver al inicio
-            </a>
+            </Link>
           </div>
 
         </div>

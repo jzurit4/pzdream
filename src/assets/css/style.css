@@ -37,37 +37,44 @@ footer {
 }
 
 .nav-icon-link {
-  font-size: 1.4rem;
+  font-size: 1.3rem;
   padding: 0.5rem 0.8rem !important;
-  position: relative;
-  display: flex;
+  position: relative !important;
+  display: inline-flex !important;
   align-items: center;
-  gap: 0.3rem;
+  gap: 0.4rem;
+  color: #0d6dc1;
+  text-decoration: none;
 }
 
 .nav-icon-link i {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
 }
 
 .nav-icon-link .icon-label {
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   font-weight: 500;
 }
 
+/* Badge rojo con el contador */
 .cart-badge {
   position: absolute;
-  top: 0;
-  right: -2px;
+  top: 2px;
+  right: 0px;
   background-color: #dc3545;
-  color: white;
+  color: #ffffff;
   border-radius: 50%;
-  padding: 0.15rem 0.45rem;
-  font-size: 0.65rem;
-  font-weight: bold;
-  min-width: 18px;
-  text-align: center;
-  transform: translate(25%, -25%);
-  border: 2px solid white;
+  padding: 0.15rem 0.4rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  min-width: 19px;
+  height: 19px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #ffffff;
+  line-height: 1;
+  z-index: 10;
 }
 
 .nav-divider {
@@ -111,10 +118,12 @@ footer {
     display: none;
   }
 
-  .cart-badge {
-    position: static;
+.cart-badge {
+    position: relative;
+    top: auto;
+    right: auto;
     transform: none;
-    margin-left: 5px;
+    margin-left: 6px;
     border: none;
   }
 
@@ -766,3 +775,4 @@ footer {
     right: -8px;
   }
 }
+
