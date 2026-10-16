@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
+import "@fortawesome/fontawesome-free/css/all.min.css";  // 👈 agrega esta
 
 import "./assets/css/style.css";
 import "./assets/css/contacto.css";

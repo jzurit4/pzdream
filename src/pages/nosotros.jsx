@@ -1,16 +1,11 @@
-import Navbar from '../components/layout/navbar';
-import Footer from '../components/layout/footer';
-import '../assets/css/style.css';
+import Layout from '../components/layout/Layout';
 
 function Nosotros() {
   return (
-    <>
-      <Navbar />
-
-      {/* BANNER DE ANCHO COMPLETO */}
+    <Layout container={false}>
       <div className="about-banner">
         <img
-          src="https://picsum.photos/seed/technology/1600/500"
+          src="https://www.cursoreparacionmoviles.com/_astro/microsoldadura-hero.D7WaWpyQ.webp"
           alt="Sobre PZDREAM"
           className="about-banner-img"
         />
@@ -20,19 +15,21 @@ function Nosotros() {
         </div>
       </div>
 
-      {/* CONTENIDO INFORMATIVO */}
-      <main className="main-content container my-5">
+      <div className="container my-5">
         <div className="row">
           <div className="col-lg-8 mx-auto">
             <h2 className="about-title text-center mb-4">
-              <i className="fas fa-store-alt text-primary me-2"></i> ¿Quiénes somos?
+              <i className="fas fa-store-alt text-primary me-2"></i>
+              ¿Quiénes somos?
             </h2>
+
             <p className="about-text">
               <strong>PZDREAM</strong> nació en 2020 con la misión de acercar la
               tecnología de vanguardia a todos los chilenos. Somos una tienda
               online especializada en hardware, periféricos y equipos de
               computación de las mejores marcas del mercado.
             </p>
+
             <p className="about-text">
               Nuestro compromiso es ofrecer productos de calidad a precios
               competitivos, respaldados por un servicio al cliente excepcional.
@@ -40,6 +37,7 @@ function Nosotros() {
               por eso cada producto en nuestro catálogo está cuidadosamente
               seleccionado para garantizar el mejor rendimiento y durabilidad.
             </p>
+
             <div className="row mt-4 g-4 text-center">
               <div className="col-md-4">
                 <div className="about-feature">
@@ -71,10 +69,8 @@ function Nosotros() {
             </div>
           </div>
         </div>
-      </main>
-
-      <Footer />
-    </>
+      </div>
+    </Layout>
   );
 }
 

@@ -1,182 +1,99 @@
 import { useState } from 'react';
-import Navbar from '../components/layout/navbar';
-import Footer from '../components/layout/footer';
-import '../assets/css/style.css';
-import '../assets/css/registro.css';
+import { useNavigate, Link } from 'react-router-dom';
+
+import Layout from '../components/layout/Layout';
+import { useAuth } from '../context/AuthContext';
+import '../assets/css/login.css';
 
 function Registro() {
-  const [formData, setFormData] = useState({
-    nombre: '',
-    apellido: '',
-    direccion: '',
-    telefono: '',
-    email: '',
-    password: '',
-    terminos: false,
-  });
+  const navigate = useNavigate();
+  const { loginUser } = useAuth();
 
-  const handleChange = (e) => {
-    const { id, value, type, checked } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [id]: type === 'checkbox' ? checked : value,
-    }));
-  };
+  const [nombre, setNombre] = useState('');
+  const [apellido, setApellido] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [direccion, setDireccion] = useState('');
+  const [telefono, setTelefono] = useState('');
+  const [aceptaTerminos, setAceptaTerminos] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Datos de registro:', formData);
+    if (!aceptaTerminos) {
+      alert('Debes aceptar los términos y condiciones.');
+      return;
+    }
+
+    loginUser({ email: email.trim(), nombre: nombre.trim() });
+
+    localStorage.setItem('userLogged', 'true');
+    localStorage.setItem('userName', nombre.trim());
+    localStorage.setItem('userEmail', email.trim());
+
+    navigate('/');
   };
 
   return (
-    <>
-      <Navbar />
+    <Layout container={false}>
+      <div className="login-page">
+        <div className="login-card" style={{ maxWidth: 520 }}>
+          <div className="logo">
+            <i className="fas fa-user-plus"></i>
+            <h2>Crear Cuenta</h2>
+            <p className="text-muted">Completa tus datos para registrarte</p>
+          </div>
 
-      <main className="main-content container my-5">
-        <div className="row justify-content-center">
-          <div className="col-lg-6 col-md-8 col-sm-10">
-            <div className="register-card">
-              <h2 className="text-center mb-4">
-                <i className="fas fa-user-plus text-primary me-2"></i>Crear Cuenta
-              </h2>
-              <p className="text-muted text-center mb-4">
-                Completa tus datos para registrarte en PZDREAM
-              </p>
-
-              <form onSubmit={handleSubmit}>
-                <div className="row g-3">
-                  <div className="col-md-6">
-                    <label htmlFor="nombre" className="form-label">
-                      Nombre
-                    </label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="nombre"
-                      placeholder="Ingresa tu nombre"
-                      value={formData.nombre}
-                      onChange={handleChange}
-                      required
-                    />
-                  </div>
-                  <div className="col-md-6">
-                    <label htmlFor="apellido" className="form-label">
-                      Apellido
-                    </label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="apellido"
-                      placeholder="Ingresa tu apellido"
-                      value={formData.apellido}
-                      onChange={handleChange}
-                      required
-                    />
-                  </div>
-                </div>
-
-                <div className="mb-3 mt-3">
-                  <label htmlFor="direccion" className="form-label">
-                    Dirección
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="direccion"
-                    placeholder="Calle, número, comuna"
-                    value={formData.direccion}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-
-                <div className="mb-3">
-                  <label htmlFor="telefono" className="form-label">
-                    Teléfono
-                  </label>
-                  <input
-                    type="tel"
-                    className="form-control"
-                    id="telefono"
-                    placeholder="+56 9 1234 5678"
-                    value={formData.telefono}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-
-                <div className="mb-3">
-                  <label htmlFor="email" className="form-label">
-                    Correo electrónico
-                  </label>
-                  <input
-                    type="email"
-                    className="form-control"
-                    id="email"
-                    placeholder="ejemplo@correo.cl"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-
-                <div className="mb-3">
-                  <label htmlFor="password" className="form-label">
-                    Contraseña
-                  </label>
-                  <input
-                    type="password"
-                    className="form-control"
-                    id="password"
-                    placeholder="Mínimo 8 caracteres"
-                    value={formData.password}
-                    onChange={handleChange}
-                    required
-                  />
-                  <div className="form-text">
-                    La contraseña debe tener al menos 8 caracteres.
-                  </div>
-                </div>
-
-                <div className="mb-4">
-                  <div className="form-check">
-                    <input
-                      className="form-check-input"
-                      type="checkbox"
-                      id="terminos"
-                      checked={formData.terminos}
-                      onChange={handleChange}
-                      required
-                    />
-                    <label className="form-check-label" htmlFor="terminos">
-                      Acepto los{' '}
-                      <a href="#" className="text-primary">
-                        términos y condiciones
-                      </a>
-                    </label>
-                  </div>
-                </div>
-
-                <button type="submit" className="btn btn-register w-100">
-                  <i className="fas fa-user-check me-2"></i>Registrarse
-                </button>
-              </form>
-
-              <div className="login-link text-center mt-4">
-                <p className="mb-0">
-                  ¿Ya tienes cuenta?{' '}
-                  <a href="/login" className="text-primary fw-semibold">
-                    Inicia sesión aquí
-                  </a>
-                </p>
+          <form onSubmit={handleSubmit}>
+            <div className="row g-3">
+              <div className="col-md-6">
+                <label htmlFor="nombre" className="form-label fw-semibold">Nombre</label>
+                <input type="text" className="form-control" id="nombre" value={nombre} onChange={(e) => setNombre(e.target.value)} required />
+              </div>
+              <div className="col-md-6">
+                <label htmlFor="apellido" className="form-label fw-semibold">Apellido</label>
+                <input type="text" className="form-control" id="apellido" value={apellido} onChange={(e) => setApellido(e.target.value)} required />
               </div>
             </div>
+
+            <div className="mb-3 mt-3">
+              <label htmlFor="direccion" className="form-label fw-semibold">Dirección</label>
+              <input type="text" className="form-control" id="direccion" placeholder="Calle, número, comuna" value={direccion} onChange={(e) => setDireccion(e.target.value)} required />
+            </div>
+
+            <div className="mb-3">
+              <label htmlFor="telefono" className="form-label fw-semibold">Teléfono</label>
+              <input type="tel" className="form-control" id="telefono" placeholder="+56 9 1234 5678" value={telefono} onChange={(e) => setTelefono(e.target.value)} required />
+            </div>
+
+            <div className="mb-3">
+              <label htmlFor="email" className="form-label fw-semibold">Correo electrónico</label>
+              <input type="email" className="form-control" id="email" placeholder="ejemplo@correo.cl" value={email} onChange={(e) => setEmail(e.target.value)} required />
+            </div>
+
+            <div className="mb-3">
+              <label htmlFor="password" className="form-label fw-semibold">Contraseña</label>
+              <input type="password" className="form-control" id="password" placeholder="Mínimo 8 caracteres" minLength={8} value={password} onChange={(e) => setPassword(e.target.value)} required />
+              <div className="form-text">La contraseña debe tener al menos 8 caracteres.</div>
+            </div>
+
+            <div className="mb-4 form-check">
+              <input className="form-check-input" type="checkbox" id="terminos" checked={aceptaTerminos} onChange={(e) => setAceptaTerminos(e.target.checked)} />
+              <label className="form-check-label" htmlFor="terminos">
+                Acepto los <a href="#" onClick={(e) => e.preventDefault()}>términos y condiciones</a>
+              </label>
+            </div>
+
+            <button type="submit" className="btn btn-login w-100">
+              <i className="fas fa-user-check me-2"></i>Registrarse
+            </button>
+          </form>
+
+          <div className="register-link">
+            ¿Ya tienes cuenta? <Link to="/login">Inicia sesión aquí</Link>
           </div>
         </div>
-      </main>
-
-      <Footer />
-    </>
+      </div>
+    </Layout>
   );
 }
 
