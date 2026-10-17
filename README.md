@@ -1,19 +1,57 @@
-# React + Vite
+#PZDREAM - Tienda de Tecnología (E-commerce Frontend)
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Este proyecto es la migración y actualización de una tienda online de tecnología a **React.js**. Originalmente construida en HTML/CSS/JS básico, la plataforma ha sido refactorizada para incorporar un framework moderno de frontend, una arquitectura basada en componentes, enrutamiento dinámico (SPA) y un panel de administración completo (CRUD) con persistencia de datos local.
 
-Currently, two official plugins are available:
+## Características Principales
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+### Para Clientes (Tienda)
+- **Catálogo Interactivo:** Visualización de productos con filtros dinámicos por categoría y buscador en tiempo real.
+- **Buscador con Preview:** Barra de búsqueda en el inicio que muestra un autocompletado con imágenes y precios de los productos.
+- **Detalle del Producto:** Página individual con especificaciones técnicas, cálculo automático de descuentos y botón de compra.
+- **Carrito de Compras:** Gestión de productos añadidos (modificar cantidades, eliminar, vaciar). Persiste en el navegador mediante `localStorage`.
+- **Autenticación Simulada:** Formulario de inicio de sesión y registro de usuario.
+- **Contacto y Foro:** Sección comunitaria donde los usuarios pueden publicar dudas o recomendaciones (requiere inicio de sesión).
 
-## React Compiler
+### Para Administradores (Panel Admin)
+- **Acceso Restringido:** Inicio de sesión independiente para el administrador.
+- **Dashboard:** Estadísticas en tiempo real (Total productos, productos en oferta, stock total).
+- **CRUD de Productos:**
+  - **Crear**: Formulario completo para agregar nuevos productos.
+  - **Leer**: Tabla general con todos los productos del catálogo.
+  - **Actualizar**: Edición de datos, precios, stock y categorías.
+  - **Eliminar**: Borrado seguro de productos con confirmación.
+- **Sincronización Global:** Cualquier cambio realizado en el panel de administración se refleja **al instante** en toda la tienda pública gracias al uso de Context API.
+- **Restauración:** Botón para restaurar el catálogo de productos original.
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+---
 
-Note: This will impact Vite dev & build performances.
-You can also try [the experimental native React Compiler support in plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md#rust-react-compiler) by using `compiler: true` in the plugin options instead of using the Babel plugin.
+## Tecnologías Utilizadas
 
-## Expanding the Oxlint configuration
+| Tecnología | Uso en el Proyecto |
+| :--- | :--- |
+| **React 19** | Framework principal para la construcción de interfaces basadas en componentes. |
+| **Vite 8** | Empaquetador y entorno de desarrollo ultrarrápido. |
+| **React Router DOM 7** | Enrutamiento dinámico del lado del cliente (SPA). |
+| **Context API** | Gestión del estado global (Auth, Cart, Products). |
+| **Bootstrap 5.3** | Framework CSS para un diseño responsivo y adaptativo. |
+| **Font Awesome 6** | Iconografía del sitio web. |
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+---
+
+## Estructura del Proyecto
+
+```text
+src/
+├── assets/
+│   └── css/            # Hojas de estilo modularizadas (admin, carrito, catalogo, etc.)
+├── components/
+│   ├── admin/          # Componentes exclusivos del panel (AdminLayout, AdminCard)
+│   ├── layout/         # Componentes estructurales (Navbar, Footer, Layout)
+│   └── productos/      # Componentes de productos (ProductCard, ProductCarousel, MiniCard)
+├── context/            # Estados globales (AuthContext, CartContext, ProductsContext)
+├── data/               # Datos semilla (productos.js)
+├── hooks/              # Hooks personalizados (useLocalStorage, useFilteredProducts)
+├── pages/              # Vistas principales y subcarpeta /admin con sus vistas
+├── utils/              # Funciones de utilidad (format.js para formatear CLP)
+├── App.jsx             # Configuración de rutas
+└── main.jsx            # Punto de entrada y proveedores de contexto
