@@ -1,24 +1,57 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useState, useEffect, useRef } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
 import Layout from '../components/layout/Layout';
 import ProductCarousel from '../components/productos/ProductCarousel';
 import { useProducts } from '../context/ProductsContext';
+import { formatCLP } from '../utils/format'; 
 
 function Home() {
   const { productos } = useProducts();
   const [busqueda, setBusqueda] = useState('');
+  const [showPreview, setShowPreview] = useState(false);
+  const previewRef = useRef(null);
+  const navigate = useNavigate();
+
+  // Logica para cerrar el preview si hacemos clic fuera
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (previewRef.current && !previewRef.current.contains(event.target)) {
+        setShowPreview(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  // Filtramos los productos para el preview (nombre o categoría)
+  const resultadosPreview = productos.filter((p) => {
+    const term = busqueda.toLowerCase().trim();
+    return (
+      p.nombre.toLowerCase().includes(term) ||
+      p.categoria.toLowerCase().includes(term)
+    );
+  }).slice(0, 5); // Mostramos solo los primeros 5
+
+  const handleSearchChange = (e) => {
+    setBusqueda(e.target.value);
+    setShowPreview(true); // Mostrar el preview al escribir
+  };
 
   const buscarProductos = (e) => {
     e.preventDefault();
+    setShowPreview(false); // Ocultar preview al buscar
     if (!busqueda.trim()) return;
-    window.location.href = `/catalogo?busqueda=${encodeURIComponent(busqueda.trim())}`;
+    navigate(`/catalogo?busqueda=${encodeURIComponent(busqueda.trim())}`);
   };
 
-  // Tomar los primeros 8 como "recomendados"
-  const recomendados = productos.slice(0, 8);
+  const seleccionarProducto = (id) => {
+    setShowPreview(false);
+    setBusqueda('');
+    navigate(`/producto/${id}`);
+  };
 
-  // Filtrar solo los que están en oferta
+  const recomendados = productos.slice(0, 8);
   const ofertas = productos.filter((p) => p.oferta).slice(0, 8);
 
   return (
@@ -58,23 +91,58 @@ function Home() {
         </div>
       </div>
 
-      {/* Buscador */}
+      {/* Buscador con Preview */}
       <section className="search-section">
-        <form onSubmit={buscarProductos}>
-          <div className="input-group">
-            <input
-              type="search"
-              className="form-control"
-              placeholder="Buscar productos, marcas o categorías..."
-              aria-label="Buscar productos"
-              value={busqueda}
-              onChange={(e) => setBusqueda(e.target.value)}
-            />
-            <button className="btn btn-search" type="submit">
-              <i className="fas fa-search me-2"></i>Buscar
-            </button>
-          </div>
-        </form>
+        <div className="search-container" ref={previewRef}>
+          <form onSubmit={buscarProductos}>
+            <div className="input-group">
+              <input
+                type="search"
+                className="form-control"
+                placeholder="Buscar productos, marcas o categorías..."
+                aria-label="Buscar productos"
+                value={busqueda}
+                onChange={handleSearchChange}
+                onFocus={() => { if (busqueda.trim()) setShowPreview(true); }}
+              />
+              <button className="btn btn-search" type="submit">
+                <i className="fas fa-search me-2"></i>Buscar
+              </button>
+            </div>
+          </form>
+
+          {/* Caja de Preview flotante */}
+          {showPreview && busqueda.trim() !== '' && (
+            <div className="search-preview-box">
+              {resultadosPreview.length > 0 ? (
+                <>
+                  <div className="search-preview-header">Productos sugeridos</div>
+                  {resultadosPreview.map((p) => (
+                    <div
+                      key={p.id}
+                      className="search-preview-item"
+                      onClick={() => seleccionarProducto(p.id)}
+                    >
+                      <img src={p.imagen} alt={p.nombre} />
+                      <div className="preview-info">
+                        <div className="preview-name">{p.nombre}</div>
+                        <div className="preview-price">{formatCLP(p.precio)}</div>
+                      </div>
+                    </div>
+                  ))}
+                  <div className="search-preview-footer" onClick={buscarProductos}>
+                    Ver todos los resultados <i className="fas fa-arrow-right ms-1"></i>
+                  </div>
+                </>
+              ) : (
+                <div className="search-preview-empty">
+                  <i className="fas fa-search-minus mb-2"></i>
+                  <p>No se encontraron resultados para "{busqueda}"</p>
+                </div>
+              )}
+            </div>
+          )}
+        </div>
       </section>
 
       {/* Recomendados */}

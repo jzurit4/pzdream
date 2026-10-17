@@ -776,3 +776,121 @@ footer {
   }
 }
 
+/* 
+   PREVIEW DE BÚSQUEDA */
+
+.search-container {
+  position: relative;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* La caja flotante */
+.search-preview-box {
+  position: absolute;
+  top: calc(100% + 5px);
+  left: 0;
+  right: 0;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  z-index: 1050; /* Mayor que el navbar */
+  overflow: hidden;
+  border: 1px solid #e9ecef;
+  animation: fadeInPreview 0.2s ease-out;
+}
+
+@keyframes fadeInPreview {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.search-preview-header {
+  padding: 0.8rem 1rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #6c757d;
+  background: #f8f9fa;
+  border-bottom: 1px solid #e9ecef;
+}
+
+/* Cada item de la lista */
+.search-preview-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.8rem 1rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  border-bottom: 1px solid #f1f3f5;
+}
+
+.search-preview-item:hover {
+  background: #e3f2fd;
+}
+
+.search-preview-item:last-child {
+  border-bottom: none;
+}
+
+.search-preview-item img {
+  width: 45px;
+  height: 45px;
+  object-fit: contain;
+  background: #f8f9fa;
+  border-radius: 6px;
+  padding: 2px;
+}
+
+.preview-info {
+  flex: 1;
+  text-align: left;
+}
+
+.preview-name {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #2d3436;
+  margin-bottom: 0.1rem;
+}
+
+.preview-price {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #007bff;
+}
+
+/* Footer del preview (Ver todos) */
+.search-preview-footer {
+  padding: 0.8rem 1rem;
+  text-align: center;
+  background: #f8f9fa;
+  color: #007bff;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.search-preview-footer:hover {
+  background: #e9ecef;
+  text-decoration: underline;
+}
+
+/* Estado vacío (sin resultados) */
+.search-preview-empty {
+  padding: 2rem 1rem;
+  text-align: center;
+  color: #6c757d;
+}
+
+.search-preview-empty i {
+  font-size: 1.5rem;
+  color: #b2bec3;
+}
+
+.search-preview-empty p {
+  font-size: 0.95rem;
+  margin: 0;
+}

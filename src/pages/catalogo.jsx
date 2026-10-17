@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 import Layout from '../components/layout/Layout';
@@ -11,26 +11,52 @@ import '../assets/css/catalogo.css';
 function Catalogo() {
   const { productos } = useProducts();
   const [searchParams, setSearchParams] = useSearchParams();
-  const [busqueda, setBusqueda] = useState('');
-
+  
   const categoriaActiva = searchParams.get('categoria') || '';
+  const busquedaUrl = searchParams.get('busqueda') || '';
+  
+  const [busqueda, setBusqueda] = useState(busquedaUrl);
+
+  // Si el usuario llega desde el Home con una busqueda, actualizamos el input
+  useEffect(() => {
+    console.log("Categoría activa:", categoriaActiva, "| Búsqueda URL:", busquedaUrl);
+    setBusqueda(busquedaUrl);
+  }, [busquedaUrl, categoriaActiva]);
+
+  const setCategoria = (slug) => {
+    const newParams = new URLSearchParams(searchParams);
+    if (slug) newParams.set('categoria', slug);
+    else newParams.delete('categoria');
+    setSearchParams(newParams);
+  };
+
+  const handleSearch = (e) => {
+    const valor = e.target.value;
+    setBusqueda(valor);
+    
+    const newParams = new URLSearchParams(searchParams);
+    if (valor.trim()) newParams.set('busqueda', valor);
+    else newParams.delete('busqueda');
+    
+    // replace: true evita que se llene el historial cada vez que presionas una tecla
+    setSearchParams(newParams, { replace: true });
+  };
 
   const filtrados = useMemo(() => {
     const term = busqueda.toLowerCase().trim();
+    
     return productos.filter((p) => {
       const okCat = !categoriaActiva || p.categoria === categoriaActiva;
-      const okQ =
-        !term ||
-        p.nombre.toLowerCase().includes(term) ||
-        p.descripcion?.toLowerCase().includes(term);
+      
+      const matchNombre = p.nombre.toLowerCase().includes(term);
+      const matchDesc = p.descripcion?.toLowerCase().includes(term);
+      const matchCat = p.categoria.toLowerCase().includes(term);
+      
+      const okQ = !term || matchNombre || matchDesc || matchCat;
+
       return okCat && okQ;
     });
   }, [productos, categoriaActiva, busqueda]);
-
-  const setCategoria = (slug) => {
-    if (slug) setSearchParams({ categoria: slug });
-    else setSearchParams({});
-  };
 
   return (
     <Layout>
@@ -61,14 +87,14 @@ function Catalogo() {
         ))}
       </div>
 
-      {/* Buscador */}
+  
       <div className="mb-3">
         <input
           type="search"
           className="form-control"
-          placeholder="Buscar productos..."
+          placeholder="Buscar por producto o categoría (ej. notebook, teclado)..."
           value={busqueda}
-          onChange={(e) => setBusqueda(e.target.value)}
+          onChange={handleSearch}
         />
       </div>
 
@@ -79,12 +105,16 @@ function Catalogo() {
       {filtrados.length === 0 ? (
         <div className="text-center py-5">
           <i className="fas fa-box-open fa-3x text-muted mb-3"></i>
-          <p className="text-muted">No hay productos que coincidan.</p>
+          <p className="text-muted">No hay productos que coincidan con "{busqueda}".</p>
           <button
             className="btn btn-primary"
-            onClick={() => { setCategoria(''); setBusqueda(''); }}
+            onClick={() => { 
+              setCategoria(''); 
+              setBusqueda(''); 
+              setSearchParams({}); 
+            }}
           >
-            Ver todos
+            Ver todos los productos
           </button>
         </div>
       ) : (
