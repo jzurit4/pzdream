@@ -13,9 +13,14 @@ const usuariosSeed = [
 export function UsersProvider({ children }) {
   const [usuarios, setUsuarios] = useLocalStorage('pz_usuarios', usuariosSeed);
 
+  // Funcion actualizada para id
   const agregarUsuario = useCallback((data) => {
-    const nuevo = { ...data, id: Date.now(), compras: 0 };
-    setUsuarios((prev) => [...prev, nuevo]);
+    setUsuarios((prev) => {
+      const maxId = prev.length > 0 ? Math.max(...prev.map(u => Number(u.id))) : 0;
+      const nuevoId = maxId + 1;
+      const nuevo = { ...data, id: nuevoId, compras: 0 };
+      return [...prev, nuevo];
+    });
   }, [setUsuarios]);
 
   const modificarUsuario = useCallback((id, data) => {

@@ -2,12 +2,12 @@ import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 
 import Layout from '../components/layout/Layout';
-import { useAuth } from '../context/AuthContext';
+import { useUsers } from '../context/UsersContext';
 import '../assets/css/login.css';
 
 function Registro() {
   const navigate = useNavigate();
-  const { loginUser } = useAuth();
+  const { usuarios, agregarUsuario } = useUsers();
 
   const [nombre, setNombre] = useState('');
   const [apellido, setApellido] = useState('');
@@ -16,21 +16,52 @@ function Registro() {
   const [direccion, setDireccion] = useState('');
   const [telefono, setTelefono] = useState('');
   const [aceptaTerminos, setAceptaTerminos] = useState(false);
+  const [error, setError] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setError('');
+
     if (!aceptaTerminos) {
-      alert('Debes aceptar los términos y condiciones.');
+      setError('Debes aceptar los términos y condiciones.');
       return;
     }
 
-    loginUser({ email: email.trim(), nombre: nombre.trim() });
+    // Normalizamos los datos ingresados
+    const emailNormalizado = email.trim().toLowerCase();
+    const telefonoNormalizado = telefono.trim().replace(/\s+/g, ''); // Quita espacios
 
-    localStorage.setItem('userLogged', 'true');
-    localStorage.setItem('userName', nombre.trim());
-    localStorage.setItem('userEmail', email.trim());
+    // Verificamos si el correo ya existe
+    const emailDuplicado = usuarios.some(
+      (u) => u.email.toLowerCase() === emailNormalizado
+    );
 
-    navigate('/');
+    if (emailDuplicado) {
+      setError('Este correo electrónico ya está registrado. Intenta con otro.');
+      return;
+    }
+
+    // Verificamos si el telefono ya existe
+    const telefonoDuplicado = usuarios.some(
+      (u) => u.telefono.replace(/\s+/g, '') === telefonoNormalizado
+    );
+
+    if (telefonoDuplicado) {
+      setError('Este número de teléfono ya está asociado a otra cuenta.');
+      return;
+    }
+
+    // Si todo esta bien, guardamos al usuario
+    agregarUsuario({
+      nombre: `${nombre.trim()} ${apellido.trim()}`,
+      email: emailNormalizado,
+      telefono: telefono.trim(), // Guardamos el telefono
+      direccion: direccion.trim(),
+    });
+
+    // Avisamos y redirigimos
+    alert('¡Registro exitoso! Ahora puedes iniciar sesión.');
+    navigate('/login');
   };
 
   return (
@@ -42,6 +73,9 @@ function Registro() {
             <h2>Crear Cuenta</h2>
             <p className="text-muted">Completa tus datos para registrarte</p>
           </div>
+
+          {/* Mostrar mensaje de error si existe */}
+          {error && <div className="alert alert-danger py-2 text-center small fw-bold">{error}</div>}
 
           <form onSubmit={handleSubmit}>
             <div className="row g-3">
