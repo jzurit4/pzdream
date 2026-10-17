@@ -63,6 +63,7 @@ function Navbar() {
 
             <ul className="navbar-nav mb-2 mb-lg-0 align-items-lg-center">
 
+              {/* Carrito */}
               <li className="nav-item">
                 <Link className="nav-link nav-icon-link" to="/carrito" title="Carrito">
                   <i className="fas fa-shopping-cart"></i>
@@ -73,6 +74,15 @@ function Navbar() {
 
               <li className="nav-divider d-none d-lg-block"></li>
 
+              {/* Botón Admin (siempre visible, discreto) */}
+              <li className="nav-item">
+                <Link className="nav-link admin-entry-link" to="/admin/login" title="Acceso administrador">
+                  <i className="fas fa-user-shield"></i>
+                  <span className="d-none d-lg-inline ms-1">Admin</span>
+                </Link>
+              </li>
+
+              {/* Usuario NO logueado */}
               {!user && (
                 <li className="nav-item">
                   <Link className="nav-link" to="/login">
@@ -81,6 +91,7 @@ function Navbar() {
                 </li>
               )}
 
+              {/* Usuario SÍ logueado */}
               {user && (
                 <li className="nav-item dropdown">
                   <a
@@ -97,6 +108,11 @@ function Navbar() {
                       <span className="dropdown-item-text">
                         <i className="fas fa-user me-2"></i>Hola, {user.nombre}
                       </span>
+                    </li>
+                    <li>
+                      <Link className="dropdown-item" to="/admin">
+                        <i className="fas fa-user-shield me-2"></i>Ir al panel admin
+                      </Link>
                     </li>
                     <li><hr className="dropdown-divider" /></li>
                     <li>

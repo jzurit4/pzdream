@@ -46,7 +46,6 @@ src/
       admin.css
       App.css
       carrito.css
-      catalogo copy.css
       catalogo.css
       contacto.css
       index.css
@@ -105,104 +104,6 @@ vite.config.js
 
 <files>
 This section contains the contents of the repository's files.
-
-<file path="src/pages/producto.jsx">
-import { useParams, Link } from 'react-router-dom';
-
-import Layout from '../components/layout/Layout';
-import { useProducts } from '../context/ProductsContext';
-import { useCart } from '../context/CartContext';
-import { formatCLP, calcularDescuento } from '../utils/format';
-
-function Producto() {
-  const { id } = useParams();
-  const { getProducto } = useProducts();
-  const { add } = useCart();
-
-  const producto = getProducto(id);
-
-  if (!producto) {
-    return (
-      <Layout>
-        <div className="alert alert-danger text-center py-5">
-          <i className="fas fa-exclamation-circle fa-3x mb-3"></i>
-          <h4>Producto no encontrado</h4>
-          <p>El producto que buscas no existe o fue removido.</p>
-          <Link to="/catalogo" className="btn btn-primary mt-3">
-            <i className="fas fa-arrow-left"></i> Volver al catálogo
-          </Link>
-        </div>
-      </Layout>
-    );
-  }
-
-  const descuento = calcularDescuento(producto.precio, producto.precioOriginal);
-
-  const especificaciones = Object.entries(producto.especificaciones || {});
-
-  return (
-    <Layout>
-      <div className="row g-4">
-        <div className="col-lg-6">
-          <div className="product-image-container">
-            <img src={producto.imagen} className="img-fluid rounded" alt={producto.nombre} loading="lazy" />
-            {descuento && (
-              <span className="badge-oferta-detalle">-{descuento}%</span>
-            )}
-          </div>
-        </div>
-
-        <div className="col-lg-6">
-          <h1 className="display-5 fw-bold">{producto.nombre}</h1>
-
-          <div className="product-prices-detalle mt-2">
-            {producto.precioOriginal && (
-              <span className="old-price-detalle">{formatCLP(producto.precioOriginal)}</span>
-            )}
-            <span className="price-detalle">{formatCLP(producto.precio)}</span>
-          </div>
-
-          <div className="mt-4">
-            <h5><i className="fas fa-align-left text-primary"></i> Descripción</h5>
-            <p className="text-muted">{producto.descripcion}</p>
-          </div>
-
-          {especificaciones.length > 0 && (
-            <div className="mt-4">
-              <h5><i className="fas fa-microchip text-primary"></i> Especificaciones</h5>
-              <ul className="list-group list-group-flush product-specs-list">
-                {especificaciones.map(([clave, valor]) => (
-                  <li
-                    key={clave}
-                    className="list-group-item d-flex justify-content-between align-items-start"
-                  >
-                    <span className="fw-bold">{clave}</span>
-                    <span className="text-muted text-end">{valor}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-
-          <div className="mt-4 d-flex flex-wrap gap-2">
-            <button
-              className="btn btn-primary btn-lg"
-              onClick={() => add(producto.id)}
-            >
-              <i className="fas fa-shopping-cart"></i> Agregar al carrito
-            </button>
-            <Link to="/catalogo" className="btn btn-outline-secondary btn-lg">
-              <i className="fas fa-arrow-left"></i> Volver
-            </Link>
-          </div>
-        </div>
-      </div>
-    </Layout>
-  );
-}
-
-export default Producto;
-</file>
 
 <file path="src/assets/css/admin.css">
 .admin-header {
@@ -305,93 +206,149 @@ export default Producto;
   .admin-header h1 { font-size: 1.8rem; }
   .admin-card i { font-size: 2.2rem; }
 }
-</file>
 
-<file path="src/assets/css/catalogo copy.css">
-.page-title {
-  font-size: 2rem;
-  font-weight: 600;
-  color: #2d3436;
-}
-
-.product-card {
-  display: block;
+.admin-stat {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
   background: white;
   border-radius: 12px;
-  padding: 1rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  transition: all 0.3s ease;
-  cursor: pointer;
-  position: relative;
-  height: 100%;
-  text-decoration: none;
-  color: inherit;
+  padding: 1.2rem 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
 }
 
-.product-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-}
-
-.product-card img {
-  width: 100%;
-  aspect-ratio: 1/1;
-  object-fit: contain;
-  background: #f8f9fa;
-  padding: 0.5rem;
-  border-radius: 8px;
-}
-
-.product-name {
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: #2d3436;
-  margin-top: 0.75rem;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  min-height: 2.8rem;
-}
-
-.product-prices {
-  margin-top: 0.3rem;
-}
-
-.price {
-  font-size: 1.1rem;
-  font-weight: 700;
+.admin-stat i {
+  font-size: 2.2rem;
   color: #007bff;
 }
 
-.old-price {
-  font-size: 0.85rem;
-  color: #b2bec3;
-  text-decoration: line-through;
-  margin-right: 0.5rem;
-}
-
-.badge-oferta-card {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  background: #dc3545;
-  color: white;
-  padding: 0.25rem 0.6rem;
-  border-radius: 20px;
-  font-size: 0.75rem;
+.admin-stat .stat-value {
+  font-size: 1.6rem;
   font-weight: 700;
-  z-index: 2;
-  box-shadow: 0 2px 6px rgba(220, 53, 69, 0.3);
+  color: #2d3436;
+  line-height: 1;
 }
 
-@media (max-width: 576px) {
-  .page-title { font-size: 1.5rem; }
-  .product-card { padding: 0.7rem; }
-  .product-name { font-size: 0.8rem; min-height: 2.2rem; }
-  .price { font-size: 0.95rem; }
-  .old-price { font-size: 0.75rem; }
+.admin-stat .stat-label {
+  font-size: 0.85rem;
+  color: #6c757d;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/*Shell admin */
+
+.admin-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #f0f4f8;
+}
+
+/* Navbar superior del admin */
+.admin-navbar {
+  background: linear-gradient(135deg, #2d3436, #1a1a2e);
+  padding: 0.9rem 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.admin-navbar-brand {
+  color: #ffffff;
+  font-size: 1.3rem;
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+}
+
+.admin-navbar-brand:hover {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.admin-badge {
+  background: #007bff;
+  color: #ffffff;
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  margin-left: 0.5rem;
+  letter-spacing: 0.05em;
+  vertical-align: middle;
+}
+
+.admin-navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.admin-navbar-link {
+  color: #dfe6e9;
+  text-decoration: none;
+  font-size: 0.9rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.admin-navbar-link:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.admin-navbar-logout:hover {
+  background: rgba(220, 53, 69, 0.2);
+  color: #ff6b7a;
+}
+
+/* Sub-navegación */
+.admin-subnav {
+  background: #ffffff;
+  border-bottom: 1px solid #e9ecef;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
+}
+
+.admin-subnav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 0.25rem;
+  overflow-x: auto;
+}
+
+.admin-subnav li a {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.9rem 1rem;
+  color: #6c757d;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.95rem;
+  border-bottom: 3px solid transparent;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.admin-subnav li a:hover {
+  color: #007bff;
+  background: #f8f9fa;
+}
+
+.admin-subnav li a.active {
+  color: #007bff;
+  border-bottom-color: #007bff;
+}
+
+/* Contenido principal */
+.admin-main {
+  flex: 1;
 }
 </file>
 
@@ -577,491 +534,810 @@ export default Producto;
 </file>
 
 <file path="src/components/admin/AdminCard.jsx">
+import { Link } from 'react-router-dom';
 
+export default function AdminCard({ to, icon, title, description, danger = false }) {
+  return (
+    <div className="col-md-6 col-lg-3">
+      <Link to={to} className="admin-card">
+        <i className={`fas ${icon} ${danger ? 'text-danger' : ''}`}></i>
+        <h5>{title}</h5>
+        <p>{description}</p>
+      </Link>
+    </div>
+  );
+}
 </file>
 
 <file path="src/components/admin/AdminLayout.jsx">
+import { useEffect } from 'react';
+import { useNavigate, Link, useLocation } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
+import '../../assets/css/admin.css';
 
-</file>
+export default function AdminLayout({ children, title, subtitle }) {
+  const { admin, logoutAdmin } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
 
-<file path="src/components/productos/ProductCardMini.jsx">
-import { formatCLP } from '../../utils/format';
-import { useCart } from '../../context/CartContext';
+  useEffect(() => {
+    if (!admin) navigate('/admin/login');
+  }, [admin, navigate]);
 
-export default function ProductCardMini({ producto }) {
-  const { add } = useCart();
-  const { id, nombre, precio, imagen } = producto;
+  if (!admin) return null;
+
+  const cerrarAdmin = () => {
+    logoutAdmin();
+    navigate('/admin/login');
+  };
 
   return (
-    <div className="col-6 col-md-4 col-lg-3">
-      <div className="product-card-mini">
-        <img src={imagen} alt={nombre} loading="lazy" />
-        <div className="product-name">{nombre}</div>
-        <div className="product-price">{formatCLP(precio)}</div>
-        <button
-          className="btn btn-primary btn-sm btn-add"
-          onClick={() => add(id)}
-        >
-          <i className="fas fa-cart-plus me-1"></i>Agregar
-        </button>
-      </div>
+    <div className="admin-shell">
+      {/* Header propio del admin */}
+      <header className="admin-navbar">
+        <div className="container-fluid d-flex align-items-center justify-content-between px-4">
+          <Link to="/admin" className="admin-navbar-brand">
+            <i className="fas fa-user-shield me-2"></i>
+            PZDREAM <span className="admin-badge">ADMIN</span>
+          </Link>
+
+          <div className="admin-navbar-actions">
+            <Link to="/" className="admin-navbar-link">
+              <i className="fas fa-store me-1"></i>
+              <span className="d-none d-md-inline">Ver tienda</span>
+            </Link>
+            <button onClick={cerrarAdmin} className="admin-navbar-link admin-navbar-logout">
+              <i className="fas fa-sign-out-alt me-1"></i>
+              <span className="d-none d-md-inline">Salir</span>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <nav className="admin-subnav">
+        <div className="container-fluid px-4">
+          <ul>
+            <li>
+              <Link to="/admin" className={location.pathname === '/admin' ? 'active' : ''}>
+                <i className="fas fa-home me-1"></i>Dashboard
+              </Link>
+            </li>
+            <li>
+              <Link to="/admin/agregar" className={location.pathname === '/admin/agregar' ? 'active' : ''}>
+                <i className="fas fa-plus me-1"></i>Agregar
+              </Link>
+            </li>
+            <li>
+              <Link to="/admin/lista" className={location.pathname === '/admin/lista' ? 'active' : ''}>
+                <i className="fas fa-list me-1"></i>Lista
+              </Link>
+            </li>
+            <li>
+              <Link to="/admin/modificar" className={location.pathname === '/admin/modificar' ? 'active' : ''}>
+                <i className="fas fa-edit me-1"></i>Modificar
+              </Link>
+            </li>
+            <li>
+              <Link to="/admin/eliminar" className={location.pathname === '/admin/eliminar' ? 'active' : ''}>
+                <i className="fas fa-trash me-1"></i>Eliminar
+              </Link>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <main className="admin-main">
+        <div className="container py-4">
+          {title && (
+            <div className="admin-header">
+              <h1>{title}</h1>
+              {subtitle && <p>{subtitle}</p>}
+            </div>
+          )}
+          {children}
+        </div>
+      </main>
     </div>
   );
 }
 </file>
 
 <file path="src/pages/admin/AdminAgregar.jsx">
-
-</file>
-
-<file path="src/pages/admin/AdminEliminar.jsx">
-
-</file>
-
-<file path="src/pages/admin/AdminHome.jsx">
-
-</file>
-
-<file path="src/pages/admin/AdminLista.jsx">
-
-</file>
-
-<file path="src/pages/admin/AdminLogin.jsx">
-
-</file>
-
-<file path="src/pages/admin/AdminModificar.jsx">
-
-</file>
-
-<file path="src/pages/carrito.jsx">
-import { Link } from 'react-router-dom';
-
-import Layout from '../components/layout/Layout';
-import ProductCardMini from '../components/productos/ProductCardMini';
-import { useCart } from '../context/CartContext';
-import { useProducts } from '../context/ProductsContext';
-import { formatCLP } from '../utils/format';
-
-import '../assets/css/carrito.css';
-
-function Carrito() {
-  const { items, total, count, change, remove, clear } = useCart();
-  const { productos } = useProducts();
-
-  const finalizarCompra = () => {
-    if (items.length === 0) return;
-    alert('¡Compra finalizada! Gracias por tu pedido.');
-    clear();
-  };
-
-  return (
-    <Layout>
-      <h1 className="display-5 fw-bold mb-4">
-        <i className="fas fa-shopping-cart text-primary me-2"></i>
-        Carrito de compras
-      </h1>
-
-      <div className="row g-4">
-        <div className="col-lg-8">
-          <h4 className="fw-semibold mb-3">
-            <i className="fas fa-boxes text-primary me-2"></i>
-            Productos disponibles
-          </h4>
-          <div className="row g-3">
-            {productos.map((p) => (
-              <ProductCardMini key={p.id} producto={p} />
-            ))}
-          </div>
-        </div>
-
-        <div className="col-lg-4">
-          <div className="cart-summary">
-            <h4 className="fw-semibold mb-3">
-              <i className="fas fa-receipt text-primary me-2"></i>
-              Resumen
-            </h4>
-
-            {items.length === 0 ? (
-              <div className="text-muted text-center py-4">
-                <i className="fas fa-cart-plus fa-3x mb-3"></i>
-                <p>Tu carrito está vacío</p>
-              </div>
-            ) : (
-              <>
-                <ul className="list-group list-group-flush mb-3">
-                  {items.map((item) => (
-                    <li className="list-group-item cart-item" key={item.id}>
-                      <div className="item-info">
-                        <div className="item-name">{item.nombre}</div>
-                        <div className="item-price">{formatCLP(item.precio)} c/u</div>
-                      </div>
-                      <div className="item-actions">
-                        <button
-                          className="btn btn-outline-secondary btn-sm"
-                          onClick={() => change(item.id, -1)}
-                        >
-                          −
-                        </button>
-                        <span className="cantidad">{item.cantidad}</span>
-                        <button
-                          className="btn btn-outline-secondary btn-sm"
-                          onClick={() => change(item.id, 1)}
-                        >
-                          +
-                        </button>
-                        <button
-                          className="btn btn-danger btn-sm"
-                          onClick={() => remove(item.id)}
-                        >
-                          <i className="fas fa-trash-alt"></i>
-                        </button>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-
-                <div className="d-flex justify-content-between fw-bold fs-5">
-                  <span>Total ({count} ítems):</span>
-                  <span>{formatCLP(total)}</span>
-                </div>
-
-                <button className="btn btn-danger w-100 mt-3" onClick={clear}>
-                  <i className="fas fa-trash-alt me-2"></i>Vaciar carrito
-                </button>
-                <button className="btn btn-success w-100 mt-2" onClick={finalizarCompra}>
-                  <i className="fas fa-check me-2"></i>Finalizar compra
-                </button>
-              </>
-            )}
-          </div>
-        </div>
-      </div>
-    </Layout>
-  );
-}
-
-export default Carrito;
-</file>
-
-<file path="src/pages/catalogo.jsx">
-import { useState, useMemo } from 'react';
-import { useSearchParams } from 'react-router-dom';
-
-import Layout from '../components/layout/Layout';
-import ProductCard from '../components/productos/ProductCard';
-import { useProducts } from '../context/ProductsContext';
-import { CATEGORIAS } from '../data/productos';
-
-import '../assets/css/catalogo.css';
-
-function Catalogo() {
-  const { productos } = useProducts();
-  const [searchParams, setSearchParams] = useSearchParams();
-  const [busqueda, setBusqueda] = useState('');
-
-  const categoriaActiva = searchParams.get('categoria') || '';
-
-  const filtrados = useMemo(() => {
-    const term = busqueda.toLowerCase().trim();
-    return productos.filter((p) => {
-      const okCat = !categoriaActiva || p.categoria === categoriaActiva;
-      const okQ =
-        !term ||
-        p.nombre.toLowerCase().includes(term) ||
-        p.descripcion?.toLowerCase().includes(term);
-      return okCat && okQ;
-    });
-  }, [productos, categoriaActiva, busqueda]);
-
-  const setCategoria = (slug) => {
-    if (slug) setSearchParams({ categoria: slug });
-    else setSearchParams({});
-  };
-
-  return (
-    <Layout>
-      <h1 className="page-title mb-3">
-        <i className="fas fa-th-large me-2 text-primary"></i>
-        Catálogo de Productos
-      </h1>
-
-      {/* Filtros por categoría */}
-      <div className="mb-3 d-flex flex-wrap gap-2">
-        <button
-          type="button"
-          className={`btn btn-sm ${!categoriaActiva ? 'btn-primary' : 'btn-outline-primary'}`}
-          onClick={() => setCategoria('')}
-        >
-          Todos
-        </button>
-        {CATEGORIAS.map((c) => (
-          <button
-            key={c.slug}
-            type="button"
-            className={`btn btn-sm ${categoriaActiva === c.slug ? 'btn-primary' : 'btn-outline-primary'}`}
-            onClick={() => setCategoria(c.slug)}
-          >
-            <i className={`fas ${c.icon} me-1`}></i>
-            {c.label}
-          </button>
-        ))}
-      </div>
-
-      {/* Buscador */}
-      <div className="mb-3">
-        <input
-          type="search"
-          className="form-control"
-          placeholder="Buscar productos..."
-          value={busqueda}
-          onChange={(e) => setBusqueda(e.target.value)}
-        />
-      </div>
-
-      <span className="badge bg-primary fs-6 mb-4">
-        {filtrados.length} {filtrados.length === 1 ? 'producto' : 'productos'}
-      </span>
-
-      {filtrados.length === 0 ? (
-        <div className="text-center py-5">
-          <i className="fas fa-box-open fa-3x text-muted mb-3"></i>
-          <p className="text-muted">No hay productos que coincidan.</p>
-          <button
-            className="btn btn-primary"
-            onClick={() => { setCategoria(''); setBusqueda(''); }}
-          >
-            Ver todos
-          </button>
-        </div>
-      ) : (
-        <div className="row g-4">
-          {filtrados.map((p) => (
-            <ProductCard key={p.id} producto={p} />
-          ))}
-        </div>
-      )}
-    </Layout>
-  );
-}
-
-export default Catalogo;
-</file>
-
-<file path="src/pages/nosotros.jsx">
-import Layout from '../components/layout/Layout';
-
-function Nosotros() {
-  return (
-    <Layout container={false}>
-      <div className="about-banner">
-        <img
-          src="https://picsum.photos/seed/technology/1600/500"
-          alt="Sobre PZDREAM"
-          className="about-banner-img"
-        />
-        <div className="about-banner-overlay">
-          <h1 className="about-banner-title">Sobre Nosotros</h1>
-          <p className="about-banner-sub">Conoce la historia detrás de PZDREAM</p>
-        </div>
-      </div>
-
-      <div className="container my-5">
-        <div className="row">
-          <div className="col-lg-8 mx-auto">
-            <h2 className="about-title text-center mb-4">
-              <i className="fas fa-store-alt text-primary me-2"></i>
-              ¿Quiénes somos?
-            </h2>
-
-            <p className="about-text">
-              <strong>PZDREAM</strong> nació en 2020 con la misión de acercar la
-              tecnología de vanguardia a todos los chilenos. Somos una tienda
-              online especializada en hardware, periféricos y equipos de
-              computación de las mejores marcas del mercado.
-            </p>
-
-            <p className="about-text">
-              Nuestro compromiso es ofrecer productos de calidad a precios
-              competitivos, respaldados por un servicio al cliente excepcional.
-              Creemos que la tecnología debe ser accesible y fácil de entender,
-              por eso cada producto en nuestro catálogo está cuidadosamente
-              seleccionado para garantizar el mejor rendimiento y durabilidad.
-            </p>
-
-            <div className="row mt-4 g-4 text-center">
-              <div className="col-md-4">
-                <div className="about-feature">
-                  <i className="fas fa-shield-alt fa-2x text-primary"></i>
-                  <h5 className="mt-2">Garantía</h5>
-                  <p className="text-muted small">
-                    Todos nuestros productos tienen garantía oficial.
-                  </p>
-                </div>
-              </div>
-              <div className="col-md-4">
-                <div className="about-feature">
-                  <i className="fas fa-truck-fast fa-2x text-primary"></i>
-                  <h5 className="mt-2">Envíos rápidos</h5>
-                  <p className="text-muted small">
-                    Entregas a todo Chile en 24-48 horas.
-                  </p>
-                </div>
-              </div>
-              <div className="col-md-4">
-                <div className="about-feature">
-                  <i className="fas fa-headset fa-2x text-primary"></i>
-                  <h5 className="mt-2">Soporte 24/7</h5>
-                  <p className="text-muted small">
-                    Atención al cliente disponible todos los días.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </Layout>
-  );
-}
-
-export default Nosotros;
-</file>
-
-<file path="src/pages/ofertas.jsx">
-import Layout from '../components/layout/Layout';
-import ProductCard from '../components/productos/ProductCard';
-import { useProducts } from '../context/ProductsContext';
-import '../assets/css/catalogo.css';
-
-function Ofertas() {
-  const { productos } = useProducts();
-  const ofertas = productos.filter((p) => p.oferta);
-
-  return (
-    <Layout>
-      <div className="d-flex justify-content-between align-items-center mb-4">
-        <h1 className="page-title">
-          <i className="fas fa-tags text-danger me-2"></i>
-          Productos en Oferta
-        </h1>
-        <span className="badge bg-danger fs-6">
-          {ofertas.length} {ofertas.length === 1 ? 'producto' : 'productos'}
-        </span>
-      </div>
-
-      {ofertas.length === 0 ? (
-        <div className="text-center py-5">
-          <i className="fas fa-tags fa-3x text-muted mb-3"></i>
-          <p className="text-muted">No hay ofertas disponibles por ahora.</p>
-        </div>
-      ) : (
-        <div className="row g-4">
-          {ofertas.map((p) => (
-            <ProductCard key={p.id} producto={p} />
-          ))}
-        </div>
-      )}
-    </Layout>
-  );
-}
-
-export default Ofertas;
-</file>
-
-<file path="src/pages/registro.jsx">
 import { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import AdminLayout from '../../components/admin/AdminLayout';
+import { useProducts } from '../../context/ProductsContext';
+import { CATEGORIAS } from '../../data/productos';
 
-import Layout from '../components/layout/Layout';
-import { useAuth } from '../context/AuthContext';
-import '../assets/css/login.css';
-
-function Registro() {
+function AdminAgregar() {
   const navigate = useNavigate();
-  const { loginUser } = useAuth();
+  const { agregarProducto } = useProducts();
 
-  const [nombre, setNombre] = useState('');
-  const [apellido, setApellido] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [direccion, setDireccion] = useState('');
-  const [telefono, setTelefono] = useState('');
-  const [aceptaTerminos, setAceptaTerminos] = useState(false);
+  const [form, setForm] = useState({
+    nombre: '',
+    precio: '',
+    precioOriginal: '',
+    stock: '',
+    imagen: '',
+    descripcion: '',
+    categoria: 'notebook',
+    oferta: false,
+  });
+
+  const [mensaje, setMensaje] = useState(null);
+
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setForm((prev) => ({ ...prev, [name]: type === 'checkbox' ? checked : value }));
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!aceptaTerminos) {
-      alert('Debes aceptar los términos y condiciones.');
+
+    if (!form.nombre.trim() || !form.precio || !form.stock) {
+      setMensaje({ type: 'danger', text: 'Completa los campos obligatorios.' });
       return;
     }
 
-    loginUser({ email: email.trim(), nombre: nombre.trim() });
+    agregarProducto({
+      ...form,
+      precio: Number(form.precio),
+      precioOriginal: form.precioOriginal ? Number(form.precioOriginal) : null,
+      stock: Number(form.stock),
+    });
 
-    localStorage.setItem('userLogged', 'true');
-    localStorage.setItem('userName', nombre.trim());
-    localStorage.setItem('userEmail', email.trim());
-
-    navigate('/');
+    setMensaje({ type: 'success', text: `Producto "${form.nombre}" agregado correctamente.` });
+    setTimeout(() => navigate('/admin/lista'), 1200);
   };
 
   return (
-    <Layout container={false}>
-      <div className="login-page">
-        <div className="login-card" style={{ maxWidth: 520 }}>
-          <div className="logo">
-            <i className="fas fa-user-plus"></i>
-            <h2>Crear Cuenta</h2>
-            <p className="text-muted">Completa tus datos para registrarte</p>
+    <AdminLayout title="Agregar Producto" subtitle="Completa los campos para añadir un nuevo producto">
+      <div className="row justify-content-center">
+        <div className="col-lg-8">
+          <div className="card shadow-sm">
+            <div className="card-body">
+              <form className="admin-form" onSubmit={handleSubmit}>
+                <div className="row g-3">
+                  <div className="col-md-6">
+                    <label className="form-label">Nombre *</label>
+                    <input type="text" className="form-control" name="nombre" value={form.nombre} onChange={handleChange} placeholder="Ej: Notebook Gamer" required />
+                  </div>
+                  <div className="col-md-6">
+                    <label className="form-label">Categoría</label>
+                    <select className="form-select" name="categoria" value={form.categoria} onChange={handleChange}>
+                      {CATEGORIAS.map((c) => (
+                        <option key={c.slug} value={c.slug}>{c.label}</option>
+                      ))}
+                    </select>
+                  </div>
+                  <div className="col-md-6">
+                    <label className="form-label">Precio (CLP) *</label>
+                    <input type="number" className="form-control" name="precio" value={form.precio} onChange={handleChange} placeholder="1299990" required />
+                  </div>
+                  <div className="col-md-6">
+                    <label className="form-label">Precio original (si está en oferta)</label>
+                    <input type="number" className="form-control" name="precioOriginal" value={form.precioOriginal} onChange={handleChange} placeholder="1499990" />
+                  </div>
+                  <div className="col-md-6">
+                    <label className="form-label">Stock *</label>
+                    <input type="number" className="form-control" name="stock" value={form.stock} onChange={handleChange} placeholder="10" required />
+                  </div>
+                  <div className="col-md-6 d-flex align-items-end">
+                    <div className="form-check">
+                      <input className="form-check-input" type="checkbox" name="oferta" id="oferta" checked={form.oferta} onChange={handleChange} />
+                      <label className="form-check-label" htmlFor="oferta">Marcar como oferta</label>
+                    </div>
+                  </div>
+                  <div className="col-12">
+                    <label className="form-label">URL de la imagen</label>
+                    <input type="text" className="form-control" name="imagen" value={form.imagen} onChange={handleChange} placeholder="https://..." />
+                  </div>
+                  <div className="col-12">
+                    <label className="form-label">Descripción</label>
+                    <textarea className="form-control" name="descripcion" rows="3" value={form.descripcion} onChange={handleChange}></textarea>
+                  </div>
+                </div>
+
+                {mensaje && <div className={`alert alert-${mensaje.type} mt-3 mb-0`}>{mensaje.text}</div>}
+
+                <div className="d-flex gap-2 mt-4">
+                  <button type="submit" className="btn btn-primary">
+                    <i className="fas fa-save me-2"></i>Guardar producto
+                  </button>
+                  <button type="button" className="btn btn-outline-secondary" onClick={() => navigate('/admin')}>
+                    <i className="fas fa-arrow-left me-2"></i>Cancelar
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </AdminLayout>
+  );
+}
+
+export default AdminAgregar;
+</file>
+
+<file path="src/pages/admin/AdminEliminar.jsx">
+import { useState } from 'react';
+import { useSearchParams, useNavigate } from 'react-router-dom';
+import AdminLayout from '../../components/admin/AdminLayout';
+import { useProducts } from '../../context/ProductsContext';
+import { formatCLP } from '../../utils/format';
+
+function AdminEliminar() {
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const { productos, eliminarProducto, getProducto } = useProducts();
+
+  const idUrl = searchParams.get('id') || '';
+  const [id, setId] = useState(idUrl);
+  const [mensaje, setMensaje] = useState(null);
+
+  const producto = id ? getProducto(id) : null;
+
+  const handleEliminar = () => {
+    if (!producto) return;
+    const confirmado = confirm(`¿Eliminar "${producto.nombre}"? Esta acción no se puede deshacer.`);
+    if (!confirmado) return;
+
+    eliminarProducto(producto.id);
+    setMensaje({ type: 'success', text: `"${producto.nombre}" eliminado correctamente.` });
+    setId('');
+    setTimeout(() => navigate('/admin/lista'), 1200);
+  };
+
+  return (
+    <AdminLayout title="Eliminar Producto" subtitle="Selecciona un producto para eliminarlo permanentemente">
+      <div className="row justify-content-center">
+        <div className="col-lg-6">
+          <div className="card shadow-sm">
+            <div className="card-body">
+              <div className="mb-4">
+                <label className="form-label fw-semibold">Selecciona el producto</label>
+                <select className="form-select" value={id} onChange={(e) => { setId(e.target.value); setMensaje(null); }}>
+                  <option value="">-- Seleccionar --</option>
+                  {productos.map((p) => (
+                    <option key={p.id} value={p.id}>#{p.id} — {p.nombre}</option>
+                  ))}
+                </select>
+              </div>
+
+              {producto && (
+                <div className="alert alert-warning">
+                  <h6 className="mb-2"><i className="fas fa-exclamation-triangle me-2"></i>Vas a eliminar:</h6>
+                  <div className="d-flex align-items-center gap-3">
+                    <img src={producto.imagen} alt={producto.nombre} style={{ width: 60, height: 60, objectFit: 'contain' }} />
+                    <div>
+                      <div className="fw-bold">{producto.nombre}</div>
+                      <div className="small text-muted">{formatCLP(producto.precio)} · {producto.categoria}</div>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {mensaje && <div className={`alert alert-${mensaje.type}`}>{mensaje.text}</div>}
+
+              <div className="d-flex gap-2">
+                <button type="button" className="btn btn-danger" onClick={handleEliminar} disabled={!producto}>
+                  <i className="fas fa-trash me-2"></i>Eliminar producto
+                </button>
+                <button type="button" className="btn btn-outline-secondary" onClick={() => navigate('/admin')}>
+                  <i className="fas fa-arrow-left me-2"></i>Cancelar
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </AdminLayout>
+  );
+}
+
+export default AdminEliminar;
+</file>
+
+<file path="src/pages/admin/AdminHome.jsx">
+import AdminLayout from '../../components/admin/AdminLayout';
+import AdminCard from '../../components/admin/AdminCard';
+import { useAuth } from '../../context/AuthContext';
+import { useProducts } from '../../context/ProductsContext';
+
+function AdminHome() {
+  const { logoutAdmin } = useAuth();
+  const { productos, resetProductos } = useProducts();
+
+  const totalProductos = productos.length;
+  const totalOfertas = productos.filter((p) => p.oferta).length;
+  const stockTotal = productos.reduce((s, p) => s + (Number(p.stock) || 0), 0);
+
+  return (
+    <AdminLayout
+      title="Panel de Administración"
+      subtitle="Gestiona los productos de tu tienda fácilmente"
+    >
+      <div className="row g-4 mb-4">
+        <div className="col-md-4">
+          <div className="admin-stat">
+            <i className="fas fa-box"></i>
+            <div>
+              <div className="stat-value">{totalProductos}</div>
+              <div className="stat-label">Productos</div>
+            </div>
+          </div>
+        </div>
+        <div className="col-md-4">
+          <div className="admin-stat">
+            <i className="fas fa-tags"></i>
+            <div>
+              <div className="stat-value">{totalOfertas}</div>
+              <div className="stat-label">En oferta</div>
+            </div>
+          </div>
+        </div>
+        <div className="col-md-4">
+          <div className="admin-stat">
+            <i className="fas fa-warehouse"></i>
+            <div>
+              <div className="stat-value">{stockTotal}</div>
+              <div className="stat-label">Unidades en stock</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="row g-4">
+        <AdminCard to="/admin/agregar" icon="fa-plus-circle" title="Agregar Producto" description="Añade un nuevo producto al catálogo" />
+        <AdminCard to="/admin/lista" icon="fa-list" title="Listar Productos" description="Visualiza todos los productos" />
+        <AdminCard to="/admin/modificar" icon="fa-edit" title="Modificar Producto" description="Actualiza los datos de un producto" />
+        <AdminCard to="/admin/eliminar" icon="fa-trash-alt" title="Eliminar Producto" description="Quita un producto del catálogo" danger />
+      </div>
+
+      <div className="text-center mt-5 d-flex justify-content-center gap-2 flex-wrap">
+        <button
+          className="btn btn-outline-secondary"
+          onClick={() => {
+            if (confirm('¿Restaurar los productos originales? Esto sobreescribe los cambios.')) {
+              resetProductos();
+              alert('Productos restaurados.');
+            }
+          }}
+        >
+          <i className="fas fa-undo me-2"></i>Restaurar catálogo original
+        </button>
+        <button
+          className="btn btn-danger"
+          onClick={() => {
+            logoutAdmin();
+            window.location.href = '/';
+          }}
+        >
+          <i className="fas fa-sign-out-alt me-2"></i>Cerrar sesión admin
+        </button>
+      </div>
+    </AdminLayout>
+  );
+}
+
+export default AdminHome;
+</file>
+
+<file path="src/pages/admin/AdminLista.jsx">
+import { Link } from 'react-router-dom';
+import AdminLayout from '../../components/admin/AdminLayout';
+import { useProducts } from '../../context/ProductsContext';
+import { formatCLP } from '../../utils/format';
+
+function AdminLista() {
+  const { productos } = useProducts();
+
+  return (
+    <AdminLayout title="Lista de Productos" subtitle="Visualiza todos los productos disponibles en el catálogo">
+      <div className="card shadow-sm">
+        <div className="card-body p-0">
+          <div className="table-responsive">
+            <table className="table table-admin table-hover mb-0">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Imagen</th>
+                  <th>Nombre</th>
+                  <th>Precio</th>
+                  <th>Stock</th>
+                  <th>Categoría</th>
+                  <th>Oferta</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                {productos.length === 0 ? (
+                  <tr>
+                    <td colSpan="8" className="text-center py-4 text-muted">No hay productos en el catálogo.</td>
+                  </tr>
+                ) : (
+                  productos.map((p) => (
+                    <tr key={p.id}>
+                      <td className="text-muted small">#{p.id}</td>
+                      <td>
+                        <img src={p.imagen} alt={p.nombre} style={{ width: 48, height: 48, objectFit: 'contain' }} />
+                      </td>
+                      <td className="fw-semibold">{p.nombre}</td>
+                      <td>{formatCLP(p.precio)}</td>
+                      <td>{p.stock ?? '—'}</td>
+                      <td><span className="badge bg-secondary">{p.categoria}</span></td>
+                      <td>
+                        {p.oferta ? <span className="badge bg-danger">Sí</span> : <span className="badge bg-light text-dark">No</span>}
+                      </td>
+                      <td>
+                        <Link to={`/admin/modificar?id=${p.id}`} className="btn btn-sm btn-outline-primary me-1" title="Modificar">
+                          <i className="fas fa-edit"></i>
+                        </Link>
+                        <Link to={`/admin/eliminar?id=${p.id}`} className="btn btn-sm btn-outline-danger" title="Eliminar">
+                          <i className="fas fa-trash-alt"></i>
+                        </Link>
+                      </td>
+                    </tr>
+                  ))
+                )}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div className="mt-3 text-muted small">
+        Mostrando <strong>{productos.length}</strong> producto(s).
+      </div>
+    </AdminLayout>
+  );
+}
+
+export default AdminLista;
+</file>
+
+<file path="src/pages/admin/AdminLogin.jsx">
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Layout from '../../components/admin/AdminLayout
+import { useAuth } from '../../context/AuthContext';
+import '../../assets/css/admin.css';
+
+function AdminLogin() {
+  const navigate = useNavigate();
+  const { admin, loginAdmin } = useAuth();
+
+  const [usuario, setUsuario] = useState('admin');
+  const [contrasenia, setContrasenia] = useState('admin123');
+  const [error, setError] = useState('');
+
+  useEffect(() => {
+    if (admin) navigate('/admin');
+  }, [admin, navigate]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const ok = loginAdmin(usuario.trim(), contrasenia.trim());
+    if (ok) {
+      navigate('/admin');
+    } else {
+      setError('Credenciales incorrectas. Inténtalo de nuevo.');
+      setContrasenia('');
+    }
+  };
+
+  return (
+  <div className="admin-login-page">
+    <div className="admin-login-card">
+      <div className="admin-login-brand">
+        <i className="fas fa-user-shield"></i>
+        <h1>Panel de Administración</h1>
+        <p>Acceso restringido a administradores</p>
+      </div>
+
+      <form onSubmit={handleSubmit}>
+        <div className="admin-login-field">
+          <label htmlFor="usuario">Usuario</label>
+          <div className="admin-login-input">
+            <i className="fas fa-user"></i>
+            <input
+              type="text"
+              id="usuario"
+              placeholder="Usuario administrador"
+              value={usuario}
+              onChange={(e) => setUsuario(e.target.value)}
+              required
+            />
+          </div>
+        </div>
+
+        <div className="admin-login-field">
+          <label htmlFor="contrasenia">Contraseña</label>
+          <div className="admin-login-input">
+            <i className="fas fa-lock"></i>
+            <input
+              type="password"
+              id="contrasenia"
+              placeholder="••••••••"
+              value={contrasenia}
+              onChange={(e) => setContrasenia(e.target.value)}
+              required
+            />
+          </div>
+        </div>
+
+        {error && (
+          <div className="admin-login-error">
+            <i className="fas fa-exclamation-triangle me-2"></i>
+            {error}
+          </div>
+        )}
+
+        <button type="submit" className="admin-login-btn">
+          <i className="fas fa-sign-in-alt me-2"></i>
+          Acceder al panel
+        </button>
+      </form>
+
+      <div className="admin-login-footer">
+        <Link to="/">
+          <i className="fas fa-arrow-left me-1"></i>
+          Volver a la tienda
+        </Link>
+      </div>
+
+      <div className="admin-login-hint">
+        <i className="fas fa-info-circle me-1"></i>
+        Demo: <strong>admin</strong> / <strong>admin123</strong>
+      </div>
+    </div>
+  </div>
+);
+  
+}
+
+export default AdminLogin;
+</file>
+
+<file path="src/pages/admin/AdminModificar.jsx">
+import { useState, useEffect } from 'react';
+import { useSearchParams, useNavigate } from 'react-router-dom';
+import AdminLayout from '../../components/admin/AdminLayout';
+import { useProducts } from '../../context/ProductsContext';
+import { CATEGORIAS } from '../../data/productos';
+import { formatCLP } from '../../utils/format';
+
+function AdminModificar() {
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const { productos, modificarProducto, getProducto } = useProducts();
+
+  const idUrl = searchParams.get('id') || '';
+  const [id, setId] = useState(idUrl);
+  const [form, setForm] = useState(null);
+  const [mensaje, setMensaje] = useState(null);
+
+  useEffect(() => {
+    if (!id) { setForm(null); return; }
+    const p = getProducto(id);
+    if (p) {
+      setForm({
+        nombre: p.nombre || '',
+        precio: p.precio ?? '',
+        precioOriginal: p.precioOriginal ?? '',
+        stock: p.stock ?? '',
+        imagen: p.imagen || '',
+        descripcion: p.descripcion || '',
+        categoria: p.categoria || 'notebook',
+        oferta: Boolean(p.oferta),
+      });
+      setMensaje(null);
+    } else {
+      setForm(null);
+    }
+  }, [id, getProducto]);
+
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setForm((prev) => ({ ...prev, [name]: type === 'checkbox' ? checked : value }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!form.nombre.trim() || form.precio === '' || form.stock === '') {
+      setMensaje({ type: 'danger', text: 'Completa los campos obligatorios.' });
+      return;
+    }
+
+    modificarProducto(id, {
+      ...form,
+      precio: Number(form.precio),
+      precioOriginal: form.precioOriginal ? Number(form.precioOriginal) : null,
+      stock: Number(form.stock),
+    });
+
+    setMensaje({ type: 'success', text: `Producto "${form.nombre}" actualizado.` });
+  };
+
+  return (
+    <AdminLayout title="Modificar Producto" subtitle="Selecciona un producto y actualiza sus datos">
+      <div className="row justify-content-center">
+        <div className="col-lg-8">
+          <div className="card shadow-sm">
+            <div className="card-body">
+              <div className="mb-4">
+                <label className="form-label fw-semibold">Seleccionar producto</label>
+                <select className="form-select" value={id} onChange={(e) => setId(e.target.value)}>
+                  <option value="">-- Seleccionar --</option>
+                  {productos.map((p) => (
+                    <option key={p.id} value={p.id}>#{p.id} — {p.nombre} ({formatCLP(p.precio)})</option>
+                  ))}
+                </select>
+              </div>
+
+              {form && (
+                <form className="admin-form" onSubmit={handleSubmit}>
+                  <div className="row g-3">
+                    <div className="col-md-6">
+                      <label className="form-label">Nombre</label>
+                      <input type="text" className="form-control" name="nombre" value={form.nombre} onChange={handleChange} required />
+                    </div>
+                    <div className="col-md-6">
+                      <label className="form-label">Categoría</label>
+                      <select className="form-select" name="categoria" value={form.categoria} onChange={handleChange}>
+                        {CATEGORIAS.map((c) => (
+                          <option key={c.slug} value={c.slug}>{c.label}</option>
+                        ))}
+                      </select>
+                    </div>
+                    <div className="col-md-6">
+                      <label className="form-label">Precio (CLP)</label>
+                      <input type="number" className="form-control" name="precio" value={form.precio} onChange={handleChange} required />
+                    </div>
+                    <div className="col-md-6">
+                      <label className="form-label">Precio original</label>
+                      <input type="number" className="form-control" name="precioOriginal" value={form.precioOriginal} onChange={handleChange} />
+                    </div>
+                    <div className="col-md-6">
+                      <label className="form-label">Stock</label>
+                      <input type="number" className="form-control" name="stock" value={form.stock} onChange={handleChange} required />
+                    </div>
+                    <div className="col-md-6 d-flex align-items-end">
+                      <div className="form-check">
+                        <input className="form-check-input" type="checkbox" name="oferta" id="oferta" checked={form.oferta} onChange={handleChange} />
+                        <label className="form-check-label" htmlFor="oferta">Marcar como oferta</label>
+                      </div>
+                    </div>
+                    <div className="col-12">
+                      <label className="form-label">URL imagen</label>
+                      <input type="text" className="form-control" name="imagen" value={form.imagen} onChange={handleChange} />
+                    </div>
+                    <div className="col-12">
+                      <label className="form-label">Descripción</label>
+                      <textarea className="form-control" name="descripcion" rows="3" value={form.descripcion} onChange={handleChange}></textarea>
+                    </div>
+                  </div>
+
+                  {mensaje && <div className={`alert alert-${mensaje.type} mt-3 mb-0`}>{mensaje.text}</div>}
+
+                  <div className="d-flex gap-2 mt-4">
+                    <button type="submit" className="btn btn-primary">
+                      <i className="fas fa-save me-2"></i>Guardar cambios
+                    </button>
+                    <button type="button" className="btn btn-outline-secondary" onClick={() => navigate('/admin')}>
+                      <i className="fas fa-arrow-left me-2"></i>Cancelar
+                    </button>
+                  </div>
+                </form>
+              )}
+
+              {!form && id && <div className="alert alert-warning">No se encontró el producto con ID #{id}.</div>}
+              {!id && (
+                <div className="text-muted text-center py-4">
+                  <i className="fas fa-hand-point-up fa-2x mb-2"></i>
+                  <p className="mb-0">Selecciona un producto para editar sus datos.</p>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+    </AdminLayout>
+  );
+}
+
+export default AdminModificar;
+</file>
+
+<file path="src/pages/producto.jsx">
+import { useParams, Link } from 'react-router-dom';
+
+import Layout from '../components/layout/Layout';
+import { useProducts } from '../context/ProductsContext';
+import { useCart } from '../context/CartContext';
+import { formatCLP, calcularDescuento } from '../utils/format';
+
+function Producto() {
+  const { id } = useParams();
+  const { getProducto } = useProducts();
+  const { add } = useCart();
+
+  const producto = getProducto(id);
+
+  if (!producto) {
+    return (
+      <Layout>
+        <div className="alert alert-danger text-center py-5">
+          <i className="fas fa-exclamation-circle fa-3x mb-3"></i>
+          <h4>Producto no encontrado</h4>
+          <p>El producto que buscas no existe o fue removido.</p>
+          <Link to="/catalogo" className="btn btn-primary mt-3">
+            <i className="fas fa-arrow-left"></i> Volver al catálogo
+          </Link>
+        </div>
+      </Layout>
+    );
+  }
+
+  const descuento = calcularDescuento(producto.precio, producto.precioOriginal);
+
+  const especificaciones = Object.entries(producto.especificaciones || {});
+
+  return (
+    <Layout>
+      <div className="row g-4">
+        <div className="col-lg-6">
+          <div className="product-image-container">
+            <img src={producto.imagen} className="img-fluid rounded" alt={producto.nombre} loading="lazy" />
+            {descuento && (
+              <span className="badge-oferta-detalle">-{descuento}%</span>
+            )}
+          </div>
+        </div>
+
+        <div className="col-lg-6">
+          <h1 className="display-5 fw-bold">{producto.nombre}</h1>
+
+          <div className="product-prices-detalle mt-2">
+            {producto.precioOriginal && (
+              <span className="old-price-detalle">{formatCLP(producto.precioOriginal)}</span>
+            )}
+            <span className="price-detalle">{formatCLP(producto.precio)}</span>
           </div>
 
-          <form onSubmit={handleSubmit}>
-            <div className="row g-3">
-              <div className="col-md-6">
-                <label htmlFor="nombre" className="form-label fw-semibold">Nombre</label>
-                <input type="text" className="form-control" id="nombre" value={nombre} onChange={(e) => setNombre(e.target.value)} required />
-              </div>
-              <div className="col-md-6">
-                <label htmlFor="apellido" className="form-label fw-semibold">Apellido</label>
-                <input type="text" className="form-control" id="apellido" value={apellido} onChange={(e) => setApellido(e.target.value)} required />
-              </div>
-            </div>
+          <div className="mt-4">
+            <h5><i className="fas fa-align-left text-primary"></i> Descripción</h5>
+            <p className="text-muted">{producto.descripcion}</p>
+          </div>
 
-            <div className="mb-3 mt-3">
-              <label htmlFor="direccion" className="form-label fw-semibold">Dirección</label>
-              <input type="text" className="form-control" id="direccion" placeholder="Calle, número, comuna" value={direccion} onChange={(e) => setDireccion(e.target.value)} required />
+          {especificaciones.length > 0 && (
+            <div className="mt-4">
+              <h5><i className="fas fa-microchip text-primary"></i> Especificaciones</h5>
+              <ul className="list-group list-group-flush product-specs-list">
+                {especificaciones.map(([clave, valor]) => (
+                  <li
+                    key={clave}
+                    className="list-group-item d-flex justify-content-between align-items-start"
+                  >
+                    <span className="fw-bold">{clave}</span>
+                    <span className="text-muted text-end">{valor}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
+          )}
 
-            <div className="mb-3">
-              <label htmlFor="telefono" className="form-label fw-semibold">Teléfono</label>
-              <input type="tel" className="form-control" id="telefono" placeholder="+56 9 1234 5678" value={telefono} onChange={(e) => setTelefono(e.target.value)} required />
-            </div>
-
-            <div className="mb-3">
-              <label htmlFor="email" className="form-label fw-semibold">Correo electrónico</label>
-              <input type="email" className="form-control" id="email" placeholder="ejemplo@correo.cl" value={email} onChange={(e) => setEmail(e.target.value)} required />
-            </div>
-
-            <div className="mb-3">
-              <label htmlFor="password" className="form-label fw-semibold">Contraseña</label>
-              <input type="password" className="form-control" id="password" placeholder="Mínimo 8 caracteres" minLength={8} value={password} onChange={(e) => setPassword(e.target.value)} required />
-              <div className="form-text">La contraseña debe tener al menos 8 caracteres.</div>
-            </div>
-
-            <div className="mb-4 form-check">
-              <input className="form-check-input" type="checkbox" id="terminos" checked={aceptaTerminos} onChange={(e) => setAceptaTerminos(e.target.checked)} />
-              <label className="form-check-label" htmlFor="terminos">
-                Acepto los <a href="#" onClick={(e) => e.preventDefault()}>términos y condiciones</a>
-              </label>
-            </div>
-
-            <button type="submit" className="btn btn-login w-100">
-              <i className="fas fa-user-check me-2"></i>Registrarse
+          <div className="mt-4 d-flex flex-wrap gap-2">
+            <button
+              className="btn btn-primary btn-lg"
+              onClick={() => add(producto.id)}
+            >
+              <i className="fas fa-shopping-cart"></i> Agregar al carrito
             </button>
-          </form>
-
-          <div className="register-link">
-            ¿Ya tienes cuenta? <Link to="/login">Inicia sesión aquí</Link>
+            <Link to="/catalogo" className="btn btn-outline-secondary btn-lg">
+              <i className="fas fa-arrow-left"></i> Volver
+            </Link>
           </div>
         </div>
       </div>
@@ -1069,7 +1345,7 @@ function Registro() {
   );
 }
 
-export default Registro;
+export default Producto;
 </file>
 
 <file path="src/assets/css/App.css">
@@ -2529,23 +2805,6 @@ footer {
 }
 </file>
 
-<file path="src/components/layout/Layout.jsx">
-import Navbar from './components/layout/Navbar';
-import Footer from './components/layout/Layout'
-
-export default function Layout({ children, container = true }) {
-  return (
-    <>
-      <Navbar />
-      <main className={container ? 'main-content container my-4' : 'main-content'}>
-        {children}
-      </main>
-      <Footer />
-    </>
-  );
-}
-</file>
-
 <file path="src/components/productos/ProductCard.jsx">
 import { Link } from 'react-router-dom';
 import { formatCLP, calcularDescuento } from '../../utils/format';
@@ -2565,6 +2824,32 @@ export default function ProductCard({ producto }) {
           <span className="price">{formatCLP(precio)}</span>
         </div>
       </Link>
+    </div>
+  );
+}
+</file>
+
+<file path="src/components/productos/ProductCardMini.jsx">
+import { formatCLP } from '../../utils/format';
+import { useCart } from '../../context/CartContext';
+
+export default function ProductCardMini({ producto }) {
+  const { add } = useCart();
+  const { id, nombre, precio, imagen } = producto;
+
+  return (
+    <div className="col-6 col-md-4 col-lg-3">
+      <div className="product-card-mini">
+        <img src={imagen} alt={nombre} loading="lazy" />
+        <div className="product-name">{nombre}</div>
+        <div className="product-price">{formatCLP(precio)}</div>
+        <button
+          className="btn btn-primary btn-sm btn-add"
+          onClick={() => add(id)}
+        >
+          <i className="fas fa-cart-plus me-1"></i>Agregar
+        </button>
+      </div>
     </div>
   );
 }
@@ -3017,6 +3302,444 @@ export function useLocalStorage(key, initial) {
 }
 </file>
 
+<file path="src/pages/carrito.jsx">
+import { Link } from 'react-router-dom';
+
+import Layout from '../components/layout/Layout';
+import ProductCardMini from '../components/productos/ProductCardMini';
+import { useCart } from '../context/CartContext';
+import { useProducts } from '../context/ProductsContext';
+import { formatCLP } from '../utils/format';
+
+import '../assets/css/carrito.css';
+
+function Carrito() {
+  const { items, total, count, change, remove, clear } = useCart();
+  const { productos } = useProducts();
+
+  const finalizarCompra = () => {
+    if (items.length === 0) return;
+    alert('¡Compra finalizada! Gracias por tu pedido.');
+    clear();
+  };
+
+  return (
+    <Layout>
+      <h1 className="display-5 fw-bold mb-4">
+        <i className="fas fa-shopping-cart text-primary me-2"></i>
+        Carrito de compras
+      </h1>
+
+      <div className="row g-4">
+        <div className="col-lg-8">
+          <h4 className="fw-semibold mb-3">
+            <i className="fas fa-boxes text-primary me-2"></i>
+            Productos disponibles
+          </h4>
+          <div className="row g-3">
+            {productos.map((p) => (
+              <ProductCardMini key={p.id} producto={p} />
+            ))}
+          </div>
+        </div>
+
+        <div className="col-lg-4">
+          <div className="cart-summary">
+            <h4 className="fw-semibold mb-3">
+              <i className="fas fa-receipt text-primary me-2"></i>
+              Resumen
+            </h4>
+
+            {items.length === 0 ? (
+              <div className="text-muted text-center py-4">
+                <i className="fas fa-cart-plus fa-3x mb-3"></i>
+                <p>Tu carrito está vacío</p>
+              </div>
+            ) : (
+              <>
+                <ul className="list-group list-group-flush mb-3">
+                  {items.map((item) => (
+                    <li className="list-group-item cart-item" key={item.id}>
+                      <div className="item-info">
+                        <div className="item-name">{item.nombre}</div>
+                        <div className="item-price">{formatCLP(item.precio)} c/u</div>
+                      </div>
+                      <div className="item-actions">
+                        <button
+                          className="btn btn-outline-secondary btn-sm"
+                          onClick={() => change(item.id, -1)}
+                        >
+                          −
+                        </button>
+                        <span className="cantidad">{item.cantidad}</span>
+                        <button
+                          className="btn btn-outline-secondary btn-sm"
+                          onClick={() => change(item.id, 1)}
+                        >
+                          +
+                        </button>
+                        <button
+                          className="btn btn-danger btn-sm"
+                          onClick={() => remove(item.id)}
+                        >
+                          <i className="fas fa-trash-alt"></i>
+                        </button>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+
+                <div className="d-flex justify-content-between fw-bold fs-5">
+                  <span>Total ({count} ítems):</span>
+                  <span>{formatCLP(total)}</span>
+                </div>
+
+                <button className="btn btn-danger w-100 mt-3" onClick={clear}>
+                  <i className="fas fa-trash-alt me-2"></i>Vaciar carrito
+                </button>
+                <button className="btn btn-success w-100 mt-2" onClick={finalizarCompra}>
+                  <i className="fas fa-check me-2"></i>Finalizar compra
+                </button>
+              </>
+            )}
+          </div>
+        </div>
+      </div>
+    </Layout>
+  );
+}
+
+export default Carrito;
+</file>
+
+<file path="src/pages/catalogo.jsx">
+import { useState, useMemo } from 'react';
+import { useSearchParams } from 'react-router-dom';
+
+import Layout from '../components/layout/Layout';
+import ProductCard from '../components/productos/ProductCard';
+import { useProducts } from '../context/ProductsContext';
+import { CATEGORIAS } from '../data/productos';
+
+import '../assets/css/catalogo.css';
+
+function Catalogo() {
+  const { productos } = useProducts();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [busqueda, setBusqueda] = useState('');
+
+  const categoriaActiva = searchParams.get('categoria') || '';
+
+  const filtrados = useMemo(() => {
+    const term = busqueda.toLowerCase().trim();
+    return productos.filter((p) => {
+      const okCat = !categoriaActiva || p.categoria === categoriaActiva;
+      const okQ =
+        !term ||
+        p.nombre.toLowerCase().includes(term) ||
+        p.descripcion?.toLowerCase().includes(term);
+      return okCat && okQ;
+    });
+  }, [productos, categoriaActiva, busqueda]);
+
+  const setCategoria = (slug) => {
+    if (slug) setSearchParams({ categoria: slug });
+    else setSearchParams({});
+  };
+
+  return (
+    <Layout>
+      <h1 className="page-title mb-3">
+        <i className="fas fa-th-large me-2 text-primary"></i>
+        Catálogo de Productos
+      </h1>
+
+      {/* Filtros por categoría */}
+      <div className="mb-3 d-flex flex-wrap gap-2">
+        <button
+          type="button"
+          className={`btn btn-sm ${!categoriaActiva ? 'btn-primary' : 'btn-outline-primary'}`}
+          onClick={() => setCategoria('')}
+        >
+          Todos
+        </button>
+        {CATEGORIAS.map((c) => (
+          <button
+            key={c.slug}
+            type="button"
+            className={`btn btn-sm ${categoriaActiva === c.slug ? 'btn-primary' : 'btn-outline-primary'}`}
+            onClick={() => setCategoria(c.slug)}
+          >
+            <i className={`fas ${c.icon} me-1`}></i>
+            {c.label}
+          </button>
+        ))}
+      </div>
+
+      {/* Buscador */}
+      <div className="mb-3">
+        <input
+          type="search"
+          className="form-control"
+          placeholder="Buscar productos..."
+          value={busqueda}
+          onChange={(e) => setBusqueda(e.target.value)}
+        />
+      </div>
+
+      <span className="badge bg-primary fs-6 mb-4">
+        {filtrados.length} {filtrados.length === 1 ? 'producto' : 'productos'}
+      </span>
+
+      {filtrados.length === 0 ? (
+        <div className="text-center py-5">
+          <i className="fas fa-box-open fa-3x text-muted mb-3"></i>
+          <p className="text-muted">No hay productos que coincidan.</p>
+          <button
+            className="btn btn-primary"
+            onClick={() => { setCategoria(''); setBusqueda(''); }}
+          >
+            Ver todos
+          </button>
+        </div>
+      ) : (
+        <div className="row g-4">
+          {filtrados.map((p) => (
+            <ProductCard key={p.id} producto={p} />
+          ))}
+        </div>
+      )}
+    </Layout>
+  );
+}
+
+export default Catalogo;
+</file>
+
+<file path="src/pages/nosotros.jsx">
+import Layout from '../components/layout/Layout';
+
+function Nosotros() {
+  return (
+    <Layout container={false}>
+      <div className="about-banner">
+        <img
+          src="https://www.cursoreparacionmoviles.com/_astro/microsoldadura-hero.D7WaWpyQ.webp"
+          alt="Sobre PZDREAM"
+          className="about-banner-img"
+        />
+        <div className="about-banner-overlay">
+          <h1 className="about-banner-title">Sobre Nosotros</h1>
+          <p className="about-banner-sub">Conoce la historia detrás de PZDREAM</p>
+        </div>
+      </div>
+
+      <div className="container my-5">
+        <div className="row">
+          <div className="col-lg-8 mx-auto">
+            <h2 className="about-title text-center mb-4">
+              <i className="fas fa-store-alt text-primary me-2"></i>
+              ¿Quiénes somos?
+            </h2>
+
+            <p className="about-text">
+              <strong>PZDREAM</strong> nació en 2020 con la misión de acercar la
+              tecnología de vanguardia a todos los chilenos. Somos una tienda
+              online especializada en hardware, periféricos y equipos de
+              computación de las mejores marcas del mercado.
+            </p>
+
+            <p className="about-text">
+              Nuestro compromiso es ofrecer productos de calidad a precios
+              competitivos, respaldados por un servicio al cliente excepcional.
+              Creemos que la tecnología debe ser accesible y fácil de entender,
+              por eso cada producto en nuestro catálogo está cuidadosamente
+              seleccionado para garantizar el mejor rendimiento y durabilidad.
+            </p>
+
+            <div className="row mt-4 g-4 text-center">
+              <div className="col-md-4">
+                <div className="about-feature">
+                  <i className="fas fa-shield-alt fa-2x text-primary"></i>
+                  <h5 className="mt-2">Garantía</h5>
+                  <p className="text-muted small">
+                    Todos nuestros productos tienen garantía oficial.
+                  </p>
+                </div>
+              </div>
+              <div className="col-md-4">
+                <div className="about-feature">
+                  <i className="fas fa-truck-fast fa-2x text-primary"></i>
+                  <h5 className="mt-2">Envíos rápidos</h5>
+                  <p className="text-muted small">
+                    Entregas a todo Chile en 24-48 horas.
+                  </p>
+                </div>
+              </div>
+              <div className="col-md-4">
+                <div className="about-feature">
+                  <i className="fas fa-headset fa-2x text-primary"></i>
+                  <h5 className="mt-2">Soporte 24/7</h5>
+                  <p className="text-muted small">
+                    Atención al cliente disponible todos los días.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Layout>
+  );
+}
+
+export default Nosotros;
+</file>
+
+<file path="src/pages/ofertas.jsx">
+import Layout from '../components/layout/Layout';
+import ProductCard from '../components/productos/ProductCard';
+import { useProducts } from '../context/ProductsContext';
+import '../assets/css/catalogo.css';
+
+function Ofertas() {
+  const { productos } = useProducts();
+  const ofertas = productos.filter((p) => p.oferta);
+
+  return (
+    <Layout>
+      <div className="d-flex justify-content-between align-items-center mb-4">
+        <h1 className="page-title">
+          <i className="fas fa-tags text-danger me-2"></i>
+          Productos en Oferta
+        </h1>
+        <span className="badge bg-danger fs-6">
+          {ofertas.length} {ofertas.length === 1 ? 'producto' : 'productos'}
+        </span>
+      </div>
+
+      {ofertas.length === 0 ? (
+        <div className="text-center py-5">
+          <i className="fas fa-tags fa-3x text-muted mb-3"></i>
+          <p className="text-muted">No hay ofertas disponibles por ahora.</p>
+        </div>
+      ) : (
+        <div className="row g-4">
+          {ofertas.map((p) => (
+            <ProductCard key={p.id} producto={p} />
+          ))}
+        </div>
+      )}
+    </Layout>
+  );
+}
+
+export default Ofertas;
+</file>
+
+<file path="src/pages/registro.jsx">
+import { useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+
+import Layout from '../components/layout/Layout';
+import { useAuth } from '../context/AuthContext';
+import '../assets/css/login.css';
+
+function Registro() {
+  const navigate = useNavigate();
+  const { loginUser } = useAuth();
+
+  const [nombre, setNombre] = useState('');
+  const [apellido, setApellido] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [direccion, setDireccion] = useState('');
+  const [telefono, setTelefono] = useState('');
+  const [aceptaTerminos, setAceptaTerminos] = useState(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!aceptaTerminos) {
+      alert('Debes aceptar los términos y condiciones.');
+      return;
+    }
+
+    loginUser({ email: email.trim(), nombre: nombre.trim() });
+
+    localStorage.setItem('userLogged', 'true');
+    localStorage.setItem('userName', nombre.trim());
+    localStorage.setItem('userEmail', email.trim());
+
+    navigate('/');
+  };
+
+  return (
+    <Layout container={false}>
+      <div className="login-page">
+        <div className="login-card" style={{ maxWidth: 520 }}>
+          <div className="logo">
+            <i className="fas fa-user-plus"></i>
+            <h2>Crear Cuenta</h2>
+            <p className="text-muted">Completa tus datos para registrarte</p>
+          </div>
+
+          <form onSubmit={handleSubmit}>
+            <div className="row g-3">
+              <div className="col-md-6">
+                <label htmlFor="nombre" className="form-label fw-semibold">Nombre</label>
+                <input type="text" className="form-control" id="nombre" value={nombre} onChange={(e) => setNombre(e.target.value)} required />
+              </div>
+              <div className="col-md-6">
+                <label htmlFor="apellido" className="form-label fw-semibold">Apellido</label>
+                <input type="text" className="form-control" id="apellido" value={apellido} onChange={(e) => setApellido(e.target.value)} required />
+              </div>
+            </div>
+
+            <div className="mb-3 mt-3">
+              <label htmlFor="direccion" className="form-label fw-semibold">Dirección</label>
+              <input type="text" className="form-control" id="direccion" placeholder="Calle, número, comuna" value={direccion} onChange={(e) => setDireccion(e.target.value)} required />
+            </div>
+
+            <div className="mb-3">
+              <label htmlFor="telefono" className="form-label fw-semibold">Teléfono</label>
+              <input type="tel" className="form-control" id="telefono" placeholder="+56 9 1234 5678" value={telefono} onChange={(e) => setTelefono(e.target.value)} required />
+            </div>
+
+            <div className="mb-3">
+              <label htmlFor="email" className="form-label fw-semibold">Correo electrónico</label>
+              <input type="email" className="form-control" id="email" placeholder="ejemplo@correo.cl" value={email} onChange={(e) => setEmail(e.target.value)} required />
+            </div>
+
+            <div className="mb-3">
+              <label htmlFor="password" className="form-label fw-semibold">Contraseña</label>
+              <input type="password" className="form-control" id="password" placeholder="Mínimo 8 caracteres" minLength={8} value={password} onChange={(e) => setPassword(e.target.value)} required />
+              <div className="form-text">La contraseña debe tener al menos 8 caracteres.</div>
+            </div>
+
+            <div className="mb-4 form-check">
+              <input className="form-check-input" type="checkbox" id="terminos" checked={aceptaTerminos} onChange={(e) => setAceptaTerminos(e.target.checked)} />
+              <label className="form-check-label" htmlFor="terminos">
+                Acepto los <a href="#" onClick={(e) => e.preventDefault()}>términos y condiciones</a>
+              </label>
+            </div>
+
+            <button type="submit" className="btn btn-login w-100">
+              <i className="fas fa-user-check me-2"></i>Registrarse
+            </button>
+          </form>
+
+          <div className="register-link">
+            ¿Ya tienes cuenta? <Link to="/login">Inicia sesión aquí</Link>
+          </div>
+        </div>
+      </div>
+    </Layout>
+  );
+}
+
+export default Registro;
+</file>
+
 <file path="src/components/layout/Footer.jsx">
 import { Link } from 'react-router-dom';
 
@@ -3096,6 +3819,23 @@ function Footer() {
 export default Footer;
 </file>
 
+<file path="src/components/layout/Layout.jsx">
+import Navbar from './Navbar';
+import Footer from './Footer';
+
+export default function Layout({ children, container = true }) {
+  return (
+    <>
+      <Navbar />
+      <main className={container ? 'main-content container my-4' : 'main-content'}>
+        {children}
+      </main>
+      <Footer />
+    </>
+  );
+}
+</file>
+
 <file path="src/components/layout/Navbar.jsx">
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
@@ -3162,6 +3902,7 @@ function Navbar() {
 
             <ul className="navbar-nav mb-2 mb-lg-0 align-items-lg-center">
 
+              {/* Carrito */}
               <li className="nav-item">
                 <Link className="nav-link nav-icon-link" to="/carrito" title="Carrito">
                   <i className="fas fa-shopping-cart"></i>
@@ -3172,6 +3913,15 @@ function Navbar() {
 
               <li className="nav-divider d-none d-lg-block"></li>
 
+              {/* Botón Admin (siempre visible, discreto) */}
+              <li className="nav-item">
+                <Link className="nav-link admin-entry-link" to="/admin/login" title="Acceso administrador">
+                  <i className="fas fa-user-shield"></i>
+                  <span className="d-none d-lg-inline ms-1">Admin</span>
+                </Link>
+              </li>
+
+              {/* Usuario NO logueado */}
               {!user && (
                 <li className="nav-item">
                   <Link className="nav-link" to="/login">
@@ -3180,6 +3930,7 @@ function Navbar() {
                 </li>
               )}
 
+              {/* Usuario SÍ logueado */}
               {user && (
                 <li className="nav-item dropdown">
                   <a
@@ -3196,6 +3947,11 @@ function Navbar() {
                       <span className="dropdown-item-text">
                         <i className="fas fa-user me-2"></i>Hola, {user.nombre}
                       </span>
+                    </li>
+                    <li>
+                      <Link className="dropdown-item" to="/admin">
+                        <i className="fas fa-user-shield me-2"></i>Ir al panel admin
+                      </Link>
                     </li>
                     <li><hr className="dropdown-divider" /></li>
                     <li>
@@ -3221,6 +3977,80 @@ function Navbar() {
 }
 
 export default Navbar;
+</file>
+
+<file path=".gitignore">
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+</file>
+
+<file path=".oxlintrc.json">
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["react", "oxc"],
+  "rules": {
+    "react/rules-of-hooks": "error",
+    "react/only-export-components": ["warn", { "allowConstantExport": true }]
+  }
+}
+</file>
+
+<file path="README.md">
+# React + Vite
+
+This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+
+Currently, two official plugins are available:
+
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+
+## React Compiler
+
+The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+
+Note: This will impact Vite dev & build performances.
+You can also try [the experimental native React Compiler support in plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md#rust-react-compiler) by using `compiler: true` in the plugin options instead of using the Babel plugin.
+
+## Expanding the Oxlint configuration
+
+If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+</file>
+
+<file path="vite.config.js">
+import react, { reactCompilerPreset } from '@vitejs/plugin-react'
+import babel from '@rolldown/plugin-babel'
+import { defineConfig } from 'vite'
+
+// https://vite.dev/config/
+export default defineConfig({
+  plugins: [
+    react(),
+    babel({ presets: [reactCompilerPreset()] })
+  ],
+})
 </file>
 
 <file path="src/pages/home.jsx">
@@ -3421,52 +4251,36 @@ function Login() {
 export default Login;
 </file>
 
-<file path=".gitignore">
-# Logs
-logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
+<file path="src/utils/format.js">
+const fmt = new Intl.NumberFormat('es-CL', {
+  style: 'currency',
+  currency: 'CLP',
+  minimumFractionDigits: 0,
+});
 
-node_modules
-dist
-dist-ssr
-*.local
+export const formatCLP = (n) => fmt.format(Number(n) || 0);
 
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
-.DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
-</file>
-
-<file path=".oxlintrc.json">
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "oxc"],
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+export const calcularDescuento = (precio, precioOriginal) => {
+  if (!precioOriginal || precioOriginal <= precio) return null;
+  return Math.round((1 - precio / precioOriginal) * 100);
+};
 </file>
 
 <file path="index.html">
 <!doctype html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>pzdream</title>
+    <title>PZDREAM — Tienda de Tecnología</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
   </head>
   <body>
     <div id="root"></div>
@@ -3488,7 +4302,7 @@ dist-ssr
     "preview": "vite preview"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^7.3.1",
+    "@fortawesome/fontawesome-free": "^6.5.2",
     "@popperjs/core": "^2.11.8",
     "bootstrap": "^5.3.8",
     "react": "^19.2.8",
@@ -3507,42 +4321,6 @@ dist-ssr
     "vite": "^8.3.0"
   }
 }
-</file>
-
-<file path="README.md">
-# React + Vite
-
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
-
-## React Compiler
-
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
-
-Note: This will impact Vite dev & build performances.
-You can also try [the experimental native React Compiler support in plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md#rust-react-compiler) by using `compiler: true` in the plugin options instead of using the Babel plugin.
-
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
-</file>
-
-<file path="vite.config.js">
-import react, { reactCompilerPreset } from '@vitejs/plugin-react'
-import babel from '@rolldown/plugin-babel'
-import { defineConfig } from 'vite'
-
-// https://vite.dev/config/
-export default defineConfig({
-  plugins: [
-    react(),
-    babel({ presets: [reactCompilerPreset()] })
-  ],
-})
 </file>
 
 <file path="src/pages/contacto.jsx">
@@ -3741,19 +4519,53 @@ function Contacto() {
 export default Contacto;
 </file>
 
-<file path="src/utils/format.js">
-const fmt = new Intl.NumberFormat('es-CL', {
-  style: 'currency',
-  currency: 'CLP',
-  minimumFractionDigits: 0,
-});
+<file path="src/App.jsx">
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
-export const formatCLP = (n) => fmt.format(Number(n) || 0);
+import Home from './pages/home';
+import Contacto from './pages/contacto';
+import Login from './pages/login';
+import Registro from './pages/registro';
+import Catalogo from './pages/catalogo';
+import Producto from './pages/producto';
+import Ofertas from './pages/ofertas';
+import Nosotros from './pages/nosotros';
+import Carrito from './pages/carrito';
 
-export const calcularDescuento = (precio, precioOriginal) => {
-  if (!precioOriginal || precioOriginal <= precio) return null;
-  return Math.round((1 - precio / precioOriginal) * 100);
-};
+import AdminLogin from './pages/admin/AdminLogin';
+import AdminHome from './pages/admin/AdminHome';
+import AdminAgregar from './pages/admin/AdminAgregar';
+import AdminLista from './pages/admin/AdminLista';
+import AdminModificar from './pages/admin/AdminModificar';
+import AdminEliminar from './pages/admin/AdminEliminar';
+
+function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/catalogo" element={<Catalogo />} />
+        <Route path="/producto/:id" element={<Producto />} />
+        <Route path="/ofertas" element={<Ofertas />} />
+        <Route path="/nosotros" element={<Nosotros />} />
+        <Route path="/carrito" element={<Carrito />} />
+        <Route path="/contacto" element={<Contacto />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/registro" element={<Registro />} />
+
+        <Route path="/admin/login" element={<AdminLogin />} />
+        <Route path="/admin" element={<AdminHome />} />
+        <Route path="/admin/agregar" element={<AdminAgregar />} />
+        <Route path="/admin/lista" element={<AdminLista />} />
+        <Route path="/admin/modificar" element={<AdminModificar />} />
+        <Route path="/admin/eliminar" element={<AdminEliminar />} />
+        <Route path="*" element={<Navigate to="/" />} />
+      </Routes>
+    </BrowserRouter>
+  );
+}
+
+export default App;
 </file>
 
 <file path="src/main.jsx">
@@ -3761,6 +4573,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
+import "@fortawesome/fontawesome-free/css/all.min.css";  // 👈 agrega esta
 
 import "./assets/css/style.css";
 import "./assets/css/contacto.css";
@@ -3781,41 +4594,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     </AuthProvider>
   </React.StrictMode>
 );
-</file>
-
-<file path="src/App.jsx">
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-
-import Home from './pages/home';
-import Contacto from './pages/contacto';
-import Login from './pages/login';
-import Registro from './pages/registro';
-import Catalogo from './pages/catalogo';
-import Producto from './pages/producto';
-import Ofertas from './pages/ofertas';
-import Nosotros from './pages/nosotros';
-import Carrito from './pages/carrito';
-
-function App() {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/catalogo" element={<Catalogo />} />
-        <Route path="/producto/:id" element={<Producto />} />
-        <Route path="/ofertas" element={<Ofertas />} />
-        <Route path="/nosotros" element={<Nosotros />} />
-        <Route path="/carrito" element={<Carrito />} />
-        <Route path="/contacto" element={<Contacto />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/registro" element={<Registro />} />
-        <Route path="*" element={<Navigate to="/" />} />
-      </Routes>
-    </BrowserRouter>
-  );
-}
-
-export default App;
 </file>
 
 </files>
