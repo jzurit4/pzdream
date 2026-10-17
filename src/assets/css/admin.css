@@ -421,9 +421,7 @@
   transition: width 0.6s ease;
 }
 
-/* ========================================
-   NUEVO LAYOUT: SIDEBAR + CONTENIDO
-   ======================================== */
+/*NUEVO LAYOUT */
 
 .admin-layout-wrapper {
   display: flex;
@@ -518,7 +516,7 @@
 /* CONTENIDO PRINCIPAL */
 .admin-main-content {
   flex: 1;
-  margin-left: 260px; /* Para dejar espacio al sidebar fijo */
+  margin-left: 260px; 
   display: flex;
   flex-direction: column;
 }
@@ -541,9 +539,6 @@
   flex: 1;
 }
 
-/* ========================================
-   TARJETAS KPI (COLORES)
-   ======================================== */
 
 .kpi-card {
   display: flex;

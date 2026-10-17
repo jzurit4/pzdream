@@ -56,9 +56,18 @@ function Home() {
 
   return (
     <Layout>
-      <div className="alert alert-info">
-        <i className="fas fa-info-circle me-2"></i>
-        Bienvenido a PZDREAM - Tu tienda de tecnología
+      {/* BANNER BIENVENIDA*/}
+      <div className="hero-banner mb-4">
+        <div className="hero-content">
+          <h1 className="hero-title">Bienvenido a <span>PZDREAM</span></h1>
+          <p className="hero-subtitle">
+            Tu tienda de tecnología favorita. Encuentra los mejores componentes y equipos al mejor precio del mercado.
+          </p>
+          <Link to="/catalogo" className="btn btn-light btn-lg hero-btn">
+            <i className="fas fa-store me-2"></i>Explorar Catálogo
+          </Link>
+        </div>
+      
       </div>
 
       {/* Carrusel principal de banners */}
