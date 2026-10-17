@@ -1,79 +1,103 @@
+import { Link } from 'react-router-dom';
 import AdminLayout from '../../components/admin/AdminLayout';
-import AdminCard from '../../components/admin/AdminCard';
-import { useAuth } from '../../context/AuthContext';
 import { useProducts } from '../../context/ProductsContext';
+import { useUsers } from '../../context/UsersContext';
 
 function AdminHome() {
-  const { logoutAdmin } = useAuth();
-  const { productos, resetProductos } = useProducts();
+  const { productos } = useProducts();
+  const { usuarios } = useUsers();
 
+  // Calculos para las tarjetas superiores
   const totalProductos = productos.length;
-  const totalOfertas = productos.filter((p) => p.oferta).length;
-  const stockTotal = productos.reduce((s, p) => s + (Number(p.stock) || 0), 0);
+  const totalUsuarios = usuarios.length;
+  // Simulamos las compras totales sumando el campo "compras" de los usuarios
+  const totalCompras = usuarios.reduce((acc, u) => acc + (u.compras || 0), 0);
 
   return (
-    <AdminLayout
-      title="Panel de Administración"
-      subtitle="Gestiona los productos de tu tienda fácilmente"
+    <AdminLayout 
+      title="Dashboard" 
+      subtitle="Resumen de las actividades diarias de PZDREAM"
     >
-      <div className="row g-4 mb-4">
+      {/* 3 TARJETAS DE COLORES  */}
+      <div className="row g-3 mb-4">
         <div className="col-md-4">
-          <div className="admin-stat">
-            <i className="fas fa-box"></i>
+          <div className="kpi-card kpi-blue">
+            <i className="fas fa-shopping-cart kpi-icon"></i>
             <div>
-              <div className="stat-value">{totalProductos}</div>
-              <div className="stat-label">Productos</div>
+              <h3>{totalCompras}</h3>
+              <p>Compras Totales</p>
             </div>
           </div>
         </div>
         <div className="col-md-4">
-          <div className="admin-stat">
-            <i className="fas fa-tags"></i>
+          <div className="kpi-card kpi-green">
+            <i className="fas fa-box kpi-icon"></i>
             <div>
-              <div className="stat-value">{totalOfertas}</div>
-              <div className="stat-label">En oferta</div>
+              <h3>{totalProductos}</h3>
+              <p>Productos en Catálogo</p>
             </div>
           </div>
         </div>
         <div className="col-md-4">
-          <div className="admin-stat">
-            <i className="fas fa-warehouse"></i>
+          <div className="kpi-card kpi-yellow">
+            <i className="fas fa-users kpi-icon"></i>
             <div>
-              <div className="stat-value">{stockTotal}</div>
-              <div className="stat-label">Unidades en stock</div>
+              <h3>{totalUsuarios}</h3>
+              <p>Usuarios Registrados</p>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="row g-4">
-        <AdminCard to="/admin/agregar" icon="fa-plus-circle" title="Agregar Producto" description="Añade un nuevo producto al catálogo" />
-        <AdminCard to="/admin/lista" icon="fa-list" title="Listar Productos" description="Visualiza todos los productos" />
-        <AdminCard to="/admin/modificar" icon="fa-edit" title="Modificar Producto" description="Actualiza los datos de un producto" />
-        <AdminCard to="/admin/eliminar" icon="fa-trash-alt" title="Eliminar Producto" description="Quita un producto del catálogo" danger />
-      </div>
+      {/*  ACCESOS RÁPIDOS */}
+      <div className="row g-3">
+        <div className="col-md-3">
+          <Link to="/admin" className="quick-card">
+            <i className="fas fa-tachometer-alt"></i>
+            <h5>Dashboard</h5>
+            <p>Visión general de todas las métricas y estadísticas.</p>
+          </Link>
+        </div>
 
-      <div className="text-center mt-5 d-flex justify-content-center gap-2 flex-wrap">
-        <button
-          className="btn btn-outline-secondary"
-          onClick={() => {
-            if (confirm('¿Restaurar los productos originales? Esto sobreescribe los cambios.')) {
-              resetProductos();
-              alert('Productos restaurados.');
-            }
-          }}
-        >
-          <i className="fas fa-undo me-2"></i>Restaurar catálogo original
-        </button>
-        <button
-          className="btn btn-danger"
-          onClick={() => {
-            logoutAdmin();
-            window.location.href = '/';
-          }}
-        >
-          <i className="fas fa-sign-out-alt me-2"></i>Cerrar sesión admin
-        </button>
+        <div className="col-md-3">
+          <Link to="/admin/lista" className="quick-card">
+            <i className="fas fa-box-open"></i>
+            <h5>Productos</h5>
+            <p>Administrar inventario y detalles de los productos.</p>
+          </Link>
+        </div>
+
+        <div className="col-md-3">
+          <Link to="/admin/usuarios" className="quick-card">
+            <i className="fas fa-user-friends"></i>
+            <h5>Usuarios</h5>
+            <p>Gestión de cuentas de usuario y sus roles.</p>
+          </Link>
+        </div>
+
+        <div className="col-md-3">
+          <Link to="/admin/reportes" className="quick-card">
+            <i className="fas fa-chart-pie"></i>
+            <h5>Reportes</h5>
+            <p>Generación de informes detallados sobre operaciones.</p>
+          </Link>
+        </div>
+
+        <div className="col-md-3">
+          <Link to="/admin/perfil" className="quick-card">
+            <i className="fas fa-user-cog"></i>
+            <h5>Perfil</h5>
+            <p>Administración de la información personal y configuración.</p>
+          </Link>
+        </div>
+        
+        <div className="col-md-3">
+          <Link to="/" className="quick-card">
+            <i className="fas fa-store"></i>
+            <h5>Tienda</h5>
+            <p>Visualiza la tienda en tiempo real como un cliente.</p>
+          </Link>
+        </div>
       </div>
     </AdminLayout>
   );
