@@ -1,12 +1,12 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { formatCLP, calcularDescuento } from '../../utils/format';
 
 function ProductCarousel({ id, productos, oferta = false }) {
   const [pagina, setPagina] = useState(0);
 
   const productosPorPagina = 4;
-  const totalPaginas = Math.ceil(
-    productos.length / productosPorPagina
-  );
+  const totalPaginas = Math.ceil(productos.length / productosPorPagina);
 
   const productosVisibles = productos.slice(
     pagina * productosPorPagina,
@@ -14,15 +14,19 @@ function ProductCarousel({ id, productos, oferta = false }) {
   );
 
   const cambiarPagina = (direccion) => {
-    setPagina((actual) =>
-      (actual + direccion + totalPaginas) % totalPaginas
-    );
+    setPagina((actual) => (actual + direccion + totalPaginas) % totalPaginas);
   };
+
+  if (productos.length === 0) {
+    return (
+      <div className="text-center py-4 text-muted small">
+        No hay productos disponibles.
+      </div>
+    );
+  }
 
   return (
     <div id={id} className="product-carousel">
-
-      {/* Botón anterior */}
       {totalPaginas > 1 && (
         <button
           type="button"
@@ -34,45 +38,42 @@ function ProductCarousel({ id, productos, oferta = false }) {
         </button>
       )}
 
-      {/* Productos */}
       <div className="row g-3">
-        {productosVisibles.map((producto) => (
-          <div className="col-6 col-md-3" key={producto.id}>
-            <a
-              href={`/producto/${producto.id}`}
-              className="product-card text-decoration-none"
-            >
-              {oferta && (
-                <div className="badge-oferta">
-                  {producto.descuento}
-                </div>
-              )}
-
-              <img
-                src={producto.imagen}
-                className="img-fluid rounded"
-                alt={producto.nombre}
-                loading="lazy"
-              />
-
-              <h6 className="mt-2">
-                {producto.nombre}
-              </h6>
-
-              <p className="price">
-                {oferta && (
-                  <span className="old-price">
-                    {producto.anterior}{' '}
-                  </span>
+        {productosVisibles.map((producto) => {
+          const descuento = calcularDescuento(producto.precio, producto.precioOriginal);
+          return (
+            <div className="col-6 col-md-3" key={producto.id}>
+              <Link
+                to={`/producto/${producto.id}`}
+                className="product-card text-decoration-none"
+              >
+                {oferta && descuento && (
+                  <div className="badge-oferta">-{descuento}%</div>
                 )}
-                {producto.precio}
-              </p>
-            </a>
-          </div>
-        ))}
+
+                <img
+                  src={producto.imagen}
+                  className="img-fluid rounded"
+                  alt={producto.nombre}
+                  loading="lazy"
+                />
+
+                <h6 className="mt-2">{producto.nombre}</h6>
+
+                <p className="price">
+                  {oferta && producto.precioOriginal && (
+                    <span className="old-price">
+                      {formatCLP(producto.precioOriginal)}{' '}
+                    </span>
+                  )}
+                  {formatCLP(producto.precio)}
+                </p>
+              </Link>
+            </div>
+          );
+        })}
       </div>
 
-      {/* Botón siguiente */}
       {totalPaginas > 1 && (
         <button
           type="button"
@@ -84,13 +85,11 @@ function ProductCarousel({ id, productos, oferta = false }) {
         </button>
       )}
 
-      {/* Indicador de página */}
       {totalPaginas > 1 && (
         <div className="text-center mt-3 small text-muted">
           {pagina + 1} de {totalPaginas}
         </div>
       )}
-
     </div>
   );
 }

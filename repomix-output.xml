@@ -105,253 +105,6 @@ vite.config.js
 <files>
 This section contains the contents of the repository's files.
 
-<file path="src/assets/css/admin.css">
-.admin-header {
-  background: linear-gradient(135deg, #2d3436, #1a1a2e);
-  color: white;
-  padding: 2rem 0;
-  border-radius: 12px;
-  margin-bottom: 2rem;
-  text-align: center;
-}
-
-.admin-header h1 {
-  font-weight: 700;
-  font-size: 2.5rem;
-}
-
-.admin-header p {
-  font-size: 1.1rem;
-  opacity: 0.8;
-}
-
-.admin-card {
-  background: white;
-  border-radius: 12px;
-  padding: 2rem 1.5rem;
-  text-align: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  transition: all 0.3s ease;
-  height: 100%;
-  text-decoration: none;
-  color: #2d3436;
-  display: block;
-}
-
-.admin-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
-  text-decoration: none;
-  color: #2d3436;
-}
-
-.admin-card i {
-  font-size: 3rem;
-  color: #007bff;
-  margin-bottom: 1rem;
-}
-
-.admin-card h5 { font-weight: 600; }
-.admin-card p { color: #6c757d; font-size: 0.95rem; }
-
-.admin-form .form-label { font-weight: 600; }
-
-.admin-form .form-control,
-.admin-form .form-select {
-  border-radius: 8px;
-  border: 1px solid #dfe6e9;
-  padding: 0.6rem 1rem;
-}
-
-.admin-form .form-control:focus,
-.admin-form .form-select:focus {
-  border-color: #007bff;
-  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-}
-
-.admin-form .btn-primary {
-  padding: 0.6rem 2rem;
-  font-weight: 600;
-  border-radius: 8px;
-  background: linear-gradient(135deg, #007bff, #0056b3);
-  border: none;
-}
-
-.admin-form .btn-primary:hover {
-  background: linear-gradient(135deg, #0056b3, #003d80);
-}
-
-.admin-form .btn-danger {
-  padding: 0.6rem 2rem;
-  font-weight: 600;
-  border-radius: 8px;
-}
-
-.table-admin {
-  background: white;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-}
-
-.table-admin thead {
-  background: #2d3436;
-  color: white;
-}
-
-.table-admin tbody tr:hover { background: #f8f9fa; }
-.table-admin .btn-sm { border-radius: 6px; }
-
-@media (max-width: 768px) {
-  .admin-header h1 { font-size: 1.8rem; }
-  .admin-card i { font-size: 2.2rem; }
-}
-
-.admin-stat {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  background: white;
-  border-radius: 12px;
-  padding: 1.2rem 1.5rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-}
-
-.admin-stat i {
-  font-size: 2.2rem;
-  color: #007bff;
-}
-
-.admin-stat .stat-value {
-  font-size: 1.6rem;
-  font-weight: 700;
-  color: #2d3436;
-  line-height: 1;
-}
-
-.admin-stat .stat-label {
-  font-size: 0.85rem;
-  color: #6c757d;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-/*Shell admin */
-
-.admin-shell {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  background-color: #f0f4f8;
-}
-
-/* Navbar superior del admin */
-.admin-navbar {
-  background: linear-gradient(135deg, #2d3436, #1a1a2e);
-  padding: 0.9rem 0;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-}
-
-.admin-navbar-brand {
-  color: #ffffff;
-  font-size: 1.3rem;
-  font-weight: 700;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-}
-
-.admin-navbar-brand:hover {
-  color: #ffffff;
-  text-decoration: none;
-}
-
-.admin-badge {
-  background: #007bff;
-  color: #ffffff;
-  font-size: 0.65rem;
-  font-weight: 700;
-  padding: 0.2rem 0.5rem;
-  border-radius: 4px;
-  margin-left: 0.5rem;
-  letter-spacing: 0.05em;
-  vertical-align: middle;
-}
-
-.admin-navbar-actions {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.admin-navbar-link {
-  color: #dfe6e9;
-  text-decoration: none;
-  font-size: 0.9rem;
-  padding: 0.4rem 0.8rem;
-  border-radius: 6px;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.admin-navbar-link:hover {
-  background: rgba(255, 255, 255, 0.1);
-  color: #ffffff;
-  text-decoration: none;
-}
-
-.admin-navbar-logout:hover {
-  background: rgba(220, 53, 69, 0.2);
-  color: #ff6b7a;
-}
-
-/* Sub-navegación */
-.admin-subnav {
-  background: #ffffff;
-  border-bottom: 1px solid #e9ecef;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
-}
-
-.admin-subnav ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  gap: 0.25rem;
-  overflow-x: auto;
-}
-
-.admin-subnav li a {
-  display: inline-flex;
-  align-items: center;
-  padding: 0.9rem 1rem;
-  color: #6c757d;
-  text-decoration: none;
-  font-weight: 500;
-  font-size: 0.95rem;
-  border-bottom: 3px solid transparent;
-  transition: all 0.2s ease;
-  white-space: nowrap;
-}
-
-.admin-subnav li a:hover {
-  color: #007bff;
-  background: #f8f9fa;
-}
-
-.admin-subnav li a.active {
-  color: #007bff;
-  border-bottom-color: #007bff;
-}
-
-/* Contenido principal */
-.admin-main {
-  flex: 1;
-}
-</file>
-
 <file path="src/assets/css/catalogo.css">
 /*ESTILOS DEL CATÁLOGO*/
 
@@ -533,723 +286,6 @@ This section contains the contents of the repository's files.
 }
 </file>
 
-<file path="src/components/admin/AdminCard.jsx">
-import { Link } from 'react-router-dom';
-
-export default function AdminCard({ to, icon, title, description, danger = false }) {
-  return (
-    <div className="col-md-6 col-lg-3">
-      <Link to={to} className="admin-card">
-        <i className={`fas ${icon} ${danger ? 'text-danger' : ''}`}></i>
-        <h5>{title}</h5>
-        <p>{description}</p>
-      </Link>
-    </div>
-  );
-}
-</file>
-
-<file path="src/components/admin/AdminLayout.jsx">
-import { useEffect } from 'react';
-import { useNavigate, Link, useLocation } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext';
-import '../../assets/css/admin.css';
-
-export default function AdminLayout({ children, title, subtitle }) {
-  const { admin, logoutAdmin } = useAuth();
-  const navigate = useNavigate();
-  const location = useLocation();
-
-  useEffect(() => {
-    if (!admin) navigate('/admin/login');
-  }, [admin, navigate]);
-
-  if (!admin) return null;
-
-  const cerrarAdmin = () => {
-    logoutAdmin();
-    navigate('/admin/login');
-  };
-
-  return (
-    <div className="admin-shell">
-      {/* Header propio del admin */}
-      <header className="admin-navbar">
-        <div className="container-fluid d-flex align-items-center justify-content-between px-4">
-          <Link to="/admin" className="admin-navbar-brand">
-            <i className="fas fa-user-shield me-2"></i>
-            PZDREAM <span className="admin-badge">ADMIN</span>
-          </Link>
-
-          <div className="admin-navbar-actions">
-            <Link to="/" className="admin-navbar-link">
-              <i className="fas fa-store me-1"></i>
-              <span className="d-none d-md-inline">Ver tienda</span>
-            </Link>
-            <button onClick={cerrarAdmin} className="admin-navbar-link admin-navbar-logout">
-              <i className="fas fa-sign-out-alt me-1"></i>
-              <span className="d-none d-md-inline">Salir</span>
-            </button>
-          </div>
-        </div>
-      </header>
-
-      <nav className="admin-subnav">
-        <div className="container-fluid px-4">
-          <ul>
-            <li>
-              <Link to="/admin" className={location.pathname === '/admin' ? 'active' : ''}>
-                <i className="fas fa-home me-1"></i>Dashboard
-              </Link>
-            </li>
-            <li>
-              <Link to="/admin/agregar" className={location.pathname === '/admin/agregar' ? 'active' : ''}>
-                <i className="fas fa-plus me-1"></i>Agregar
-              </Link>
-            </li>
-            <li>
-              <Link to="/admin/lista" className={location.pathname === '/admin/lista' ? 'active' : ''}>
-                <i className="fas fa-list me-1"></i>Lista
-              </Link>
-            </li>
-            <li>
-              <Link to="/admin/modificar" className={location.pathname === '/admin/modificar' ? 'active' : ''}>
-                <i className="fas fa-edit me-1"></i>Modificar
-              </Link>
-            </li>
-            <li>
-              <Link to="/admin/eliminar" className={location.pathname === '/admin/eliminar' ? 'active' : ''}>
-                <i className="fas fa-trash me-1"></i>Eliminar
-              </Link>
-            </li>
-          </ul>
-        </div>
-      </nav>
-
-      <main className="admin-main">
-        <div className="container py-4">
-          {title && (
-            <div className="admin-header">
-              <h1>{title}</h1>
-              {subtitle && <p>{subtitle}</p>}
-            </div>
-          )}
-          {children}
-        </div>
-      </main>
-    </div>
-  );
-}
-</file>
-
-<file path="src/pages/admin/AdminAgregar.jsx">
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import AdminLayout from '../../components/admin/AdminLayout';
-import { useProducts } from '../../context/ProductsContext';
-import { CATEGORIAS } from '../../data/productos';
-
-function AdminAgregar() {
-  const navigate = useNavigate();
-  const { agregarProducto } = useProducts();
-
-  const [form, setForm] = useState({
-    nombre: '',
-    precio: '',
-    precioOriginal: '',
-    stock: '',
-    imagen: '',
-    descripcion: '',
-    categoria: 'notebook',
-    oferta: false,
-  });
-
-  const [mensaje, setMensaje] = useState(null);
-
-  const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setForm((prev) => ({ ...prev, [name]: type === 'checkbox' ? checked : value }));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    if (!form.nombre.trim() || !form.precio || !form.stock) {
-      setMensaje({ type: 'danger', text: 'Completa los campos obligatorios.' });
-      return;
-    }
-
-    agregarProducto({
-      ...form,
-      precio: Number(form.precio),
-      precioOriginal: form.precioOriginal ? Number(form.precioOriginal) : null,
-      stock: Number(form.stock),
-    });
-
-    setMensaje({ type: 'success', text: `Producto "${form.nombre}" agregado correctamente.` });
-    setTimeout(() => navigate('/admin/lista'), 1200);
-  };
-
-  return (
-    <AdminLayout title="Agregar Producto" subtitle="Completa los campos para añadir un nuevo producto">
-      <div className="row justify-content-center">
-        <div className="col-lg-8">
-          <div className="card shadow-sm">
-            <div className="card-body">
-              <form className="admin-form" onSubmit={handleSubmit}>
-                <div className="row g-3">
-                  <div className="col-md-6">
-                    <label className="form-label">Nombre *</label>
-                    <input type="text" className="form-control" name="nombre" value={form.nombre} onChange={handleChange} placeholder="Ej: Notebook Gamer" required />
-                  </div>
-                  <div className="col-md-6">
-                    <label className="form-label">Categoría</label>
-                    <select className="form-select" name="categoria" value={form.categoria} onChange={handleChange}>
-                      {CATEGORIAS.map((c) => (
-                        <option key={c.slug} value={c.slug}>{c.label}</option>
-                      ))}
-                    </select>
-                  </div>
-                  <div className="col-md-6">
-                    <label className="form-label">Precio (CLP) *</label>
-                    <input type="number" className="form-control" name="precio" value={form.precio} onChange={handleChange} placeholder="1299990" required />
-                  </div>
-                  <div className="col-md-6">
-                    <label className="form-label">Precio original (si está en oferta)</label>
-                    <input type="number" className="form-control" name="precioOriginal" value={form.precioOriginal} onChange={handleChange} placeholder="1499990" />
-                  </div>
-                  <div className="col-md-6">
-                    <label className="form-label">Stock *</label>
-                    <input type="number" className="form-control" name="stock" value={form.stock} onChange={handleChange} placeholder="10" required />
-                  </div>
-                  <div className="col-md-6 d-flex align-items-end">
-                    <div className="form-check">
-                      <input className="form-check-input" type="checkbox" name="oferta" id="oferta" checked={form.oferta} onChange={handleChange} />
-                      <label className="form-check-label" htmlFor="oferta">Marcar como oferta</label>
-                    </div>
-                  </div>
-                  <div className="col-12">
-                    <label className="form-label">URL de la imagen</label>
-                    <input type="text" className="form-control" name="imagen" value={form.imagen} onChange={handleChange} placeholder="https://..." />
-                  </div>
-                  <div className="col-12">
-                    <label className="form-label">Descripción</label>
-                    <textarea className="form-control" name="descripcion" rows="3" value={form.descripcion} onChange={handleChange}></textarea>
-                  </div>
-                </div>
-
-                {mensaje && <div className={`alert alert-${mensaje.type} mt-3 mb-0`}>{mensaje.text}</div>}
-
-                <div className="d-flex gap-2 mt-4">
-                  <button type="submit" className="btn btn-primary">
-                    <i className="fas fa-save me-2"></i>Guardar producto
-                  </button>
-                  <button type="button" className="btn btn-outline-secondary" onClick={() => navigate('/admin')}>
-                    <i className="fas fa-arrow-left me-2"></i>Cancelar
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-    </AdminLayout>
-  );
-}
-
-export default AdminAgregar;
-</file>
-
-<file path="src/pages/admin/AdminEliminar.jsx">
-import { useState } from 'react';
-import { useSearchParams, useNavigate } from 'react-router-dom';
-import AdminLayout from '../../components/admin/AdminLayout';
-import { useProducts } from '../../context/ProductsContext';
-import { formatCLP } from '../../utils/format';
-
-function AdminEliminar() {
-  const navigate = useNavigate();
-  const [searchParams] = useSearchParams();
-  const { productos, eliminarProducto, getProducto } = useProducts();
-
-  const idUrl = searchParams.get('id') || '';
-  const [id, setId] = useState(idUrl);
-  const [mensaje, setMensaje] = useState(null);
-
-  const producto = id ? getProducto(id) : null;
-
-  const handleEliminar = () => {
-    if (!producto) return;
-    const confirmado = confirm(`¿Eliminar "${producto.nombre}"? Esta acción no se puede deshacer.`);
-    if (!confirmado) return;
-
-    eliminarProducto(producto.id);
-    setMensaje({ type: 'success', text: `"${producto.nombre}" eliminado correctamente.` });
-    setId('');
-    setTimeout(() => navigate('/admin/lista'), 1200);
-  };
-
-  return (
-    <AdminLayout title="Eliminar Producto" subtitle="Selecciona un producto para eliminarlo permanentemente">
-      <div className="row justify-content-center">
-        <div className="col-lg-6">
-          <div className="card shadow-sm">
-            <div className="card-body">
-              <div className="mb-4">
-                <label className="form-label fw-semibold">Selecciona el producto</label>
-                <select className="form-select" value={id} onChange={(e) => { setId(e.target.value); setMensaje(null); }}>
-                  <option value="">-- Seleccionar --</option>
-                  {productos.map((p) => (
-                    <option key={p.id} value={p.id}>#{p.id} — {p.nombre}</option>
-                  ))}
-                </select>
-              </div>
-
-              {producto && (
-                <div className="alert alert-warning">
-                  <h6 className="mb-2"><i className="fas fa-exclamation-triangle me-2"></i>Vas a eliminar:</h6>
-                  <div className="d-flex align-items-center gap-3">
-                    <img src={producto.imagen} alt={producto.nombre} style={{ width: 60, height: 60, objectFit: 'contain' }} />
-                    <div>
-                      <div className="fw-bold">{producto.nombre}</div>
-                      <div className="small text-muted">{formatCLP(producto.precio)} · {producto.categoria}</div>
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {mensaje && <div className={`alert alert-${mensaje.type}`}>{mensaje.text}</div>}
-
-              <div className="d-flex gap-2">
-                <button type="button" className="btn btn-danger" onClick={handleEliminar} disabled={!producto}>
-                  <i className="fas fa-trash me-2"></i>Eliminar producto
-                </button>
-                <button type="button" className="btn btn-outline-secondary" onClick={() => navigate('/admin')}>
-                  <i className="fas fa-arrow-left me-2"></i>Cancelar
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </AdminLayout>
-  );
-}
-
-export default AdminEliminar;
-</file>
-
-<file path="src/pages/admin/AdminHome.jsx">
-import AdminLayout from '../../components/admin/AdminLayout';
-import AdminCard from '../../components/admin/AdminCard';
-import { useAuth } from '../../context/AuthContext';
-import { useProducts } from '../../context/ProductsContext';
-
-function AdminHome() {
-  const { logoutAdmin } = useAuth();
-  const { productos, resetProductos } = useProducts();
-
-  const totalProductos = productos.length;
-  const totalOfertas = productos.filter((p) => p.oferta).length;
-  const stockTotal = productos.reduce((s, p) => s + (Number(p.stock) || 0), 0);
-
-  return (
-    <AdminLayout
-      title="Panel de Administración"
-      subtitle="Gestiona los productos de tu tienda fácilmente"
-    >
-      <div className="row g-4 mb-4">
-        <div className="col-md-4">
-          <div className="admin-stat">
-            <i className="fas fa-box"></i>
-            <div>
-              <div className="stat-value">{totalProductos}</div>
-              <div className="stat-label">Productos</div>
-            </div>
-          </div>
-        </div>
-        <div className="col-md-4">
-          <div className="admin-stat">
-            <i className="fas fa-tags"></i>
-            <div>
-              <div className="stat-value">{totalOfertas}</div>
-              <div className="stat-label">En oferta</div>
-            </div>
-          </div>
-        </div>
-        <div className="col-md-4">
-          <div className="admin-stat">
-            <i className="fas fa-warehouse"></i>
-            <div>
-              <div className="stat-value">{stockTotal}</div>
-              <div className="stat-label">Unidades en stock</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="row g-4">
-        <AdminCard to="/admin/agregar" icon="fa-plus-circle" title="Agregar Producto" description="Añade un nuevo producto al catálogo" />
-        <AdminCard to="/admin/lista" icon="fa-list" title="Listar Productos" description="Visualiza todos los productos" />
-        <AdminCard to="/admin/modificar" icon="fa-edit" title="Modificar Producto" description="Actualiza los datos de un producto" />
-        <AdminCard to="/admin/eliminar" icon="fa-trash-alt" title="Eliminar Producto" description="Quita un producto del catálogo" danger />
-      </div>
-
-      <div className="text-center mt-5 d-flex justify-content-center gap-2 flex-wrap">
-        <button
-          className="btn btn-outline-secondary"
-          onClick={() => {
-            if (confirm('¿Restaurar los productos originales? Esto sobreescribe los cambios.')) {
-              resetProductos();
-              alert('Productos restaurados.');
-            }
-          }}
-        >
-          <i className="fas fa-undo me-2"></i>Restaurar catálogo original
-        </button>
-        <button
-          className="btn btn-danger"
-          onClick={() => {
-            logoutAdmin();
-            window.location.href = '/';
-          }}
-        >
-          <i className="fas fa-sign-out-alt me-2"></i>Cerrar sesión admin
-        </button>
-      </div>
-    </AdminLayout>
-  );
-}
-
-export default AdminHome;
-</file>
-
-<file path="src/pages/admin/AdminLista.jsx">
-import { Link } from 'react-router-dom';
-import AdminLayout from '../../components/admin/AdminLayout';
-import { useProducts } from '../../context/ProductsContext';
-import { formatCLP } from '../../utils/format';
-
-function AdminLista() {
-  const { productos } = useProducts();
-
-  return (
-    <AdminLayout title="Lista de Productos" subtitle="Visualiza todos los productos disponibles en el catálogo">
-      <div className="card shadow-sm">
-        <div className="card-body p-0">
-          <div className="table-responsive">
-            <table className="table table-admin table-hover mb-0">
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Imagen</th>
-                  <th>Nombre</th>
-                  <th>Precio</th>
-                  <th>Stock</th>
-                  <th>Categoría</th>
-                  <th>Oferta</th>
-                  <th>Acciones</th>
-                </tr>
-              </thead>
-              <tbody>
-                {productos.length === 0 ? (
-                  <tr>
-                    <td colSpan="8" className="text-center py-4 text-muted">No hay productos en el catálogo.</td>
-                  </tr>
-                ) : (
-                  productos.map((p) => (
-                    <tr key={p.id}>
-                      <td className="text-muted small">#{p.id}</td>
-                      <td>
-                        <img src={p.imagen} alt={p.nombre} style={{ width: 48, height: 48, objectFit: 'contain' }} />
-                      </td>
-                      <td className="fw-semibold">{p.nombre}</td>
-                      <td>{formatCLP(p.precio)}</td>
-                      <td>{p.stock ?? '—'}</td>
-                      <td><span className="badge bg-secondary">{p.categoria}</span></td>
-                      <td>
-                        {p.oferta ? <span className="badge bg-danger">Sí</span> : <span className="badge bg-light text-dark">No</span>}
-                      </td>
-                      <td>
-                        <Link to={`/admin/modificar?id=${p.id}`} className="btn btn-sm btn-outline-primary me-1" title="Modificar">
-                          <i className="fas fa-edit"></i>
-                        </Link>
-                        <Link to={`/admin/eliminar?id=${p.id}`} className="btn btn-sm btn-outline-danger" title="Eliminar">
-                          <i className="fas fa-trash-alt"></i>
-                        </Link>
-                      </td>
-                    </tr>
-                  ))
-                )}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-
-      <div className="mt-3 text-muted small">
-        Mostrando <strong>{productos.length}</strong> producto(s).
-      </div>
-    </AdminLayout>
-  );
-}
-
-export default AdminLista;
-</file>
-
-<file path="src/pages/admin/AdminLogin.jsx">
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import Layout from '../../components/admin/AdminLayout
-import { useAuth } from '../../context/AuthContext';
-import '../../assets/css/admin.css';
-
-function AdminLogin() {
-  const navigate = useNavigate();
-  const { admin, loginAdmin } = useAuth();
-
-  const [usuario, setUsuario] = useState('admin');
-  const [contrasenia, setContrasenia] = useState('admin123');
-  const [error, setError] = useState('');
-
-  useEffect(() => {
-    if (admin) navigate('/admin');
-  }, [admin, navigate]);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const ok = loginAdmin(usuario.trim(), contrasenia.trim());
-    if (ok) {
-      navigate('/admin');
-    } else {
-      setError('Credenciales incorrectas. Inténtalo de nuevo.');
-      setContrasenia('');
-    }
-  };
-
-  return (
-  <div className="admin-login-page">
-    <div className="admin-login-card">
-      <div className="admin-login-brand">
-        <i className="fas fa-user-shield"></i>
-        <h1>Panel de Administración</h1>
-        <p>Acceso restringido a administradores</p>
-      </div>
-
-      <form onSubmit={handleSubmit}>
-        <div className="admin-login-field">
-          <label htmlFor="usuario">Usuario</label>
-          <div className="admin-login-input">
-            <i className="fas fa-user"></i>
-            <input
-              type="text"
-              id="usuario"
-              placeholder="Usuario administrador"
-              value={usuario}
-              onChange={(e) => setUsuario(e.target.value)}
-              required
-            />
-          </div>
-        </div>
-
-        <div className="admin-login-field">
-          <label htmlFor="contrasenia">Contraseña</label>
-          <div className="admin-login-input">
-            <i className="fas fa-lock"></i>
-            <input
-              type="password"
-              id="contrasenia"
-              placeholder="••••••••"
-              value={contrasenia}
-              onChange={(e) => setContrasenia(e.target.value)}
-              required
-            />
-          </div>
-        </div>
-
-        {error && (
-          <div className="admin-login-error">
-            <i className="fas fa-exclamation-triangle me-2"></i>
-            {error}
-          </div>
-        )}
-
-        <button type="submit" className="admin-login-btn">
-          <i className="fas fa-sign-in-alt me-2"></i>
-          Acceder al panel
-        </button>
-      </form>
-
-      <div className="admin-login-footer">
-        <Link to="/">
-          <i className="fas fa-arrow-left me-1"></i>
-          Volver a la tienda
-        </Link>
-      </div>
-
-      <div className="admin-login-hint">
-        <i className="fas fa-info-circle me-1"></i>
-        Demo: <strong>admin</strong> / <strong>admin123</strong>
-      </div>
-    </div>
-  </div>
-);
-  
-}
-
-export default AdminLogin;
-</file>
-
-<file path="src/pages/admin/AdminModificar.jsx">
-import { useState, useEffect } from 'react';
-import { useSearchParams, useNavigate } from 'react-router-dom';
-import AdminLayout from '../../components/admin/AdminLayout';
-import { useProducts } from '../../context/ProductsContext';
-import { CATEGORIAS } from '../../data/productos';
-import { formatCLP } from '../../utils/format';
-
-function AdminModificar() {
-  const navigate = useNavigate();
-  const [searchParams] = useSearchParams();
-  const { productos, modificarProducto, getProducto } = useProducts();
-
-  const idUrl = searchParams.get('id') || '';
-  const [id, setId] = useState(idUrl);
-  const [form, setForm] = useState(null);
-  const [mensaje, setMensaje] = useState(null);
-
-  useEffect(() => {
-    if (!id) { setForm(null); return; }
-    const p = getProducto(id);
-    if (p) {
-      setForm({
-        nombre: p.nombre || '',
-        precio: p.precio ?? '',
-        precioOriginal: p.precioOriginal ?? '',
-        stock: p.stock ?? '',
-        imagen: p.imagen || '',
-        descripcion: p.descripcion || '',
-        categoria: p.categoria || 'notebook',
-        oferta: Boolean(p.oferta),
-      });
-      setMensaje(null);
-    } else {
-      setForm(null);
-    }
-  }, [id, getProducto]);
-
-  const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setForm((prev) => ({ ...prev, [name]: type === 'checkbox' ? checked : value }));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!form.nombre.trim() || form.precio === '' || form.stock === '') {
-      setMensaje({ type: 'danger', text: 'Completa los campos obligatorios.' });
-      return;
-    }
-
-    modificarProducto(id, {
-      ...form,
-      precio: Number(form.precio),
-      precioOriginal: form.precioOriginal ? Number(form.precioOriginal) : null,
-      stock: Number(form.stock),
-    });
-
-    setMensaje({ type: 'success', text: `Producto "${form.nombre}" actualizado.` });
-  };
-
-  return (
-    <AdminLayout title="Modificar Producto" subtitle="Selecciona un producto y actualiza sus datos">
-      <div className="row justify-content-center">
-        <div className="col-lg-8">
-          <div className="card shadow-sm">
-            <div className="card-body">
-              <div className="mb-4">
-                <label className="form-label fw-semibold">Seleccionar producto</label>
-                <select className="form-select" value={id} onChange={(e) => setId(e.target.value)}>
-                  <option value="">-- Seleccionar --</option>
-                  {productos.map((p) => (
-                    <option key={p.id} value={p.id}>#{p.id} — {p.nombre} ({formatCLP(p.precio)})</option>
-                  ))}
-                </select>
-              </div>
-
-              {form && (
-                <form className="admin-form" onSubmit={handleSubmit}>
-                  <div className="row g-3">
-                    <div className="col-md-6">
-                      <label className="form-label">Nombre</label>
-                      <input type="text" className="form-control" name="nombre" value={form.nombre} onChange={handleChange} required />
-                    </div>
-                    <div className="col-md-6">
-                      <label className="form-label">Categoría</label>
-                      <select className="form-select" name="categoria" value={form.categoria} onChange={handleChange}>
-                        {CATEGORIAS.map((c) => (
-                          <option key={c.slug} value={c.slug}>{c.label}</option>
-                        ))}
-                      </select>
-                    </div>
-                    <div className="col-md-6">
-                      <label className="form-label">Precio (CLP)</label>
-                      <input type="number" className="form-control" name="precio" value={form.precio} onChange={handleChange} required />
-                    </div>
-                    <div className="col-md-6">
-                      <label className="form-label">Precio original</label>
-                      <input type="number" className="form-control" name="precioOriginal" value={form.precioOriginal} onChange={handleChange} />
-                    </div>
-                    <div className="col-md-6">
-                      <label className="form-label">Stock</label>
-                      <input type="number" className="form-control" name="stock" value={form.stock} onChange={handleChange} required />
-                    </div>
-                    <div className="col-md-6 d-flex align-items-end">
-                      <div className="form-check">
-                        <input className="form-check-input" type="checkbox" name="oferta" id="oferta" checked={form.oferta} onChange={handleChange} />
-                        <label className="form-check-label" htmlFor="oferta">Marcar como oferta</label>
-                      </div>
-                    </div>
-                    <div className="col-12">
-                      <label className="form-label">URL imagen</label>
-                      <input type="text" className="form-control" name="imagen" value={form.imagen} onChange={handleChange} />
-                    </div>
-                    <div className="col-12">
-                      <label className="form-label">Descripción</label>
-                      <textarea className="form-control" name="descripcion" rows="3" value={form.descripcion} onChange={handleChange}></textarea>
-                    </div>
-                  </div>
-
-                  {mensaje && <div className={`alert alert-${mensaje.type} mt-3 mb-0`}>{mensaje.text}</div>}
-
-                  <div className="d-flex gap-2 mt-4">
-                    <button type="submit" className="btn btn-primary">
-                      <i className="fas fa-save me-2"></i>Guardar cambios
-                    </button>
-                    <button type="button" className="btn btn-outline-secondary" onClick={() => navigate('/admin')}>
-                      <i className="fas fa-arrow-left me-2"></i>Cancelar
-                    </button>
-                  </div>
-                </form>
-              )}
-
-              {!form && id && <div className="alert alert-warning">No se encontró el producto con ID #{id}.</div>}
-              {!id && (
-                <div className="text-muted text-center py-4">
-                  <i className="fas fa-hand-point-up fa-2x mb-2"></i>
-                  <p className="mb-0">Selecciona un producto para editar sus datos.</p>
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-      </div>
-    </AdminLayout>
-  );
-}
-
-export default AdminModificar;
-</file>
-
 <file path="src/pages/producto.jsx">
 import { useParams, Link } from 'react-router-dom';
 
@@ -1346,6 +382,417 @@ function Producto() {
 }
 
 export default Producto;
+</file>
+
+<file path="src/assets/css/admin.css">
+.admin-header {
+  background: linear-gradient(135deg, #2d3436, #1a1a2e);
+  color: white;
+  padding: 2rem 0;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.admin-header h1 {
+  font-weight: 700;
+  font-size: 2.5rem;
+}
+
+.admin-header p {
+  font-size: 1.1rem;
+  opacity: 0.8;
+}
+
+.admin-card {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  height: 100%;
+  text-decoration: none;
+  color: #2d3436;
+  display: block;
+}
+
+.admin-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+  text-decoration: none;
+  color: #2d3436;
+}
+
+.admin-card i {
+  font-size: 3rem;
+  color: #007bff;
+  margin-bottom: 1rem;
+}
+
+.admin-card h5 { font-weight: 600; }
+.admin-card p { color: #6c757d; font-size: 0.95rem; }
+
+.admin-form .form-label { font-weight: 600; }
+
+.admin-form .form-control,
+.admin-form .form-select {
+  border-radius: 8px;
+  border: 1px solid #dfe6e9;
+  padding: 0.6rem 1rem;
+}
+
+.admin-form .form-control:focus,
+.admin-form .form-select:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.admin-form .btn-primary {
+  padding: 0.6rem 2rem;
+  font-weight: 600;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #007bff, #0056b3);
+  border: none;
+}
+
+.admin-form .btn-primary:hover {
+  background: linear-gradient(135deg, #0056b3, #003d80);
+}
+
+.admin-form .btn-danger {
+  padding: 0.6rem 2rem;
+  font-weight: 600;
+  border-radius: 8px;
+}
+
+.table-admin {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.table-admin thead {
+  background: #2d3436;
+  color: white;
+}
+
+.table-admin tbody tr:hover { background: #f8f9fa; }
+.table-admin .btn-sm { border-radius: 6px; }
+
+@media (max-width: 768px) {
+  .admin-header h1 { font-size: 1.8rem; }
+  .admin-card i { font-size: 2.2rem; }
+}
+
+.admin-stat {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: white;
+  border-radius: 12px;
+  padding: 1.2rem 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.admin-stat i {
+  font-size: 2.2rem;
+  color: #007bff;
+}
+
+.admin-stat .stat-value {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #2d3436;
+  line-height: 1;
+}
+
+.admin-stat .stat-label {
+  font-size: 0.85rem;
+  color: #6c757d;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.admin-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #f0f4f8;
+}
+
+.admin-navbar {
+  background: linear-gradient(135deg, #2d3436, #1a1a2e);
+  padding: 0.9rem 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.admin-navbar-brand {
+  color: #ffffff;
+  font-size: 1.3rem;
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+}
+
+.admin-navbar-brand:hover {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.admin-badge {
+  background: #007bff;
+  color: #ffffff;
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  margin-left: 0.5rem;
+  letter-spacing: 0.05em;
+  vertical-align: middle;
+}
+
+.admin-navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.admin-navbar-link {
+  color: #dfe6e9;
+  text-decoration: none;
+  font-size: 0.9rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.admin-navbar-link:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.admin-navbar-logout:hover {
+  background: rgba(220, 53, 69, 0.2);
+  color: #ff6b7a;
+}
+
+.admin-subnav {
+  background: #ffffff;
+  border-bottom: 1px solid #e9ecef;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
+}
+
+.admin-subnav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 0.25rem;
+  overflow-x: auto;
+}
+
+.admin-subnav li a {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.9rem 1rem;
+  color: #6c757d;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.95rem;
+  border-bottom: 3px solid transparent;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.admin-subnav li a:hover {
+  color: #007bff;
+  background: #f8f9fa;
+}
+
+.admin-subnav li a.active {
+  color: #007bff;
+  border-bottom-color: #007bff;
+}
+
+.admin-main {
+  flex: 1;
+}
+
+.admin-login-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  background-color: #f0f4f8;
+}
+
+.admin-login-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 2.5rem 2rem;
+  max-width: 440px;
+  width: 100%;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+  transition: transform 0.2s ease;
+}
+
+.admin-login-card:hover {
+  transform: translateY(-3px);
+}
+
+.admin-login-brand {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.admin-login-brand i {
+  font-size: 3rem;
+  color: #007bff;
+  display: inline-block;
+  padding: 0.8rem;
+  background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+  border-radius: 50%;
+  margin-bottom: 1rem;
+}
+
+.admin-login-brand h1 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #2d3436;
+  margin: 0 0 0.3rem;
+}
+
+.admin-login-brand p {
+  color: #6c757d;
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.admin-login-field {
+  margin-bottom: 1.2rem;
+}
+
+.admin-login-field label {
+  display: block;
+  font-weight: 600;
+  color: #2d3436;
+  font-size: 0.9rem;
+  margin-bottom: 0.4rem;
+}
+
+.admin-login-input {
+  display: flex;
+  align-items: center;
+  background: #ffffff;
+  border: 2px solid #dfe6e9;
+  border-radius: 10px;
+  padding: 0 1rem;
+  transition: all 0.2s ease;
+}
+
+.admin-login-input:focus-within {
+  border-color: #007bff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.15);
+}
+
+.admin-login-input i {
+  color: #6c757d;
+  font-size: 1rem;
+  margin-right: 0.75rem;
+}
+
+.admin-login-input input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  padding: 0.75rem 0;
+  font-size: 1rem;
+  outline: none;
+  color: #2d3436;
+}
+
+.admin-login-input input::placeholder {
+  color: #b2bec3;
+}
+
+.admin-login-error {
+  background: #f8d7da;
+  color: #721c24;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  border-left: 4px solid #dc3545;
+}
+
+.admin-login-btn {
+  width: 100%;
+  padding: 0.85rem;
+  font-size: 1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #007bff, #0056b3);
+  color: #ffffff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 0.5rem;
+}
+
+.admin-login-btn:hover {
+  background: linear-gradient(135deg, #0056b3, #003d80);
+  transform: scale(1.02);
+}
+
+.admin-login-btn:active {
+  transform: scale(1);
+}
+
+.admin-login-footer {
+  text-align: center;
+  margin-top: 1.5rem;
+}
+
+.admin-login-footer a {
+  color: #6c757d;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.2s;
+}
+
+.admin-login-footer a:hover {
+  color: #007bff;
+  text-decoration: underline;
+}
+
+.admin-login-hint {
+  text-align: center;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e9ecef;
+  font-size: 0.8rem;
+  color: #6c757d;
+}
+
+@media (max-width: 480px) {
+  .admin-login-card {
+    padding: 2rem 1.5rem;
+  }
+  .admin-login-brand i {
+    font-size: 2.6rem;
+  }
+  .admin-login-brand h1 {
+    font-size: 1.3rem;
+  }
+}
 </file>
 
 <file path="src/assets/css/App.css">
@@ -2805,6 +2252,115 @@ footer {
 }
 </file>
 
+<file path="src/components/admin/AdminCard.jsx">
+import { Link } from 'react-router-dom';
+
+export default function AdminCard({ to, icon, title, description, danger = false }) {
+  return (
+    <div className="col-md-6 col-lg-3">
+      <Link to={to} className="admin-card">
+        <i className={`fas ${icon} ${danger ? 'text-danger' : ''}`}></i>
+        <h5>{title}</h5>
+        <p>{description}</p>
+      </Link>
+    </div>
+  );
+}
+</file>
+
+<file path="src/components/admin/AdminLayout.jsx">
+import { useEffect } from 'react';
+import { useNavigate, Link, useLocation } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
+import '../../assets/css/admin.css';
+
+export default function AdminLayout({ children, title, subtitle }) {
+  const { admin, logoutAdmin } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    if (!admin) navigate('/admin/login');
+  }, [admin, navigate]);
+
+  if (!admin) return null;
+
+  const cerrarAdmin = () => {
+    logoutAdmin();
+    navigate('/admin/login');
+  };
+
+  return (
+    <div className="admin-shell">
+      {/* Header propio del admin */}
+      <header className="admin-navbar">
+        <div className="container-fluid d-flex align-items-center justify-content-between px-4">
+          <Link to="/admin" className="admin-navbar-brand">
+            <i className="fas fa-user-shield me-2"></i>
+            PZDREAM <span className="admin-badge">ADMIN</span>
+          </Link>
+
+          <div className="admin-navbar-actions">
+            <Link to="/" className="admin-navbar-link">
+              <i className="fas fa-store me-1"></i>
+              <span className="d-none d-md-inline">Ver tienda</span>
+            </Link>
+            <button onClick={cerrarAdmin} className="admin-navbar-link admin-navbar-logout">
+              <i className="fas fa-sign-out-alt me-1"></i>
+              <span className="d-none d-md-inline">Salir</span>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <nav className="admin-subnav">
+        <div className="container-fluid px-4">
+          <ul>
+            <li>
+              <Link to="/admin" className={location.pathname === '/admin' ? 'active' : ''}>
+                <i className="fas fa-home me-1"></i>Dashboard
+              </Link>
+            </li>
+            <li>
+              <Link to="/admin/agregar" className={location.pathname === '/admin/agregar' ? 'active' : ''}>
+                <i className="fas fa-plus me-1"></i>Agregar
+              </Link>
+            </li>
+            <li>
+              <Link to="/admin/lista" className={location.pathname === '/admin/lista' ? 'active' : ''}>
+                <i className="fas fa-list me-1"></i>Lista
+              </Link>
+            </li>
+            <li>
+              <Link to="/admin/modificar" className={location.pathname === '/admin/modificar' ? 'active' : ''}>
+                <i className="fas fa-edit me-1"></i>Modificar
+              </Link>
+            </li>
+            <li>
+              <Link to="/admin/eliminar" className={location.pathname === '/admin/eliminar' ? 'active' : ''}>
+                <i className="fas fa-trash me-1"></i>Eliminar
+              </Link>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <main className="admin-main">
+        <div className="container py-4">
+          {title && (
+            <div className="admin-header">
+              <h1>{title}</h1>
+              {subtitle && <p>{subtitle}</p>}
+            </div>
+          )}
+          {children}
+        </div>
+      </main>
+    </div>
+  );
+}
+</file>
+
 <file path="src/components/productos/ProductCard.jsx">
 import { Link } from 'react-router-dom';
 import { formatCLP, calcularDescuento } from '../../utils/format';
@@ -2857,14 +2413,14 @@ export default function ProductCardMini({ producto }) {
 
 <file path="src/components/productos/ProductCarousel.jsx">
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { formatCLP, calcularDescuento } from '../../utils/format';
 
 function ProductCarousel({ id, productos, oferta = false }) {
   const [pagina, setPagina] = useState(0);
 
   const productosPorPagina = 4;
-  const totalPaginas = Math.ceil(
-    productos.length / productosPorPagina
-  );
+  const totalPaginas = Math.ceil(productos.length / productosPorPagina);
 
   const productosVisibles = productos.slice(
     pagina * productosPorPagina,
@@ -2872,15 +2428,19 @@ function ProductCarousel({ id, productos, oferta = false }) {
   );
 
   const cambiarPagina = (direccion) => {
-    setPagina((actual) =>
-      (actual + direccion + totalPaginas) % totalPaginas
-    );
+    setPagina((actual) => (actual + direccion + totalPaginas) % totalPaginas);
   };
+
+  if (productos.length === 0) {
+    return (
+      <div className="text-center py-4 text-muted small">
+        No hay productos disponibles.
+      </div>
+    );
+  }
 
   return (
     <div id={id} className="product-carousel">
-
-      {/* Botón anterior */}
       {totalPaginas > 1 && (
         <button
           type="button"
@@ -2892,45 +2452,42 @@ function ProductCarousel({ id, productos, oferta = false }) {
         </button>
       )}
 
-      {/* Productos */}
       <div className="row g-3">
-        {productosVisibles.map((producto) => (
-          <div className="col-6 col-md-3" key={producto.id}>
-            <a
-              href={`/producto/${producto.id}`}
-              className="product-card text-decoration-none"
-            >
-              {oferta && (
-                <div className="badge-oferta">
-                  {producto.descuento}
-                </div>
-              )}
-
-              <img
-                src={producto.imagen}
-                className="img-fluid rounded"
-                alt={producto.nombre}
-                loading="lazy"
-              />
-
-              <h6 className="mt-2">
-                {producto.nombre}
-              </h6>
-
-              <p className="price">
-                {oferta && (
-                  <span className="old-price">
-                    {producto.anterior}{' '}
-                  </span>
+        {productosVisibles.map((producto) => {
+          const descuento = calcularDescuento(producto.precio, producto.precioOriginal);
+          return (
+            <div className="col-6 col-md-3" key={producto.id}>
+              <Link
+                to={`/producto/${producto.id}`}
+                className="product-card text-decoration-none"
+              >
+                {oferta && descuento && (
+                  <div className="badge-oferta">-{descuento}%</div>
                 )}
-                {producto.precio}
-              </p>
-            </a>
-          </div>
-        ))}
+
+                <img
+                  src={producto.imagen}
+                  className="img-fluid rounded"
+                  alt={producto.nombre}
+                  loading="lazy"
+                />
+
+                <h6 className="mt-2">{producto.nombre}</h6>
+
+                <p className="price">
+                  {oferta && producto.precioOriginal && (
+                    <span className="old-price">
+                      {formatCLP(producto.precioOriginal)}{' '}
+                    </span>
+                  )}
+                  {formatCLP(producto.precio)}
+                </p>
+              </Link>
+            </div>
+          );
+        })}
       </div>
 
-      {/* Botón siguiente */}
       {totalPaginas > 1 && (
         <button
           type="button"
@@ -2942,13 +2499,11 @@ function ProductCarousel({ id, productos, oferta = false }) {
         </button>
       )}
 
-      {/* Indicador de página */}
       {totalPaginas > 1 && (
         <div className="text-center mt-3 small text-muted">
           {pagina + 1} de {totalPaginas}
         </div>
       )}
-
     </div>
   );
 }
@@ -3300,6 +2855,612 @@ export function useLocalStorage(key, initial) {
 
   return [value, setValue];
 }
+</file>
+
+<file path="src/pages/admin/AdminAgregar.jsx">
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import AdminLayout from '../../components/admin/AdminLayout';
+import { useProducts } from '../../context/ProductsContext';
+import { CATEGORIAS } from '../../data/productos';
+
+function AdminAgregar() {
+  const navigate = useNavigate();
+  const { agregarProducto } = useProducts();
+
+  const [form, setForm] = useState({
+    nombre: '',
+    precio: '',
+    precioOriginal: '',
+    stock: '',
+    imagen: '',
+    descripcion: '',
+    categoria: 'notebook',
+    oferta: false,
+  });
+
+  const [mensaje, setMensaje] = useState(null);
+
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setForm((prev) => ({ ...prev, [name]: type === 'checkbox' ? checked : value }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (!form.nombre.trim() || !form.precio || !form.stock) {
+      setMensaje({ type: 'danger', text: 'Completa los campos obligatorios.' });
+      return;
+    }
+
+    agregarProducto({
+      ...form,
+      precio: Number(form.precio),
+      precioOriginal: form.precioOriginal ? Number(form.precioOriginal) : null,
+      stock: Number(form.stock),
+    });
+
+    setMensaje({ type: 'success', text: `Producto "${form.nombre}" agregado correctamente.` });
+    setTimeout(() => navigate('/admin/lista'), 1200);
+  };
+
+  return (
+    <AdminLayout title="Agregar Producto" subtitle="Completa los campos para añadir un nuevo producto">
+      <div className="row justify-content-center">
+        <div className="col-lg-8">
+          <div className="card shadow-sm">
+            <div className="card-body">
+              <form className="admin-form" onSubmit={handleSubmit}>
+                <div className="row g-3">
+                  <div className="col-md-6">
+                    <label className="form-label">Nombre *</label>
+                    <input type="text" className="form-control" name="nombre" value={form.nombre} onChange={handleChange} placeholder="Ej: Notebook Gamer" required />
+                  </div>
+                  <div className="col-md-6">
+                    <label className="form-label">Categoría</label>
+                    <select className="form-select" name="categoria" value={form.categoria} onChange={handleChange}>
+                      {CATEGORIAS.map((c) => (
+                        <option key={c.slug} value={c.slug}>{c.label}</option>
+                      ))}
+                    </select>
+                  </div>
+                  <div className="col-md-6">
+                    <label className="form-label">Precio (CLP) *</label>
+                    <input type="number" className="form-control" name="precio" value={form.precio} onChange={handleChange} placeholder="1299990" required />
+                  </div>
+                  <div className="col-md-6">
+                    <label className="form-label">Precio original (si está en oferta)</label>
+                    <input type="number" className="form-control" name="precioOriginal" value={form.precioOriginal} onChange={handleChange} placeholder="1499990" />
+                  </div>
+                  <div className="col-md-6">
+                    <label className="form-label">Stock *</label>
+                    <input type="number" className="form-control" name="stock" value={form.stock} onChange={handleChange} placeholder="10" required />
+                  </div>
+                  <div className="col-md-6 d-flex align-items-end">
+                    <div className="form-check">
+                      <input className="form-check-input" type="checkbox" name="oferta" id="oferta" checked={form.oferta} onChange={handleChange} />
+                      <label className="form-check-label" htmlFor="oferta">Marcar como oferta</label>
+                    </div>
+                  </div>
+                  <div className="col-12">
+                    <label className="form-label">URL de la imagen</label>
+                    <input type="text" className="form-control" name="imagen" value={form.imagen} onChange={handleChange} placeholder="https://..." />
+                  </div>
+                  <div className="col-12">
+                    <label className="form-label">Descripción</label>
+                    <textarea className="form-control" name="descripcion" rows="3" value={form.descripcion} onChange={handleChange}></textarea>
+                  </div>
+                </div>
+
+                {mensaje && <div className={`alert alert-${mensaje.type} mt-3 mb-0`}>{mensaje.text}</div>}
+
+                <div className="d-flex gap-2 mt-4">
+                  <button type="submit" className="btn btn-primary">
+                    <i className="fas fa-save me-2"></i>Guardar producto
+                  </button>
+                  <button type="button" className="btn btn-outline-secondary" onClick={() => navigate('/admin')}>
+                    <i className="fas fa-arrow-left me-2"></i>Cancelar
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </AdminLayout>
+  );
+}
+
+export default AdminAgregar;
+</file>
+
+<file path="src/pages/admin/AdminEliminar.jsx">
+import { useState } from 'react';
+import { useSearchParams, useNavigate } from 'react-router-dom';
+import AdminLayout from '../../components/admin/AdminLayout';
+import { useProducts } from '../../context/ProductsContext';
+import { formatCLP } from '../../utils/format';
+
+function AdminEliminar() {
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const { productos, eliminarProducto, getProducto } = useProducts();
+
+  const idUrl = searchParams.get('id') || '';
+  const [id, setId] = useState(idUrl);
+  const [mensaje, setMensaje] = useState(null);
+
+  const producto = id ? getProducto(id) : null;
+
+  const handleEliminar = () => {
+    if (!producto) return;
+    const confirmado = confirm(`¿Eliminar "${producto.nombre}"? Esta acción no se puede deshacer.`);
+    if (!confirmado) return;
+
+    eliminarProducto(producto.id);
+    setMensaje({ type: 'success', text: `"${producto.nombre}" eliminado correctamente.` });
+    setId('');
+    setTimeout(() => navigate('/admin/lista'), 1200);
+  };
+
+  return (
+    <AdminLayout title="Eliminar Producto" subtitle="Selecciona un producto para eliminarlo permanentemente">
+      <div className="row justify-content-center">
+        <div className="col-lg-6">
+          <div className="card shadow-sm">
+            <div className="card-body">
+              <div className="mb-4">
+                <label className="form-label fw-semibold">Selecciona el producto</label>
+                <select className="form-select" value={id} onChange={(e) => { setId(e.target.value); setMensaje(null); }}>
+                  <option value="">-- Seleccionar --</option>
+                  {productos.map((p) => (
+                    <option key={p.id} value={p.id}>#{p.id} — {p.nombre}</option>
+                  ))}
+                </select>
+              </div>
+
+              {producto && (
+                <div className="alert alert-warning">
+                  <h6 className="mb-2"><i className="fas fa-exclamation-triangle me-2"></i>Vas a eliminar:</h6>
+                  <div className="d-flex align-items-center gap-3">
+                    <img src={producto.imagen} alt={producto.nombre} style={{ width: 60, height: 60, objectFit: 'contain' }} />
+                    <div>
+                      <div className="fw-bold">{producto.nombre}</div>
+                      <div className="small text-muted">{formatCLP(producto.precio)} · {producto.categoria}</div>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {mensaje && <div className={`alert alert-${mensaje.type}`}>{mensaje.text}</div>}
+
+              <div className="d-flex gap-2">
+                <button type="button" className="btn btn-danger" onClick={handleEliminar} disabled={!producto}>
+                  <i className="fas fa-trash me-2"></i>Eliminar producto
+                </button>
+                <button type="button" className="btn btn-outline-secondary" onClick={() => navigate('/admin')}>
+                  <i className="fas fa-arrow-left me-2"></i>Cancelar
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </AdminLayout>
+  );
+}
+
+export default AdminEliminar;
+</file>
+
+<file path="src/pages/admin/AdminHome.jsx">
+import AdminLayout from '../../components/admin/AdminLayout';
+import AdminCard from '../../components/admin/AdminCard';
+import { useAuth } from '../../context/AuthContext';
+import { useProducts } from '../../context/ProductsContext';
+
+function AdminHome() {
+  const { logoutAdmin } = useAuth();
+  const { productos, resetProductos } = useProducts();
+
+  const totalProductos = productos.length;
+  const totalOfertas = productos.filter((p) => p.oferta).length;
+  const stockTotal = productos.reduce((s, p) => s + (Number(p.stock) || 0), 0);
+
+  return (
+    <AdminLayout
+      title="Panel de Administración"
+      subtitle="Gestiona los productos de tu tienda fácilmente"
+    >
+      <div className="row g-4 mb-4">
+        <div className="col-md-4">
+          <div className="admin-stat">
+            <i className="fas fa-box"></i>
+            <div>
+              <div className="stat-value">{totalProductos}</div>
+              <div className="stat-label">Productos</div>
+            </div>
+          </div>
+        </div>
+        <div className="col-md-4">
+          <div className="admin-stat">
+            <i className="fas fa-tags"></i>
+            <div>
+              <div className="stat-value">{totalOfertas}</div>
+              <div className="stat-label">En oferta</div>
+            </div>
+          </div>
+        </div>
+        <div className="col-md-4">
+          <div className="admin-stat">
+            <i className="fas fa-warehouse"></i>
+            <div>
+              <div className="stat-value">{stockTotal}</div>
+              <div className="stat-label">Unidades en stock</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="row g-4">
+        <AdminCard to="/admin/agregar" icon="fa-plus-circle" title="Agregar Producto" description="Añade un nuevo producto al catálogo" />
+        <AdminCard to="/admin/lista" icon="fa-list" title="Listar Productos" description="Visualiza todos los productos" />
+        <AdminCard to="/admin/modificar" icon="fa-edit" title="Modificar Producto" description="Actualiza los datos de un producto" />
+        <AdminCard to="/admin/eliminar" icon="fa-trash-alt" title="Eliminar Producto" description="Quita un producto del catálogo" danger />
+      </div>
+
+      <div className="text-center mt-5 d-flex justify-content-center gap-2 flex-wrap">
+        <button
+          className="btn btn-outline-secondary"
+          onClick={() => {
+            if (confirm('¿Restaurar los productos originales? Esto sobreescribe los cambios.')) {
+              resetProductos();
+              alert('Productos restaurados.');
+            }
+          }}
+        >
+          <i className="fas fa-undo me-2"></i>Restaurar catálogo original
+        </button>
+        <button
+          className="btn btn-danger"
+          onClick={() => {
+            logoutAdmin();
+            window.location.href = '/';
+          }}
+        >
+          <i className="fas fa-sign-out-alt me-2"></i>Cerrar sesión admin
+        </button>
+      </div>
+    </AdminLayout>
+  );
+}
+
+export default AdminHome;
+</file>
+
+<file path="src/pages/admin/AdminLista.jsx">
+import { Link } from 'react-router-dom';
+import AdminLayout from '../../components/admin/AdminLayout';
+import { useProducts } from '../../context/ProductsContext';
+import { formatCLP } from '../../utils/format';
+
+function AdminLista() {
+  const { productos } = useProducts();
+
+  return (
+    <AdminLayout title="Lista de Productos" subtitle="Visualiza todos los productos disponibles en el catálogo">
+      <div className="card shadow-sm">
+        <div className="card-body p-0">
+          <div className="table-responsive">
+            <table className="table table-admin table-hover mb-0">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Imagen</th>
+                  <th>Nombre</th>
+                  <th>Precio</th>
+                  <th>Stock</th>
+                  <th>Categoría</th>
+                  <th>Oferta</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                {productos.length === 0 ? (
+                  <tr>
+                    <td colSpan="8" className="text-center py-4 text-muted">No hay productos en el catálogo.</td>
+                  </tr>
+                ) : (
+                  productos.map((p) => (
+                    <tr key={p.id}>
+                      <td className="text-muted small">#{p.id}</td>
+                      <td>
+                        <img src={p.imagen} alt={p.nombre} style={{ width: 48, height: 48, objectFit: 'contain' }} />
+                      </td>
+                      <td className="fw-semibold">{p.nombre}</td>
+                      <td>{formatCLP(p.precio)}</td>
+                      <td>{p.stock ?? '—'}</td>
+                      <td><span className="badge bg-secondary">{p.categoria}</span></td>
+                      <td>
+                        {p.oferta ? <span className="badge bg-danger">Sí</span> : <span className="badge bg-light text-dark">No</span>}
+                      </td>
+                      <td>
+                        <Link to={`/admin/modificar?id=${p.id}`} className="btn btn-sm btn-outline-primary me-1" title="Modificar">
+                          <i className="fas fa-edit"></i>
+                        </Link>
+                        <Link to={`/admin/eliminar?id=${p.id}`} className="btn btn-sm btn-outline-danger" title="Eliminar">
+                          <i className="fas fa-trash-alt"></i>
+                        </Link>
+                      </td>
+                    </tr>
+                  ))
+                )}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div className="mt-3 text-muted small">
+        Mostrando <strong>{productos.length}</strong> producto(s).
+      </div>
+    </AdminLayout>
+  );
+}
+
+export default AdminLista;
+</file>
+
+<file path="src/pages/admin/AdminLogin.jsx">
+import { useState, useEffect } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
+import '../../assets/css/admin.css';
+
+function AdminLogin() {
+  const navigate = useNavigate();
+  const { admin, loginAdmin } = useAuth();
+
+  const [usuario, setUsuario] = useState('admin');
+  const [contrasenia, setContrasenia] = useState('admin123');
+  const [error, setError] = useState('');
+
+  useEffect(() => {
+    if (admin) navigate('/admin');
+  }, [admin, navigate]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const ok = loginAdmin(usuario.trim(), contrasenia.trim());
+    if (ok) {
+      navigate('/admin');
+    } else {
+      setError('Credenciales incorrectas. Inténtalo de nuevo.');
+      setContrasenia('');
+    }
+  };
+
+  return (
+    <div className="admin-login-page">
+      <div className="admin-login-card">
+        <div className="admin-login-brand">
+          <i className="fas fa-user-shield"></i>
+          <h1>Panel de Administración</h1>
+          <p>Acceso restringido a administradores</p>
+        </div>
+
+        <form onSubmit={handleSubmit}>
+          <div className="admin-login-field">
+            <label htmlFor="usuario">Usuario</label>
+            <div className="admin-login-input">
+              <i className="fas fa-user"></i>
+              <input
+                type="text"
+                id="usuario"
+                placeholder="Usuario administrador"
+                value={usuario}
+                onChange={(e) => setUsuario(e.target.value)}
+                required
+              />
+            </div>
+          </div>
+
+          <div className="admin-login-field">
+            <label htmlFor="contrasenia">Contraseña</label>
+            <div className="admin-login-input">
+              <i className="fas fa-lock"></i>
+              <input
+                type="password"
+                id="contrasenia"
+                placeholder="••••••••"
+                value={contrasenia}
+                onChange={(e) => setContrasenia(e.target.value)}
+                required
+              />
+            </div>
+          </div>
+
+          {error && (
+            <div className="admin-login-error">
+              <i className="fas fa-exclamation-triangle me-2"></i>
+              {error}
+            </div>
+          )}
+
+          <button type="submit" className="admin-login-btn">
+            <i className="fas fa-sign-in-alt me-2"></i>
+            Acceder al panel
+          </button>
+        </form>
+
+        <div className="admin-login-footer">
+          <Link to="/">
+            <i className="fas fa-arrow-left me-1"></i>
+            Volver a la tienda
+          </Link>
+        </div>
+
+        <div className="admin-login-hint">
+          <i className="fas fa-info-circle me-1"></i>
+          Demo: <strong>admin</strong> / <strong>admin123</strong>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default AdminLogin;
+</file>
+
+<file path="src/pages/admin/AdminModificar.jsx">
+import { useState, useEffect } from 'react';
+import { useSearchParams, useNavigate } from 'react-router-dom';
+import AdminLayout from '../../components/admin/AdminLayout';
+import { useProducts } from '../../context/ProductsContext';
+import { CATEGORIAS } from '../../data/productos';
+import { formatCLP } from '../../utils/format';
+
+function AdminModificar() {
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const { productos, modificarProducto, getProducto } = useProducts();
+
+  const idUrl = searchParams.get('id') || '';
+  const [id, setId] = useState(idUrl);
+  const [form, setForm] = useState(null);
+  const [mensaje, setMensaje] = useState(null);
+
+  useEffect(() => {
+    if (!id) { setForm(null); return; }
+    const p = getProducto(id);
+    if (p) {
+      setForm({
+        nombre: p.nombre || '',
+        precio: p.precio ?? '',
+        precioOriginal: p.precioOriginal ?? '',
+        stock: p.stock ?? '',
+        imagen: p.imagen || '',
+        descripcion: p.descripcion || '',
+        categoria: p.categoria || 'notebook',
+        oferta: Boolean(p.oferta),
+      });
+      setMensaje(null);
+    } else {
+      setForm(null);
+    }
+  }, [id, getProducto]);
+
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setForm((prev) => ({ ...prev, [name]: type === 'checkbox' ? checked : value }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!form.nombre.trim() || form.precio === '' || form.stock === '') {
+      setMensaje({ type: 'danger', text: 'Completa los campos obligatorios.' });
+      return;
+    }
+
+    modificarProducto(id, {
+      ...form,
+      precio: Number(form.precio),
+      precioOriginal: form.precioOriginal ? Number(form.precioOriginal) : null,
+      stock: Number(form.stock),
+    });
+
+    setMensaje({ type: 'success', text: `Producto "${form.nombre}" actualizado.` });
+  };
+
+  return (
+    <AdminLayout title="Modificar Producto" subtitle="Selecciona un producto y actualiza sus datos">
+      <div className="row justify-content-center">
+        <div className="col-lg-8">
+          <div className="card shadow-sm">
+            <div className="card-body">
+              <div className="mb-4">
+                <label className="form-label fw-semibold">Seleccionar producto</label>
+                <select className="form-select" value={id} onChange={(e) => setId(e.target.value)}>
+                  <option value="">-- Seleccionar --</option>
+                  {productos.map((p) => (
+                    <option key={p.id} value={p.id}>#{p.id} — {p.nombre} ({formatCLP(p.precio)})</option>
+                  ))}
+                </select>
+              </div>
+
+              {form && (
+                <form className="admin-form" onSubmit={handleSubmit}>
+                  <div className="row g-3">
+                    <div className="col-md-6">
+                      <label className="form-label">Nombre</label>
+                      <input type="text" className="form-control" name="nombre" value={form.nombre} onChange={handleChange} required />
+                    </div>
+                    <div className="col-md-6">
+                      <label className="form-label">Categoría</label>
+                      <select className="form-select" name="categoria" value={form.categoria} onChange={handleChange}>
+                        {CATEGORIAS.map((c) => (
+                          <option key={c.slug} value={c.slug}>{c.label}</option>
+                        ))}
+                      </select>
+                    </div>
+                    <div className="col-md-6">
+                      <label className="form-label">Precio (CLP)</label>
+                      <input type="number" className="form-control" name="precio" value={form.precio} onChange={handleChange} required />
+                    </div>
+                    <div className="col-md-6">
+                      <label className="form-label">Precio original</label>
+                      <input type="number" className="form-control" name="precioOriginal" value={form.precioOriginal} onChange={handleChange} />
+                    </div>
+                    <div className="col-md-6">
+                      <label className="form-label">Stock</label>
+                      <input type="number" className="form-control" name="stock" value={form.stock} onChange={handleChange} required />
+                    </div>
+                    <div className="col-md-6 d-flex align-items-end">
+                      <div className="form-check">
+                        <input className="form-check-input" type="checkbox" name="oferta" id="oferta" checked={form.oferta} onChange={handleChange} />
+                        <label className="form-check-label" htmlFor="oferta">Marcar como oferta</label>
+                      </div>
+                    </div>
+                    <div className="col-12">
+                      <label className="form-label">URL imagen</label>
+                      <input type="text" className="form-control" name="imagen" value={form.imagen} onChange={handleChange} />
+                    </div>
+                    <div className="col-12">
+                      <label className="form-label">Descripción</label>
+                      <textarea className="form-control" name="descripcion" rows="3" value={form.descripcion} onChange={handleChange}></textarea>
+                    </div>
+                  </div>
+
+                  {mensaje && <div className={`alert alert-${mensaje.type} mt-3 mb-0`}>{mensaje.text}</div>}
+
+                  <div className="d-flex gap-2 mt-4">
+                    <button type="submit" className="btn btn-primary">
+                      <i className="fas fa-save me-2"></i>Guardar cambios
+                    </button>
+                    <button type="button" className="btn btn-outline-secondary" onClick={() => navigate('/admin')}>
+                      <i className="fas fa-arrow-left me-2"></i>Cancelar
+                    </button>
+                  </div>
+                </form>
+              )}
+
+              {!form && id && <div className="alert alert-warning">No se encontró el producto con ID #{id}.</div>}
+              {!id && (
+                <div className="text-muted text-center py-4">
+                  <i className="fas fa-hand-point-up fa-2x mb-2"></i>
+                  <p className="mb-0">Selecciona un producto para editar sus datos.</p>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+    </AdminLayout>
+  );
+}
+
+export default AdminModificar;
 </file>
 
 <file path="src/pages/carrito.jsx">
@@ -3836,6 +3997,80 @@ export default function Layout({ children, container = true }) {
 }
 </file>
 
+<file path=".gitignore">
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+</file>
+
+<file path=".oxlintrc.json">
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["react", "oxc"],
+  "rules": {
+    "react/rules-of-hooks": "error",
+    "react/only-export-components": ["warn", { "allowConstantExport": true }]
+  }
+}
+</file>
+
+<file path="README.md">
+# React + Vite
+
+This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+
+Currently, two official plugins are available:
+
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+
+## React Compiler
+
+The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+
+Note: This will impact Vite dev & build performances.
+You can also try [the experimental native React Compiler support in plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md#rust-react-compiler) by using `compiler: true` in the plugin options instead of using the Babel plugin.
+
+## Expanding the Oxlint configuration
+
+If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+</file>
+
+<file path="vite.config.js">
+import react, { reactCompilerPreset } from '@vitejs/plugin-react'
+import babel from '@rolldown/plugin-babel'
+import { defineConfig } from 'vite'
+
+// https://vite.dev/config/
+export default defineConfig({
+  plugins: [
+    react(),
+    babel({ presets: [reactCompilerPreset()] })
+  ],
+})
+</file>
+
 <file path="src/components/layout/Navbar.jsx">
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
@@ -3979,87 +4214,16 @@ function Navbar() {
 export default Navbar;
 </file>
 
-<file path=".gitignore">
-# Logs
-logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
-
-node_modules
-dist
-dist-ssr
-*.local
-
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
-.DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
-</file>
-
-<file path=".oxlintrc.json">
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "oxc"],
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
-</file>
-
-<file path="README.md">
-# React + Vite
-
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
-
-## React Compiler
-
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
-
-Note: This will impact Vite dev & build performances.
-You can also try [the experimental native React Compiler support in plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md#rust-react-compiler) by using `compiler: true` in the plugin options instead of using the Babel plugin.
-
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
-</file>
-
-<file path="vite.config.js">
-import react, { reactCompilerPreset } from '@vitejs/plugin-react'
-import babel from '@rolldown/plugin-babel'
-import { defineConfig } from 'vite'
-
-// https://vite.dev/config/
-export default defineConfig({
-  plugins: [
-    react(),
-    babel({ presets: [reactCompilerPreset()] })
-  ],
-})
-</file>
-
 <file path="src/pages/home.jsx">
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import Layout from '../components/layout/Layout';
 import ProductCarousel from '../components/productos/ProductCarousel';
+import { useProducts } from '../context/ProductsContext';
 
 function Home() {
+  const { productos } = useProducts();
   const [busqueda, setBusqueda] = useState('');
 
   const buscarProductos = (e) => {
@@ -4068,27 +4232,11 @@ function Home() {
     window.location.href = `/catalogo?busqueda=${encodeURIComponent(busqueda.trim())}`;
   };
 
-  const recomendados = [
-    { id: 1, nombre: 'Notebook Gamer', precio: '$1.299.990', imagen: 'https://i5.walmartimages.cl/asr/a7dd66c0-f691-4227-8a40-47fec2456f1c.1bb6f0270e2d01383eafa4204eb5a0ff.png?odnHeight=612&odnWidth=612&odnBg=FFFFFF' },
-    { id: 2, nombre: 'PC Escritorio', precio: '$899.990', imagen: 'https://minisitios.ripley.cl/minisitios/icdinamica/2024/09-septiembre/ICD%20computaci%C3%B3n%20110924/AllInOne.jpg' },
-    { id: 3, nombre: 'SSD 1TB', precio: '$149.990', imagen: 'https://media.spdigital.cl/thumbnails/products/rz7s3jb4_d0d6821a_thumbnail_4096.jpg' },
-    { id: 4, nombre: 'Tarjeta Gráfica', precio: '$499.990', imagen: 'https://static.myshop.cl/fotos/3/1/5/3/5/1_1764687802000.png' },
-    { id: 5, nombre: 'Monitor 27"', precio: '$299.990', imagen: 'https://rimage.ripley.cl/home.ripley/Attachment/MKP/8117/MPM10002882701/imagen2-1' },
-    { id: 6, nombre: 'Memoria RAM 16GB', precio: '$89.990', imagen: 'https://natcomchile.cl/wp-content/uploads/2021/06/memoria-ram-HyperX-81410057.jpg' },
-    { id: 7, nombre: 'Teclado Mecánico', precio: '$79.990', imagen: 'https://todoclick.cl/6732674-large_default/teclado-mecanico-hibrido-cougar-core-negro-spa.jpg' },
-    { id: 8, nombre: 'Mouse Inalámbrico', precio: '$19.990', imagen: 'https://fotosol.cl/cdn/shop/products/1-19.jpg?crop=center&height=617&v=1623961130&width=617' },
-  ];
+  // Tomar los primeros 8 como "recomendados"
+  const recomendados = productos.slice(0, 8);
 
-  const ofertas = [
-    { id: 9, nombre: 'Notebook Gamer', precio: '$1.049.990', anterior: '$1.499.990', descuento: '-25%', imagen: 'https://scglobal.cl/4992-large_default/notebook-hp-gamer-victus-15-fb3007la-r7-8845hs-16gb-1tb-r4050-w11h.jpg' },
-    { id: 10, nombre: 'PC Escritorio', precio: '$1.899.990', anterior: '$2.599.990', descuento: '-20%', imagen: 'https://clonesyperifericos.com/wp-content/uploads/2026/08/PC_GAMER_STRIKE.png' },
-    { id: 11, nombre: 'SSD 1TB', precio: '$219.490', anterior: '$249.990', descuento: '-10%', imagen: 'https://centrale.cl/wp-content/uploads/Disco-SSD-1TB-Kingston-NV3-M.2-2230-NVMe-PCIe-4.0-x4-Nand-3D-1.webp' },
-    { id: 12, nombre: 'Tarjeta Gráfica', precio: '$374.990', anterior: '$499.990', descuento: '-25%', imagen: 'https://media.spdigital.cl/thumbnails/products/_xv8eamf_253e1f5d_thumbnail_512.jpg' },
-    { id: 13, nombre: 'Monitor 27"', precio: '$269.990', anterior: '$299.990', descuento: '-10%', imagen: 'https://media.falabella.com/falabellaCL/152191364_01/w=1500,h=1500,fit=cover' },
-    { id: 14, nombre: 'Memoria RAM 16GB', precio: '$79.190', anterior: '$89.990', descuento: '-12%', imagen: 'https://m.media-amazon.com/images/I/41XJ679agFL._SL500_.jpg' },
-    { id: 15, nombre: 'Teclado Mecánico', precio: '$65.590', anterior: '$79.990', descuento: '-18%', imagen: 'https://static.wixstatic.com/media/19e3c3_ef7569780f3b4a489f4d063817491d71~mv2.jpg/v1/fill/w_560,h_560,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/19e3c3_ef7569780f3b4a489f4d063817491d71~mv2.jpg' },
-    { id: 16, nombre: 'Procesador Ryzen', precio: '$100.190', anterior: '$129.990', descuento: '-22%', imagen: 'https://assets.pcfactory.cl/public/foto/46284/2_500.jpg?t=1661280777450' },
-  ];
+  // Filtrar solo los que están en oferta
+  const ofertas = productos.filter((p) => p.oferta).slice(0, 8);
 
   return (
     <Layout>
@@ -4097,6 +4245,7 @@ function Home() {
         Bienvenido a PZDREAM - Tu tienda de tecnología
       </div>
 
+      {/* Carrusel principal de banners */}
       <div className="carousel-full-width">
         <div id="carouselPrincipal" className="carousel slide" data-bs-ride="carousel" data-bs-interval="4000">
           <div className="carousel-indicators">
@@ -4126,10 +4275,18 @@ function Home() {
         </div>
       </div>
 
+      {/* Buscador */}
       <section className="search-section">
         <form onSubmit={buscarProductos}>
           <div className="input-group">
-            <input type="search" className="form-control" placeholder="Buscar productos, marcas o categorías..." aria-label="Buscar productos" value={busqueda} onChange={(e) => setBusqueda(e.target.value)} />
+            <input
+              type="search"
+              className="form-control"
+              placeholder="Buscar productos, marcas o categorías..."
+              aria-label="Buscar productos"
+              value={busqueda}
+              onChange={(e) => setBusqueda(e.target.value)}
+            />
             <button className="btn btn-search" type="submit">
               <i className="fas fa-search me-2"></i>Buscar
             </button>
@@ -4137,26 +4294,28 @@ function Home() {
         </form>
       </section>
 
+      {/* Recomendados */}
       <section className="product-section my-5">
         <div className="d-flex justify-content-between align-items-center mb-3">
           <h2 className="section-title">
             <i className="fas fa-star text-warning me-2"></i>Productos Recomendados
           </h2>
-          <a href="/catalogo" className="text-decoration-none see-all">
+          <Link to="/catalogo" className="text-decoration-none see-all">
             Ver todos <i className="fas fa-arrow-right"></i>
-          </a>
+          </Link>
         </div>
         <ProductCarousel id="recomendadosCarousel" productos={recomendados} />
       </section>
 
+      {/* Ofertas */}
       <section className="product-section my-5">
         <div className="d-flex justify-content-between align-items-center mb-3">
           <h2 className="section-title">
             <i className="fas fa-tags text-danger me-2"></i>En Oferta
           </h2>
-          <a href="/ofertas" className="text-decoration-none see-all">
+          <Link to="/ofertas" className="text-decoration-none see-all">
             Ver todos <i className="fas fa-arrow-right"></i>
-          </a>
+          </Link>
         </div>
         <ProductCarousel id="ofertasCarousel" productos={ofertas} oferta />
       </section>
@@ -4519,6 +4678,34 @@ function Contacto() {
 export default Contacto;
 </file>
 
+<file path="src/main.jsx">
+import React from "react";
+import ReactDOM from "react-dom/client";
+
+import "bootstrap/dist/js/bootstrap.bundle.min.js";
+import "@fortawesome/fontawesome-free/css/all.min.css";  // 👈 agrega esta
+
+import "./assets/css/style.css";
+import "./assets/css/contacto.css";
+
+import App from "./App.jsx";
+import { AuthProvider } from "./context/AuthContext";
+import { ProductsProvider } from "./context/ProductsContext";
+import { CartProvider } from "./context/CartContext";
+
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <React.StrictMode>
+    <AuthProvider>
+      <ProductsProvider>
+        <CartProvider>
+          <App />
+        </CartProvider>
+      </ProductsProvider>
+    </AuthProvider>
+  </React.StrictMode>
+);
+</file>
+
 <file path="src/App.jsx">
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
@@ -4566,34 +4753,6 @@ function App() {
 }
 
 export default App;
-</file>
-
-<file path="src/main.jsx">
-import React from "react";
-import ReactDOM from "react-dom/client";
-
-import "bootstrap/dist/js/bootstrap.bundle.min.js";
-import "@fortawesome/fontawesome-free/css/all.min.css";  // 👈 agrega esta
-
-import "./assets/css/style.css";
-import "./assets/css/contacto.css";
-
-import App from "./App.jsx";
-import { AuthProvider } from "./context/AuthContext";
-import { ProductsProvider } from "./context/ProductsContext";
-import { CartProvider } from "./context/CartContext";
-
-ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <AuthProvider>
-      <ProductsProvider>
-        <CartProvider>
-          <App />
-        </CartProvider>
-      </ProductsProvider>
-    </AuthProvider>
-  </React.StrictMode>
-);
 </file>
 
 </files>
