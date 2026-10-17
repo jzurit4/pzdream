@@ -21,7 +21,6 @@ export default function AdminLayout({ children, title, subtitle }) {
 
   return (
     <div className="admin-shell">
-      {/* Header propio del admin */}
       <header className="admin-navbar">
         <div className="container-fluid d-flex align-items-center justify-content-between px-4">
           <Link to="/admin" className="admin-navbar-brand">
@@ -51,23 +50,24 @@ export default function AdminLayout({ children, title, subtitle }) {
               </Link>
             </li>
             <li>
-              <Link to="/admin/agregar" className={location.pathname === '/admin/agregar' ? 'active' : ''}>
-                <i className="fas fa-plus me-1"></i>Agregar
+              <Link to="/admin/lista" className={location.pathname.includes('/admin/lista') || location.pathname.includes('/admin/agregar') || location.pathname.includes('/admin/modificar') || location.pathname.includes('/admin/eliminar') ? 'active' : ''}>
+                <i className="fas fa-box me-1"></i>Productos
+              </Link>
+            </li>
+          
+            <li>
+              <Link to="/admin/usuarios" className={location.pathname.includes('/admin/usuarios') ? 'active' : ''}>
+                <i className="fas fa-users me-1"></i>Usuarios
               </Link>
             </li>
             <li>
-              <Link to="/admin/lista" className={location.pathname === '/admin/lista' ? 'active' : ''}>
-                <i className="fas fa-list me-1"></i>Lista
+              <Link to="/admin/reportes" className={location.pathname === '/admin/reportes' ? 'active' : ''}>
+                <i className="fas fa-chart-line me-1"></i>Reportes
               </Link>
             </li>
             <li>
-              <Link to="/admin/modificar" className={location.pathname === '/admin/modificar' ? 'active' : ''}>
-                <i className="fas fa-edit me-1"></i>Modificar
-              </Link>
-            </li>
-            <li>
-              <Link to="/admin/eliminar" className={location.pathname === '/admin/eliminar' ? 'active' : ''}>
-                <i className="fas fa-trash me-1"></i>Eliminar
+              <Link to="/admin/perfil" className={location.pathname === '/admin/perfil' ? 'active' : ''}>
+                <i className="fas fa-user-cog me-1"></i>Perfil
               </Link>
             </li>
           </ul>

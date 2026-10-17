@@ -5,6 +5,7 @@ Este proyecto es la migración y actualización de una tienda online de tecnolog
 ## Características Principales
 
 ### Para Clientes (Tienda)
+
 - **Catálogo Interactivo:** Visualización de productos con filtros dinámicos por categoría y buscador en tiempo real.
 - **Buscador con Preview:** Barra de búsqueda en el inicio que muestra un autocompletado con imágenes y precios de los productos.
 - **Detalle del Producto:** Página individual con especificaciones técnicas, cálculo automático de descuentos y botón de compra.
@@ -13,6 +14,7 @@ Este proyecto es la migración y actualización de una tienda online de tecnolog
 - **Contacto y Foro:** Sección comunitaria donde los usuarios pueden publicar dudas o recomendaciones (requiere inicio de sesión).
 
 ### Para Administradores (Panel Admin)
+
 - **Acceso Restringido:** Inicio de sesión independiente para el administrador.
 - **Dashboard:** Estadísticas en tiempo real (Total productos, productos en oferta, stock total).
 - **CRUD de Productos:**
@@ -27,14 +29,14 @@ Este proyecto es la migración y actualización de una tienda online de tecnolog
 
 ## Tecnologías Utilizadas
 
-| Tecnología | Uso en el Proyecto |
-| :--- | :--- |
-| **React 19** | Framework principal para la construcción de interfaces basadas en componentes. |
-| **Vite 8** | Empaquetador y entorno de desarrollo ultrarrápido. |
-| **React Router DOM 7** | Enrutamiento dinámico del lado del cliente (SPA). |
-| **Context API** | Gestión del estado global (Auth, Cart, Products). |
-| **Bootstrap 5.3** | Framework CSS para un diseño responsivo y adaptativo. |
-| **Font Awesome 6** | Iconografía del sitio web. |
+| Tecnología             | Uso en el Proyecto                                                             |
+| :--------------------- | :----------------------------------------------------------------------------- |
+| **React 19**           | Framework principal para la construcción de interfaces basadas en componentes. |
+| **Vite 8**             | Empaquetador y entorno de desarrollo ultrarrápido.                             |
+| **React Router DOM 7** | Enrutamiento dinámico del lado del cliente (SPA).                              |
+| **Context API**        | Gestión del estado global (Auth, Cart, Products).                              |
+| **Bootstrap 5.3**      | Framework CSS para un diseño responsivo y adaptativo.                          |
+| **Font Awesome 6**     | Iconografía del sitio web.                                                     |
 
 ---
 
@@ -55,3 +57,4 @@ src/
 ├── utils/              # Funciones de utilidad (format.js para formatear CLP)
 ├── App.jsx             # Configuración de rutas
 └── main.jsx            # Punto de entrada y proveedores de contexto
+```
