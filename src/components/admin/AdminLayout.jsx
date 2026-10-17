@@ -23,7 +23,6 @@ export default function AdminLayout({ children, title, subtitle }) {
 
   return (
     <div className="admin-layout-wrapper">
-      {/* SIDEBAR IZQ*/}
       <aside className="admin-sidebar">
         <div className="sidebar-brand">
           <i className="fas fa-user-shield me-2"></i>
@@ -32,14 +31,39 @@ export default function AdminLayout({ children, title, subtitle }) {
 
         <nav className="sidebar-nav">
           <Link to="/admin" className={`sidebar-link ${isActive('/admin')}`}>
-            <i className="fas fa-home"></i> Dashboard
+            <i className="fas fa-home"></i> Home / Dashboard
           </Link>
-          <Link to="/admin/lista" className={`sidebar-link ${location.pathname.includes('/admin/lista') || location.pathname.includes('/admin/agregar') ? 'active' : ''}`}>
-            <i className="fas fa-box"></i> Productos
+          
+          <Link to="/admin/ordenes" className={`sidebar-link ${location.pathname.includes('/admin/ordenes') ? 'active' : ''}`}>
+            <i className="fas fa-receipt"></i> Órdenes / Boletas
           </Link>
-          <Link to="/admin/usuarios" className={`sidebar-link ${location.pathname.includes('/admin/usuarios') ? 'active' : ''}`}>
-            <i className="fas fa-users"></i> Usuarios
+
+          {/* GRUPO PRODUCTOS */}
+          <div className="sidebar-group-title">Productos</div>
+          <Link to="/admin/lista" className={`sidebar-link ps-5 ${isActive('/admin/lista') || isActive('/admin/modificar') || isActive('/admin/eliminar') ? 'active' : ''}`}>
+            <i className="fas fa-box"></i> Mostrar Productos
           </Link>
+          <Link to="/admin/agregar" className={`sidebar-link ps-5 ${isActive('/admin/agregar') ? 'active' : ''}`}>
+            <i className="fas fa-plus"></i> Nuevo Producto
+          </Link>
+          <Link to="/admin/productos-criticos" className={`sidebar-link ps-5 ${isActive('/admin/productos-criticos') ? 'active' : ''}`}>
+            <i className="fas fa-exclamation-triangle"></i> Listado Críticos
+          </Link>
+
+          {/* GRUPO CATEGORÍAS */}
+          <div className="sidebar-group-title">Categorías</div>
+          <Link to="/admin/categorias" className={`sidebar-link ps-5 ${location.pathname.includes('/admin/categorias') ? 'active' : ''}`}>
+            <i className="fas fa-tags"></i> Mostrar Categorías
+          </Link>
+
+          {/* GRUPO USUARIOS */}
+          <div className="sidebar-group-title">Usuarios</div>
+          <Link to="/admin/usuarios" className={`sidebar-link ps-5 ${location.pathname.includes('/admin/usuarios') ? 'active' : ''}`}>
+            <i className="fas fa-users"></i> Mostrar Usuarios
+          </Link>
+
+          {/* GRUPO SISTEMA */}
+          <div className="sidebar-group-title">Sistema</div>
           <Link to="/admin/reportes" className={`sidebar-link ${isActive('/admin/reportes')}`}>
             <i className="fas fa-chart-line"></i> Reportes
           </Link>
@@ -58,13 +82,11 @@ export default function AdminLayout({ children, title, subtitle }) {
         </div>
       </aside>
 
-      {/* CONTENIDO PRINCIPAL*/}
       <main className="admin-main-content">
         <div className="admin-topbar">
           <h2>{title || 'Panel de Administración'}</h2>
           {subtitle && <p className="text-muted mb-0">{subtitle}</p>}
         </div>
-        
         <div className="admin-content-area">
           {children}
         </div>

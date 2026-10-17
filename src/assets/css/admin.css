@@ -612,7 +612,7 @@
   margin: 0;
 }
 
-/* RESPONSIVO */
+
 @media (max-width: 992px) {
   .admin-sidebar {
     width: 80px;
@@ -621,4 +621,39 @@
   .sidebar-link span { display: none; }
   .sidebar-link i { margin: 0; }
   .admin-main-content { margin-left: 80px; }
+}
+
+.sidebar-group-title {
+  padding: 1.2rem 1.5rem 0.4rem;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: #8c93a1;
+  font-weight: 700;
+  letter-spacing: 1px;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  margin-top: 0.5rem;
+}
+
+.sidebar-link.ps-5 {
+  padding-left: 2.8rem !important;
+  font-size: 0.9rem;
+  padding-top: 0.7rem;
+  padding-bottom: 0.7rem;
+}
+
+.sidebar-link.ps-5 i {
+  font-size: 0.9rem;
+  width: 20px;
+}
+
+/* Checkout y Boletas */
+.bg-light {
+  background-color: #f8f9fa !important;
+}
+.form-control, .form-select {
+  border: 1px solid #dee2e6;
+  box-shadow: none !important;
+}
+.form-control:focus, .form-select:focus {
+  border-color: #86b7fe;
 }

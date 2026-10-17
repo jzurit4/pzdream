@@ -1,3 +1,4 @@
+
 import React from "react";
 import ReactDOM from "react-dom/client";
 
@@ -11,7 +12,9 @@ import App from "./App.jsx";
 import { AuthProvider } from "./context/AuthContext";
 import { ProductsProvider } from "./context/ProductsContext";
 import { CartProvider } from "./context/CartContext";
-import { UsersProvider } from "./context/UsersContext"; // 👈 NUEVO
+import { UsersProvider } from "./context/UsersContext";
+import { CategoriesProvider } from "./context/CategoriesContext"; 
+import { OrdersProvider } from "./context/OrdersContext"; 
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -19,7 +22,11 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       <ProductsProvider>
         <CartProvider>
           <UsersProvider>
-            <App />
+            <CategoriesProvider> 
+              <OrdersProvider>
+                <App />
+              </OrdersProvider>
+            </CategoriesProvider>
           </UsersProvider>
         </CartProvider>
       </ProductsProvider>

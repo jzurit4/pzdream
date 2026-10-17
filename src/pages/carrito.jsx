@@ -12,12 +12,6 @@ function Carrito() {
   const { items, total, count, change, remove, clear } = useCart();
   const { productos } = useProducts();
 
-  const finalizarCompra = () => {
-    if (items.length === 0) return;
-    alert('¡Compra finalizada! Gracias por tu pedido.');
-    clear();
-  };
-
   return (
     <Layout>
       <h1 className="display-5 fw-bold mb-4">
@@ -60,23 +54,10 @@ function Carrito() {
                         <div className="item-price">{formatCLP(item.precio)} c/u</div>
                       </div>
                       <div className="item-actions">
-                        <button
-                          className="btn btn-outline-secondary btn-sm"
-                          onClick={() => change(item.id, -1)}
-                        >
-                          −
-                        </button>
+                        <button className="btn btn-outline-secondary btn-sm" onClick={() => change(item.id, -1)}>−</button>
                         <span className="cantidad">{item.cantidad}</span>
-                        <button
-                          className="btn btn-outline-secondary btn-sm"
-                          onClick={() => change(item.id, 1)}
-                        >
-                          +
-                        </button>
-                        <button
-                          className="btn btn-danger btn-sm"
-                          onClick={() => remove(item.id)}
-                        >
+                        <button className="btn btn-outline-secondary btn-sm" onClick={() => change(item.id, 1)}>+</button>
+                        <button className="btn btn-danger btn-sm" onClick={() => remove(item.id)}>
                           <i className="fas fa-trash-alt"></i>
                         </button>
                       </div>
@@ -84,17 +65,17 @@ function Carrito() {
                   ))}
                 </ul>
 
-                <div className="d-flex justify-content-between fw-bold fs-5">
+                <div className="d-flex justify-content-between fw-bold fs-5 mb-3">
                   <span>Total ({count} ítems):</span>
                   <span>{formatCLP(total)}</span>
                 </div>
 
-                <button className="btn btn-danger w-100 mt-3" onClick={clear}>
+                <button className="btn btn-danger w-100 mb-2" onClick={clear}>
                   <i className="fas fa-trash-alt me-2"></i>Vaciar carrito
                 </button>
-                <button className="btn btn-success w-100 mt-2" onClick={finalizarCompra}>
+                <Link to="/checkout" className="btn btn-success w-100">
                   <i className="fas fa-check me-2"></i>Finalizar compra
-                </button>
+                </Link>
               </>
             )}
           </div>
