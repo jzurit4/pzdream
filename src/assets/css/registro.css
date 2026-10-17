@@ -1,0 +1,67 @@
+/* ==========================================
+   ESTILOS EXCLUSIVOS - PÁGINA DE REGISTRO
+   ========================================== */
+
+/* Contenedor o Tarjeta de Registro */
+.register-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 2.5rem 2rem;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.register-card h2 {
+  font-weight: 600;
+  color: #2d3436;
+}
+
+.register-card .form-label {
+  font-weight: 500;
+  color: #2d3436;
+}
+
+.register-card .form-control {
+  border-radius: 10px;
+  border: 1px solid #ced4da;
+  padding: 0.6rem 1rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.register-card .form-control:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.register-card .btn-register {
+  padding: 0.7rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #007bff, #0056b3);
+  color: white;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.register-card .btn-register:hover {
+  background: linear-gradient(135deg, #0056b3, #003d80);
+  transform: translateY(-2px);
+}
+
+.register-card .login-link a {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.register-card .login-link a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 576px) {
+  .register-card {
+    padding: 1.5rem 1rem;
+    margin: 0 0.5rem;
+  }
+}

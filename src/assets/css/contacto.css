@@ -1,0 +1,124 @@
+/* ===== ESTILOS PARA PÁGINA DE CONTACTO Y FORO ===== */
+.contact-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 1.8rem 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: 100%;
+}
+
+.contact-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.contact-icon {
+  font-size: 2rem;
+  color: #007bff;
+  margin-bottom: 0.8rem;
+}
+
+.contact-card h5 {
+  font-weight: 600;
+  color: #2d3436;
+  margin-bottom: 0.5rem;
+}
+
+.contact-card a {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.contact-card a:hover {
+  text-decoration: underline;
+}
+
+/* Botones circulares de redes sociales */
+.social-btn-circle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 45px;
+  height: 45px;
+  background-color: #f8f9fa;
+  color: #2d3436;
+  border-radius: 50%;
+  margin: 0 0.4rem;
+  font-size: 1.2rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  text-decoration: none;
+}
+
+.social-btn-circle:hover {
+  background-color: #007bff;
+  color: #ffffff;
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
+}
+
+/* Contenedor principal de las secciones de formulario y feed */
+.post-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 1.8rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  height: 100%;
+}
+
+/* Tarjeta de cada publicación individual dentro del feed */
+.post-item {
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 10px;
+  padding: 1.2rem;
+  margin-bottom: 1.2rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.post-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border-color: #ced4da;
+  background: #ffffff;
+}
+
+.post-item:last-child {
+  margin-bottom: 0;
+}
+
+/* Etiquetas (badges) para las publicaciones */
+.post-badge {
+  display: inline-block;
+  padding: 0.25rem 0.6rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border-radius: 20px;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.badge-duda,
+.post-badge.duda {
+  background-color: #e3f2fd;
+  color: #0d6efd;
+  border: 1px solid #b6d4fe;
+}
+
+.badge-recom,
+.post-badge.recomendacion {
+  background-color: #e8f5e9;
+  color: #198754;
+  border: 1px solid #a3cfbb;
+}
+
+/* Tarjetas para las respuestas internas */
+.reply-item {
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 0.75rem;
+  margin-top: 0.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
