@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import Layout from '../components/layout/Layout';
 import { useCart } from '../context/CartContext';
 import { useUsers } from '../context/UsersContext';
 import { useOrders } from '../context/OrdersContext';
+import { useAuth } from '../context/AuthContext'; 
 import { formatCLP } from '../utils/format';
 
 function Checkout() {
@@ -11,6 +12,7 @@ function Checkout() {
   const { items, total, clear } = useCart();
   const { registrarCompra, usuarios } = useUsers();
   const { agregarOrden } = useOrders();
+  const { user } = useAuth(); // Obtenemos el usuario logueado
 
   const [form, setForm] = useState({
     nombre: '', apellido: '', email: '', calle: '', depto: '', region: 'Región Metropolitana de Santiago', comuna: '', indicaciones: ''
@@ -18,6 +20,23 @@ function Checkout() {
   
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
+
+  //Autocompletar datos si el usuario ya inicio sesión
+  useEffect(() => {
+    if (user) {
+      const datosUsuario = usuarios.find(u => u.email.toLowerCase() === user.email.toLowerCase());
+      if (datosUsuario) {
+        const partesNombre = datosUsuario.nombre.split(' ');
+        setForm(prev => ({
+          ...prev,
+          nombre: partesNombre[0] || '',
+          apellido: partesNombre.slice(1).join(' ') || '',
+          email: datosUsuario.email,
+          calle: datosUsuario.direccion || '', // Usamos la direccion guardada
+        }));
+      }
+    }
+  }, [user, usuarios]);
 
   if (items.length === 0 && !success) {
     return (
@@ -30,6 +49,27 @@ function Checkout() {
     );
   }
 
+  // BLOQUEO DE SEGURIDAD: Si no hay usuario, no mostramos el formulario
+  if (!user) {
+    return (
+      <Layout>
+        <div className="container py-5 text-center">
+          <div className="card shadow-sm col-md-6 mx-auto p-5 border-0">
+            <p className="text-muted">Para finalizar tu compra de forma segura, primero debes iniciar sesión con tu cuenta registrada.</p>
+            <div className="d-flex justify-content-center gap-3 mt-4">
+              <Link to="/login" className="btn btn-primary px-4 py-2">
+                <i className="fas fa-sign-in-alt me-2"></i>Iniciar Sesión
+              </Link>
+              <Link to="/registro" className="btn btn-outline-primary px-4 py-2">
+                Registrarme
+              </Link>
+            </div>
+          </div>
+        </div>
+      </Layout>
+    );
+  }
+
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
   const handlePagar = (e) => {
@@ -37,15 +77,15 @@ function Checkout() {
     setError('');
 
     // Validaciones basicas
-    if (!form.nombre || !form.apellido || !form.email || !form.calle || !form.comuna) {
+    if (!form.nombre || !form.apellido || !form.calle || !form.comuna) {
       setError('Por favor, completa todos los campos obligatorios (*).');
       return;
     }
 
-    // Validar si el usuario existe 
+    // Doble verificacion: comprobar que el correo realmente exista
     const usuarioExiste = usuarios.find(u => u.email.toLowerCase() === form.email.toLowerCase());
     if (!usuarioExiste) {
-      setError('El correo ingresado no está registrado. Por favor, regístrate primero o usa un correo válido.');
+      setError('El correo ingresado no está registrado. Por favor, verifica tu cuenta.');
       return;
     }
 
@@ -61,7 +101,7 @@ function Checkout() {
     // Sumar compra al usuario
     registrarCompra(form.email);
 
-    // Vaciar carrito y mostrar éxito
+    // Vaciar carrito y mostrar exito
     clear();
     setSuccess(true);
   };
@@ -129,15 +169,16 @@ function Checkout() {
             <div className="row g-3">
               <div className="col-md-6">
                 <label className="form-label small text-muted">Nombre*</label>
-                <input type="text" className="form-control" name="nombre" onChange={handleChange} required />
+                <input type="text" className="form-control" name="nombre" value={form.nombre} onChange={handleChange} required />
               </div>
               <div className="col-md-6">
                 <label className="form-label small text-muted">Apellidos*</label>
-                <input type="text" className="form-control" name="apellido" onChange={handleChange} required />
+                <input type="text" className="form-control" name="apellido" value={form.apellido} onChange={handleChange} required />
               </div>
               <div className="col-md-6">
-                <label className="form-label small text-muted">Correo*</label>
-                <input type="email" className="form-control" name="email" onChange={handleChange} required />
+                <label className="form-label small text-muted">Correo (Cuenta verificada)*</label>
+                <input type="email" className="form-control bg-light" name="email" value={form.email} readOnly title="El correo no se puede modificar" />
+                <div className="form-text small text-success"><i className="fas fa-check-circle"></i> Sesión iniciada</div>
               </div>
             </div>
           </div>
@@ -147,41 +188,40 @@ function Checkout() {
             <div className="row g-3">
               <div className="col-md-8">
                 <label className="form-label small text-muted">Calle*</label>
-                <input type="text" className="form-control" name="calle" onChange={handleChange} required />
+                <input type="text" className="form-control" name="calle" value={form.calle} onChange={handleChange} required />
               </div>
               <div className="col-md-4">
                 <label className="form-label small text-muted">Departamento (opcional)</label>
-                <input type="text" className="form-control" name="depto" onChange={handleChange} />
+                <input type="text" className="form-control" name="depto" value={form.depto} onChange={handleChange} />
               </div>
               <div className="col-md-6">
                 <label className="form-label small text-muted">Región*</label>
-                <select className="form-select" name="region" onChange={handleChange} required>
-                <option value="">Selecciona una región...</option>
-                <option value="Arica y Parinacota">Región de Arica y Parinacota</option>
-                <option value="Tarapacá">Región de Tarapacá</option>
-                <option value="Antofagasta">Región de Antofagasta</option>
-                <option value="Atacama">Región de Atacama</option>
-                <option value="Coquimbo">Región de Coquimbo</option>
-                <option value="Valparaíso">Región de Valparaíso</option>
-                <option value="Metropolitana de Santiago">Región Metropolitana de Santiago</option>
-                <option value="O'Higgins">Región del Libertador Gral. Bernardo O'Higgins</option>
-                <option value="Maule">Región del Maule</option>
-                <option value="Ñuble">Región de Ñuble</option>
-                <option value="Biobío">Región del Biobío</option>
-                <option value="La Araucanía">Región de La Araucanía</option>
-                <option value="Los Ríos">Región de Los Ríos</option>
-                <option value="Los Lagos">Región de Los Lagos</option>
-                <option value="Aysén">Región de Aysén del Gral. Carlos Ibáñez del Campo</option>
-                <option value="Magallanes">Región de Magallanes y de la Antártica Chilena</option>
-            </select>
+                <select className="form-select" name="region" value={form.region} onChange={handleChange} required>
+                  <option value="Arica y Parinacota">Región de Arica y Parinacota</option>
+                  <option value="Tarapacá">Región de Tarapacá</option>
+                  <option value="Antofagasta">Región de Antofagasta</option>
+                  <option value="Atacama">Región de Atacama</option>
+                  <option value="Coquimbo">Región de Coquimbo</option>
+                  <option value="Valparaíso">Región de Valparaíso</option>
+                  <option value="Metropolitana de Santiago">Región Metropolitana de Santiago</option>
+                  <option value="O'Higgins">Región del Libertador Gral. Bernardo O'Higgins</option>
+                  <option value="Maule">Región del Maule</option>
+                  <option value="Ñuble">Región de Ñuble</option>
+                  <option value="Biobío">Región del Biobío</option>
+                  <option value="La Araucanía">Región de La Araucanía</option>
+                  <option value="Los Ríos">Región de Los Ríos</option>
+                  <option value="Los Lagos">Región de Los Lagos</option>
+                  <option value="Aysén">Región de Aysén del Gral. Carlos Ibáñez del Campo</option>
+                  <option value="Magallanes">Región de Magallanes y de la Antártica Chilena</option>
+                </select>
               </div>
               <div className="col-md-6">
                 <label className="form-label small text-muted">Comuna*</label>
-                <input type="text" className="form-control" name="comuna" onChange={handleChange} required />
+                <input type="text" className="form-control" name="comuna" value={form.comuna} onChange={handleChange} required />
               </div>
               <div className="col-12">
                 <label className="form-label small text-muted">Indicaciones para la entrega (opcional)</label>
-                <textarea className="form-control" name="indicaciones" rows="2" onChange={handleChange}></textarea>
+                <textarea className="form-control" name="indicaciones" rows="2" value={form.indicaciones} onChange={handleChange}></textarea>
               </div>
             </div>
           </div>
