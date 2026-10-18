@@ -18,6 +18,14 @@ function Registro() {
   const [aceptaTerminos, setAceptaTerminos] = useState(false);
   const [error, setError] = useState('');
 
+  // 
+  const handleTelefonoChange = (e) => {
+    const valor = e.target.value;
+    // Expresión regular que permite digitos, '+', espacios y guiones
+    const valorLimpio = valor.replace(/[^0-9+\s-]/g, '');
+    setTelefono(valorLimpio);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setError('');
@@ -27,9 +35,18 @@ function Registro() {
       return;
     }
 
-    // Normalizamos los datos ingresados
+    // Normalizamos los datos
     const emailNormalizado = email.trim().toLowerCase();
     const telefonoNormalizado = telefono.trim().replace(/\s+/g, ''); // Quita espacios
+
+    // VALIDACIÓN DE FORMATO DE TELÉFONO
+    // Empieza con + (opcional), seguido de 8 a 15 dígitos numéricos
+    const phoneRegex = /^\+?\d{8,15}$/;
+    
+    if (!phoneRegex.test(telefonoNormalizado)) {
+      setError('El formato del teléfono no es válido. Debe tener entre 8 y 15 dígitos (ej: +56912345678).');
+      return;
+    }
 
     // Verificamos si el correo ya existe
     const emailDuplicado = usuarios.some(
@@ -55,11 +72,11 @@ function Registro() {
     agregarUsuario({
       nombre: `${nombre.trim()} ${apellido.trim()}`,
       email: emailNormalizado,
-      telefono: telefono.trim(), // Guardamos el telefono
+      telefono: telefono.trim(), 
       direccion: direccion.trim(),
+      password: password, 
     });
 
-    // Avisamos y redirigimos
     alert('¡Registro exitoso! Ahora puedes iniciar sesión.');
     navigate('/login');
   };
@@ -74,7 +91,6 @@ function Registro() {
             <p className="text-muted">Completa tus datos para registrarte</p>
           </div>
 
-          {/* Mostrar mensaje de error si existe */}
           {error && <div className="alert alert-danger py-2 text-center small fw-bold">{error}</div>}
 
           <form onSubmit={handleSubmit}>
@@ -96,7 +112,16 @@ function Registro() {
 
             <div className="mb-3">
               <label htmlFor="telefono" className="form-label fw-semibold">Teléfono</label>
-              <input type="tel" className="form-control" id="telefono" placeholder="+56 9 1234 5678" value={telefono} onChange={(e) => setTelefono(e.target.value)} required />
+              <input 
+                type="tel" 
+                className="form-control" 
+                id="telefono" 
+                placeholder="+56912345678" 
+                value={telefono} 
+                onChange={handleTelefonoChange} 
+                required 
+              />
+              <div className="form-text small">Ingresa tu número con código de país. Ej: +56912345678</div>
             </div>
 
             <div className="mb-3">

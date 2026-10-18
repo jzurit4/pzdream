@@ -4,8 +4,8 @@ import { useLocalStorage } from '../hooks/useLocalStorage';
 const UsersContext = createContext(null);
 
 const usuariosSeed = [
-  { id: 1, nombre: 'Carlos Pérez', email: 'carlos@correo.com', telefono: '+56 9 1111 1111', direccion: 'Santiago Centro', compras: 0 },
-  { id: 2, nombre: 'Ana Gómez', email: 'ana@correo.com', telefono: '+56 9 2222 2222', direccion: 'Providencia', compras: 0 },
+  { id: 1, nombre: 'Carlos Pérez', email: 'carlos@correo.com', telefono: '+56 9 1111 1111', direccion: 'Santiago Centro', compras: 0, password: '123456' },
+  { id: 2, nombre: 'Ana Gómez', email: 'ana@correo.com', telefono: '+56 9 2222 2222', direccion: 'Providencia', compras: 0, password: '123456' },
 ];
 
 export function UsersProvider({ children }) {

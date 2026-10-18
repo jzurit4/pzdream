@@ -3,35 +3,40 @@ import { useNavigate } from 'react-router-dom';
 
 import Layout from '../components/layout/Layout';
 import { useAuth } from '../context/AuthContext';
-import { useUsers } from '../context/UsersContext'; //Importamos contexto de usuarios
+import { useUsers } from '../context/UsersContext';
 import '../assets/css/login.css';
 
 function Login() {
   const navigate = useNavigate();
   const { loginUser } = useAuth();
-  const { usuarios } = useUsers(); // Traemos la lista de usuarios registrados
+  const { usuarios } = useUsers();
 
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState(''); //Estado para el mensaje de error
+  const [error, setError] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setError(''); // Limpiamos errores previos
+    setError('');
 
-    // Buscamos si el correo existe en la base de datos simulada
+    // Buscamos si el correo existe
     const usuarioExiste = usuarios.find(
       (u) => u.email.toLowerCase() === email.trim().toLowerCase()
     );
 
-    // Si no existe, mostramos error y cortamos la ejecución
     if (!usuarioExiste) {
       setError('Este correo no está registrado. Por favor, regístrate primero.');
       return;
     }
 
-    // Si existe, permitimos el inicio de sesión normal
+    // Verificamos la contraseña
+    if (usuarioExiste.password !== password) {
+      setError('Contraseña incorrecta. Por favor, inténtalo de nuevo.');
+      return;
+    }
+
+    // Iniciar sesion
     loginUser({ email: email.trim(), nombre: username.trim() });
     localStorage.setItem('userLogged', 'true');
     localStorage.setItem('userName', username.trim());
@@ -50,7 +55,6 @@ function Login() {
             <p className="text-muted">Inicia sesión en tu cuenta</p>
           </div>
 
-          {/*Mostrar el mensaje de error si las credenciales fallan */}
           {error && (
             <div className="alert alert-danger py-2 text-center small">
               <i className="fas fa-exclamation-circle me-2"></i>
