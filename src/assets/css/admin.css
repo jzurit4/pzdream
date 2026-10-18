@@ -1,4 +1,3 @@
-
 .admin-header {
   background: linear-gradient(135deg, #2d3436, #1a1a2e);
   color: white;
@@ -95,11 +94,6 @@
 .table-admin tbody tr:hover { background: #f8f9fa; }
 .table-admin .btn-sm { border-radius: 6px; }
 
-@media (max-width: 768px) {
-  .admin-header h1 { font-size: 1.8rem; }
-  .admin-card i { font-size: 2.2rem; }
-}
-
 .admin-stat {
   display: flex;
   align-items: center;
@@ -129,116 +123,6 @@
   letter-spacing: 0.05em;
 }
 
-.admin-shell {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  background-color: #f0f4f8;
-}
-
-.admin-navbar {
-  background: linear-gradient(135deg, #2d3436, #1a1a2e);
-  padding: 0.9rem 0;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-}
-
-.admin-navbar-brand {
-  color: #ffffff;
-  font-size: 1.3rem;
-  font-weight: 700;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-}
-
-.admin-navbar-brand:hover {
-  color: #ffffff;
-  text-decoration: none;
-}
-
-.admin-badge {
-  background: #007bff;
-  color: #ffffff;
-  font-size: 0.65rem;
-  font-weight: 700;
-  padding: 0.2rem 0.5rem;
-  border-radius: 4px;
-  margin-left: 0.5rem;
-  letter-spacing: 0.05em;
-  vertical-align: middle;
-}
-
-.admin-navbar-actions {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.admin-navbar-link {
-  color: #dfe6e9;
-  text-decoration: none;
-  font-size: 0.9rem;
-  padding: 0.4rem 0.8rem;
-  border-radius: 6px;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.admin-navbar-link:hover {
-  background: rgba(255, 255, 255, 0.1);
-  color: #ffffff;
-  text-decoration: none;
-}
-
-.admin-navbar-logout:hover {
-  background: rgba(220, 53, 69, 0.2);
-  color: #ff6b7a;
-}
-
-.admin-subnav {
-  background: #ffffff;
-  border-bottom: 1px solid #e9ecef;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
-}
-
-.admin-subnav ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  gap: 0.25rem;
-  overflow-x: auto;
-}
-
-.admin-subnav li a {
-  display: inline-flex;
-  align-items: center;
-  padding: 0.9rem 1rem;
-  color: #6c757d;
-  text-decoration: none;
-  font-weight: 500;
-  font-size: 0.95rem;
-  border-bottom: 3px solid transparent;
-  transition: all 0.2s ease;
-  white-space: nowrap;
-}
-
-.admin-subnav li a:hover {
-  color: #007bff;
-  background: #f8f9fa;
-}
-
-.admin-subnav li a.active {
-  color: #007bff;
-  border-bottom-color: #007bff;
-}
-
-.admin-main {
-  flex: 1;
-}
-
 .admin-login-page {
   min-height: 100vh;
   display: flex;
@@ -258,14 +142,9 @@
   transition: transform 0.2s ease;
 }
 
-.admin-login-card:hover {
-  transform: translateY(-3px);
-}
+.admin-login-card:hover { transform: translateY(-3px); }
 
-.admin-login-brand {
-  text-align: center;
-  margin-bottom: 2rem;
-}
+.admin-login-brand { text-align: center; margin-bottom: 2rem; }
 
 .admin-login-brand i {
   font-size: 3rem;
@@ -284,15 +163,9 @@
   margin: 0 0 0.3rem;
 }
 
-.admin-login-brand p {
-  color: #6c757d;
-  font-size: 0.95rem;
-  margin: 0;
-}
+.admin-login-brand p { color: #6c757d; font-size: 0.95rem; margin: 0; }
 
-.admin-login-field {
-  margin-bottom: 1.2rem;
-}
+.admin-login-field { margin-bottom: 1.2rem; }
 
 .admin-login-field label {
   display: block;
@@ -317,11 +190,7 @@
   box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.15);
 }
 
-.admin-login-input i {
-  color: #6c757d;
-  font-size: 1rem;
-  margin-right: 0.75rem;
-}
+.admin-login-input i { color: #6c757d; font-size: 1rem; margin-right: 0.75rem; }
 
 .admin-login-input input {
   flex: 1;
@@ -333,9 +202,7 @@
   color: #2d3436;
 }
 
-.admin-login-input input::placeholder {
-  color: #b2bec3;
-}
+.admin-login-input input::placeholder { color: #b2bec3; }
 
 .admin-login-error {
   background: #f8d7da;
@@ -366,14 +233,7 @@
   transform: scale(1.02);
 }
 
-.admin-login-btn:active {
-  transform: scale(1);
-}
-
-.admin-login-footer {
-  text-align: center;
-  margin-top: 1.5rem;
-}
+.admin-login-footer { text-align: center; margin-top: 1.5rem; }
 
 .admin-login-footer a {
   color: #6c757d;
@@ -382,10 +242,7 @@
   transition: color 0.2s;
 }
 
-.admin-login-footer a:hover {
-  color: #007bff;
-  text-decoration: underline;
-}
+.admin-login-footer a:hover { color: #007bff; text-decoration: underline; }
 
 .admin-login-hint {
   text-align: center;
@@ -395,19 +252,6 @@
   font-size: 0.8rem;
   color: #6c757d;
 }
-
-@media (max-width: 480px) {
-  .admin-login-card {
-    padding: 2rem 1.5rem;
-  }
-  .admin-login-brand i {
-    font-size: 2.6rem;
-  }
-  .admin-login-brand h1 {
-    font-size: 1.3rem;
-  }
-}
-
 
 .progress {
   background-color: #e9ecef;
@@ -421,15 +265,14 @@
   transition: width 0.6s ease;
 }
 
-/*NUEVO LAYOUT */
-
 .admin-layout-wrapper {
   display: flex;
   min-height: 100vh;
   background-color: #f4f7f6;
 }
 
-/* SIDEBAR IZQUIERDO */
+.sidebar-overlay { display: none; }
+
 .admin-sidebar {
   width: 260px;
   background-color: #1a1a2e;
@@ -439,6 +282,7 @@
   position: fixed;
   height: 100vh;
   z-index: 1000;
+  transition: left 0.3s ease-in-out;
 }
 
 .sidebar-brand {
@@ -450,11 +294,7 @@
   align-items: center;
 }
 
-.sidebar-nav {
-  flex: 1;
-  padding: 1rem 0;
-  overflow-y: auto;
-}
+.sidebar-nav { flex: 1; padding: 1rem 0; overflow-y: auto; }
 
 .sidebar-link {
   display: flex;
@@ -466,10 +306,7 @@
   transition: all 0.2s ease;
 }
 
-.sidebar-link i {
-  width: 25px;
-  font-size: 1.1rem;
-}
+.sidebar-link i { width: 25px; font-size: 1.1rem; }
 
 .sidebar-link:hover, .sidebar-link.active {
   background-color: #0d6efd;
@@ -477,10 +314,7 @@
   border-left: 4px solid #fff;
 }
 
-.sidebar-footer {
-  padding: 1.5rem;
-  border-top: 1px solid rgba(255,255,255,0.1);
-}
+.sidebar-footer { padding: 1.5rem; border-top: 1px solid rgba(255,255,255,0.1); }
 
 .sidebar-btn {
   display: flex;
@@ -496,24 +330,32 @@
   transition: all 0.2s;
 }
 
-.btn-tienda {
-  background-color: #2d3436;
-  color: #fff;
-}
-.btn-tienda:hover {
-  background-color: #000;
-  color: #fff;
+.btn-tienda { background-color: #2d3436; color: #fff; }
+.btn-tienda:hover { background-color: #000; color: #fff; }
+
+.btn-logout { background-color: #dc3545; color: #fff; }
+.btn-logout:hover { background-color: #bb2d3b; }
+
+.sidebar-group-title {
+  padding: 1.2rem 1.5rem 0.4rem;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: #8c93a1;
+  font-weight: 700;
+  letter-spacing: 1px;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  margin-top: 0.5rem;
 }
 
-.btn-logout {
-  background-color: #dc3545;
-  color: #fff;
-}
-.btn-logout:hover {
-  background-color: #bb2d3b;
+.sidebar-link.ps-5 {
+  padding-left: 2.8rem !important;
+  font-size: 0.9rem;
+  padding-top: 0.7rem;
+  padding-bottom: 0.7rem;
 }
 
-/* CONTENIDO PRINCIPAL */
+.sidebar-link.ps-5 i { font-size: 0.9rem; width: 20px; }
+
 .admin-main-content {
   flex: 1;
   margin-left: 260px; 
@@ -528,17 +370,9 @@
   margin-bottom: 2rem;
 }
 
-.admin-topbar h2 {
-  font-weight: 700;
-  color: #2d3436;
-  margin: 0;
-}
+.admin-topbar h2 { font-weight: 700; color: #2d3436; margin: 0; }
 
-.admin-content-area {
-  padding: 0 2rem 2rem 2rem;
-  flex: 1;
-}
-
+.admin-content-area { padding: 0 2rem 2rem 2rem; flex: 1; }
 
 .kpi-card {
   display: flex;
@@ -549,30 +383,15 @@
   box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 
-.kpi-icon {
-  font-size: 3rem;
-  opacity: 0.3;
-  margin-right: 1.5rem;
-}
+.kpi-icon { font-size: 3rem; opacity: 0.3; margin-right: 1.5rem; }
 
-.kpi-card h3 {
-  margin: 0;
-  font-size: 2.2rem;
-  font-weight: 700;
-  line-height: 1;
-}
-
-.kpi-card p {
-  margin: 0;
-  font-size: 1rem;
-  opacity: 0.9;
-}
+.kpi-card h3 { margin: 0; font-size: 2.2rem; font-weight: 700; line-height: 1; }
+.kpi-card p { margin: 0; font-size: 1rem; opacity: 0.9; }
 
 .kpi-blue { background: linear-gradient(135deg, #0d6efd, #0056b3); }
 .kpi-green { background: linear-gradient(135deg, #198754, #146c43); }
 .kpi-yellow { background: linear-gradient(135deg, #ffc107, #d39e00); color: #333;}
 .kpi-yellow .kpi-icon { color: #333; opacity: 0.2; }
-
 
 .quick-card {
   display: block;
@@ -594,66 +413,67 @@
   color: #0d6efd;
 }
 
-.quick-card i {
-  font-size: 2.5rem;
-  color: #0d6efd;
-  margin-bottom: 1rem;
+.quick-card i { font-size: 2.5rem; color: #0d6efd; margin-bottom: 1rem; }
+.quick-card h5 { font-weight: 700; font-size: 1.1rem; margin-bottom: 0.5rem; }
+.quick-card p { font-size: 0.85rem; color: #6c757d; margin: 0; }
+
+.bg-light { background-color: #f8f9fa !important; }
+
+.form-control, .form-select {
+  border: 1px solid #dee2e6;
+  box-shadow: none !important;
 }
 
-.quick-card h5 {
-  font-weight: 700;
-  font-size: 1.1rem;
-  margin-bottom: 0.5rem;
-}
-
-.quick-card p {
-  font-size: 0.85rem;
-  color: #6c757d;
-  margin: 0;
-}
-
+.form-control:focus, .form-select:focus { border-color: #86b7fe; }
 
 @media (max-width: 992px) {
-  .admin-sidebar {
-    width: 80px;
-  }
+  .admin-sidebar { width: 80px; }
   .sidebar-brand { font-size: 1rem; padding: 1rem; justify-content: center;}
   .sidebar-link span { display: none; }
   .sidebar-link i { margin: 0; }
   .admin-main-content { margin-left: 80px; }
 }
 
-.sidebar-group-title {
-  padding: 1.2rem 1.5rem 0.4rem;
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  color: #8c93a1;
-  font-weight: 700;
-  letter-spacing: 1px;
-  border-top: 1px solid rgba(255,255,255,0.05);
-  margin-top: 0.5rem;
-}
+@media (max-width: 768px) {
+  .admin-sidebar {
+    left: -260px;
+    width: 260px;
+  }
 
-.sidebar-link.ps-5 {
-  padding-left: 2.8rem !important;
-  font-size: 0.9rem;
-  padding-top: 0.7rem;
-  padding-bottom: 0.7rem;
-}
+  .admin-sidebar.open {
+    left: 0;
+  }
 
-.sidebar-link.ps-5 i {
-  font-size: 0.9rem;
-  width: 20px;
-}
+  .sidebar-overlay {
+    display: block;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+  }
 
-/* Checkout y Boletas */
-.bg-light {
-  background-color: #f8f9fa !important;
-}
-.form-control, .form-select {
-  border: 1px solid #dee2e6;
-  box-shadow: none !important;
-}
-.form-control:focus, .form-select:focus {
-  border-color: #86b7fe;
+  .admin-main-content { margin-left: 0; }
+
+  .admin-topbar { padding: 1rem; }
+  .admin-topbar h2 { font-size: 1.5rem; }
+  .admin-content-area { padding: 0 1rem 2rem 1rem; }
+
+  .kpi-card {
+    padding: 1rem;
+    flex-direction: column;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  .kpi-icon { margin-right: 0; margin-bottom: 0.5rem; font-size: 2.5rem; }
+  .kpi-card h3 { font-size: 1.8rem; }
+
+  .table-responsive { border-radius: 10px; font-size: 0.85rem; }
+  .table-admin th, .table-admin td { white-space: nowrap; padding: 0.5rem; }
+
+  .admin-form .btn { width: 100%; margin-bottom: 0.5rem; }
+  
+  .admin-login-card { padding: 2rem 1.5rem; }
+  .admin-login-brand i { font-size: 2.6rem; }
+  .admin-login-brand h1 { font-size: 1.3rem; }
 }
