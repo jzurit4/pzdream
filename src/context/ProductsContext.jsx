@@ -1,4 +1,4 @@
-import { createContext, useContext, useCallback } from 'react';
+import { createContext, useContext, useCallback, useEffect } from 'react'; 
 import { productosSeed } from '../data/productos';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 
@@ -6,6 +6,20 @@ const ProductsContext = createContext(null);
 
 export function ProductsProvider({ children }) {
   const [productos, setProductos] = useLocalStorage('pz_productos', productosSeed);
+
+  // Asegura que los productos viejos tengan stock
+  useEffect(() => {
+    const necesitaMigracion = productos.some(p => p.stock === undefined);
+    
+    if (necesitaMigracion) {
+      const productosMigrados = productos.map(p => ({
+        ...p,
+        // Si no tiene stock, le asignamos uno aleatorio entre 0 y 20
+        stock: p.stock !== undefined ? p.stock : Math.floor(Math.random() * 21) 
+      }));
+      setProductos(productosMigrados);
+    }
+  }, [productos, setProductos]);
 
   const agregarProducto = useCallback((data) => {
     const nuevo = {
